@@ -31,33 +31,34 @@ html, body {
 
   .header {
     height: 50px;
-    background-color: var(--header-background);    
-    border: 1px solid var(--border-color);     
+    background-color: var(--header-background);
+    border: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 10px;
   }
-
+  
   .header-mashlom-logo {
     max-height: 45px;
     padding-left: 5px;
-    padding-bottom: 7px;    
+    padding-bottom: 7px;
   }
-
+  
   .header-assuta-logo {
     max-height: 42px;
     padding-right: 5px;
     padding-bottom: 2px;
     max-width: 100px;
   }
-
+  
   .header-text {
-    width: 65%;
-    max-height:100%;
-    color:var(--header-text-color);
+    color: var(--header-text-color);
     text-align: center;
     font-weight: 600;
     font-size: 13px;
     font-family: Helvetica;
-    padding-right: 15px;
-    vertical-align: middle;
+    padding: 0 15px;
   }
 
   .buttons-color {

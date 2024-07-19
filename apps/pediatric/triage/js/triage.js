@@ -1,4 +1,4 @@
-var app = angular.module("app", []);
+var app = angular.module("app", ["common-directives"]);
   
 app.controller("TriageController", ['$scope', '$rootScope', '$http', '$timeout', function($scope, $rootScope, $http, $timeout) {
     const ctrl = this;

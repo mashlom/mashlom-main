@@ -26,30 +26,8 @@
 
 </head>
 <body ng-app="app" ng-controller="EosController as ctrl" >
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-J85BPCEQ2Y"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-J85BPCEQ2Y');
-</script>
-<nav class="navbar navbar-expand-lg header">
-  <div style="width: 20%;height:100%; text-align: right;">
-    <img class="header-assuta-logo" src="../../assets/assuta/only-alef.png" >
-  </div>
-  <div class="header-text">
-    <p>
-      mashlom.me בשיתוף עם בית<br>
-      החולים אסותא אשדוד, חטיבת הילדים
-    </p>
-  </div>
-  <div style="width: 15%;height:100%; text-align: left; vertical-align: middle">
-    <img class="header-mashlom-logo" src="../../assets/logo/IconOnly_Transparent_NoBuffer.png" >
-  </div>
-</nav>
+<header-directive></header-directive>
 <div id="eos-main" class="container main-content eos-main-content">  
-  <terms></terms>
 <div id="calculator" ng-show="ctrl.page == 'CALCULATOR'" style="overflow-y: auto;overflow-x: hidden; padding-bottom: 10px;" >
   <div class="group-container">
     <div>
@@ -346,7 +324,7 @@
 </footer>
 <script src="../../3rd-party/angularjs/angular.min.js"></script>
 <script src="../../3rd-party/bootstrap/bootstrap.bundle.min.js"></script>
-<script src="../../common/js/terms.js"></script>
+<script src="../../common/js/common-components.js"></script>
 <script src="./eos.js"></script>
 </body>
 </html>

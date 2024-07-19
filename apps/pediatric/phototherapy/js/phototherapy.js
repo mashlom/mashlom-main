@@ -1,4 +1,4 @@
-var app = angular.module("app", ["terms"]);
+var app = angular.module("app", ["common-directives"]);
   
 app.controller("PhototherapyController", ['$scope', '$rootScope', '$timeout', function($scope, $rootScope, $timeout) {
     const ctrl = this;

@@ -1,4 +1,4 @@
-var app = angular.module("app", ["terms"]);
+var app = angular.module("app", ["common-directives"]);
 
 function isElementInViewport(el) {
   const rect = el.getBoundingClientRect();
