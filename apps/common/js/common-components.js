@@ -2,10 +2,12 @@ function setHospitalConfig() {
     window.hospital = getParameterByName("hospital");
     window.allHospitalConfigs = {
         "apps": {
-            "logo": ""
+            "logo": "",
+            "hebrewName": "קפלן"
         },
         "kaplan": {
-            "logo": "/apps/assets/kaplan/logo.png"
+            "logo": "/apps/assets/kaplan/logo.png",
+            "hebrewName": "קפלן"
         }
     };
     window.hospitalConfig = window.allHospitalConfigs[window.hospital ? window.hospital : "apps"];
@@ -29,10 +31,10 @@ app.directive('terms', ['$templateRequest', '$compile', function($templateReques
             };
 
             scope.perHospitalPhrasing = function() {
-                if (!window.hospital) {
+                if (!window.hospitalConfig.hebrewName) {
                     return "";
                 }
-                return "בבית החולים " + window.hospital;
+                return "בבית החולים " + window.hospitalConfig.hebrewName;
             }
 
             // load the template html as a relative location (since its a common
