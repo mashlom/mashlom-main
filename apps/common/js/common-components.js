@@ -3,7 +3,7 @@ function setHospitalConfig() {
     window.allHospitalConfigs = {
         "apps": {
             "logo": "",
-            "hebrewName": "קפלן"
+            "hebrewName": ""
         },
         "kaplan": {
             "logo": "/apps/assets/kaplan/logo.png",
