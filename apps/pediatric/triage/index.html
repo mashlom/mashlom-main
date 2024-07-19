@@ -40,7 +40,7 @@
     <div class="list-conditions" id="list-conditions">
       <ol class="list-group" style="padding: 0px;">
         <li class="list-group-item d-flex justify-content-between align-items-center"
-          ng-repeat="item in ctrl.triageData | toArray | orderBy:'level':true"
+          ng-repeat="item in ctrl.triageData | toArray | orderBy:'level':false"
           ng-if="ctrl.showItem(item)"
           ng-class="{'selected-row' : ctrl.selectedRows.includes(item)}"
           ng-click="ctrl.toggleRow(item)"
@@ -55,50 +55,6 @@
 <measures-table ng-show="ctrl.dataShown=='MEASURES'" ></measures-table>
 <helper-tables ng-show="ctrl.dataShown=='HELPER_TABLES'" ></helper-tables>
 
-<!-- <footer class="d-flex justify-content-between align-items-center position-relative">
-  <div class="position-relative" style="min-width:100px;">
-      <button class="btn btn-link text-black d-flex align-items-center footer-button" style="font-size:1.1rem;" onclick="toggleMenu()">
-          <span class="dots" style="margin-left: 7px;"><i class="fas fa-ellipsis-v"></i></span>
-          <span class="ml-2">מידע נוסף</span>
-      </button>
-      <div class="menu">
-          <div class="menu-item bottom-menu-color" ng-click="ctrl.openMeasures()">
-            <div ><i class="fa-solid fa-syringe"></i></div>
-              <span>מדדים</span>
-          </div>
-          <hr>
-          <div class="menu-item bottom-menu-color" ng-click="ctrl.openHelperTables()">
-            <div ><i class="fa-solid fa-user-doctor"></i></div>
-              <span>טבלאות עזר</span>
-          </div>          
-      </div>
-  </div>
-  <div class="text-left w-100 text-black" style="direction: ltr;font-weight: bold;font-size: 0.7rem;">
-      <span>הוכן בסיוע בית החולים אסותא אשדוד</span>
-  </div>
-</footer>
-<script>
-  function toggleMenu() {
-        document.querySelector('.menu').classList.toggle('d-block');
-    }
-
-    // Close the menu when clicking outside of it
-    document.addEventListener('click', function(event) {
-        const menu = document.querySelector('.menu');
-        const button = document.querySelector('.btn');
-
-        if (!menu.contains(event.target) && !button.contains(event.target)) {
-            menu.classList.remove('d-block');
-        }
-    });
-
-    // Close the menu after clicking on a menu item
-    document.querySelectorAll('.menu-item').forEach(item => {
-        item.addEventListener('click', function() {
-            document.querySelector('.menu').classList.remove('d-block');
-        });
-    });
-</script> -->
 <footer class="text-center text-white footer">
   <div class="footer-container">
     <div id="footer-menu" ng-show="!ctrl.searchBarOpen">

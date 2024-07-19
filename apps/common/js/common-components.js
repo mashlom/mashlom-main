@@ -1,21 +1,17 @@
-function getHospital() {
-    // Get the current URL from the browser
-    const currentUrl = window.location.href;
-
-    try {
-        // Create a new URL object
-        const urlObj = new URL(currentUrl);
-
-        // Get the pathname and split it into segments
-        const pathSegments = urlObj.pathname.split('/').filter(segment => segment.length > 0);
-
-        // Return the first segment if it exists, otherwise return null
-        return pathSegments.length > 0 ? pathSegments[0] : null;
-    } catch (error) {
-        console.error('Error processing the URL:', error);
-        return null;
-    }
+function setHospitalConfig() {
+    window.hospital = getParameterByName("hospital");
+    window.allHospitalConfigs = {
+        "apps": {
+            "logo": ""
+        },
+        "kaplan": {
+            "logo": "/apps/assets/kaplan/logo.png"
+        }
+    };
+    window.hospitalConfig = window.allHospitalConfigs[window.hospital ? window.hospital : "apps"];
 }
+
+setHospitalConfig();
 
 var app = angular.module("common-directives", []);
 
@@ -33,11 +29,10 @@ app.directive('terms', ['$templateRequest', '$compile', function($templateReques
             };
 
             scope.perHospitalPhrasing = function() {
-                const hospital = getHospital();
-                if (!hospital || hospital == "apps") {
+                if (!window.hospital) {
                     return "";
                 }
-                return "בבית החולים " + hospital;
+                return "בבית החולים " + window.hospital;
             }
 
             // load the template html as a relative location (since its a common
@@ -60,10 +55,8 @@ app.directive('terms', ['$templateRequest', '$compile', function($templateReques
 app.directive('headerDirective', ['$templateRequest', '$compile', function($templateRequest, $compile) {
     return {
         restrict: 'E',
-        scope: {
-            leftLogoUrl: '@'
-        },
         link: function(scope, element, attrs) {
+            scope.leftLogoUrl = window.hospitalConfig.logo;            
 
             // load the template html as a relative location (since its a common
             // package and I don't know from where is will be called, templateUrl won't work.
