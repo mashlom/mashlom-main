@@ -42,7 +42,8 @@ html, body {
   .header-mashlom-logo {
     max-height: 45px;
     padding-left: 5px;
-    padding-bottom: 7px;
+    padding-bottom: 3px;
+    padding-top: 4px;
   }
   
   .header-assuta-logo {
