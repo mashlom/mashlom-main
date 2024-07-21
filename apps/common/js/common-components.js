@@ -57,9 +57,14 @@ app.directive('terms', ['$templateRequest', '$compile', function($templateReques
 app.directive('headerDirective', ['$templateRequest', '$compile', function($templateRequest, $compile) {
     return {
         restrict: 'E',
+        scope: {
+            credit: '@'
+        },
         link: function(scope, element, attrs) {
-            scope.leftLogoUrl = window.hospitalConfig.logo;            
-
+            scope.leftLogoUrl = window.hospitalConfig.logo;
+            if (scope.credit) {
+                scope.creditStr = "הוכן בסיוע בי\"ח " + scope.credit;
+            }
             // load the template html as a relative location (since its a common
             // package and I don't know from where is will be called, templateUrl won't work.
             // The following is a work around for this.)
