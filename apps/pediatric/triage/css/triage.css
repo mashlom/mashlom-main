@@ -55,7 +55,6 @@ body, html {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    padding-top: 20px;
     margin-bottom: 2wh;
   }
   .selected {

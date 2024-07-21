@@ -30,6 +30,11 @@
 <header-directive></header-directive>
 <div id="triage-main" ng-show="ctrl.dataShown=='TRIAGE'">
   <div class="container main-content" >
+  <div class="row form-group">
+      <div class="col-auto fs-3 ">
+          <h1>טריאז' - מיון ילדים</h1>
+      </div>
+  </div>
   <div id="filters" class="filters-group">
       <div ng-repeat="category in ctrl.categories" class="chip" 
         ng-class="{ 'selected': ctrl.selectedCategories.includes(category.categoryId) }"
