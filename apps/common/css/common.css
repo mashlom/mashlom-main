@@ -18,6 +18,9 @@ html, body {
   color: var(--page-font-color) !important;
   background-color: var(--page-background-color);
   overflow-x: hidden;
+  direction: rtl;
+  max-width: 700px;
+  margin: 0 auto;
 }
 
 .main-content {
@@ -59,7 +62,7 @@ html, body {
     font-weight: 600;
     font-size: 13px;
     font-family: Helvetica;
-    padding: 0 15px;
+    padding: 0;
   }
 
   .buttons-color {

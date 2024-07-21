@@ -1,5 +1,5 @@
 function setHospitalConfig() {
-    window.hospital = getParameterByName("hospital");
+    window.hospital = getParameterByName("hospital") || getFirstResourcePart();
     window.allHospitalConfigs = {
         "apps": {
             "logo": "",

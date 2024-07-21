@@ -50,6 +50,24 @@ function getUpdatedQueryParameter(key, value, url) {
     }
 }
 
+function getFirstResourcePart() {
+    // Create a URL object
+    const urlObject = new URL(window.location.href);
+    
+    // Get the pathname and split it by '/'
+    const pathParts = urlObject.pathname.split('/');
+    
+    // Return the first non-empty part
+    for (const part of pathParts) {
+        if (part !== '') {
+            return part;
+        }
+    }
+    
+    // If no non-empty part is found, return an empty string
+    return '';
+}
+
 function updateQueryParameter(key, value, url) {
     if (history.pushState) {
         var newurl = getUpdatedQueryParameter(key, value, url);

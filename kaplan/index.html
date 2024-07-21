@@ -18,9 +18,11 @@
     <meta name="keywords" content="רופאים, מחשבונים, mashlom.me, בית חולים קפלן" />
     <meta name="robots" content="index, follow, NOODP" />
     <link href="../apps/3rd-party/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../apps/common/css/common.css">
     <link rel="stylesheet" href="../apps/common/css/index-page.css">
+    <link rel="stylesheet" href="../apps/3rd-party/fontawesome/fontawesome-free-6.5.1-web/css/all.min.css">
 </head>
-<body>
+<body ng-app="app" ng-controller="IndexController as ctrl">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-J85BPCEQ2Y"></script>
 <script>
     window.dataLayer = window.dataLayer || [];
@@ -28,16 +30,31 @@
     gtag('js', new Date());    
     gtag('config', 'G-J85BPCEQ2Y');
 </script>
-<div class="page-content">
-    <header>
-      <img src="../apps/assets/logo/FullLogo_Transparent.png" alt="Logo" style="height: 100%;">
-    </header>  
-    <h3>מחלקת ילדים</h3>            
-    <ul>
-        <li><a class="custom-link" href="./pediatric/triage.html">טריאז' במיון</a></li>
-        <li><a class="custom-link" href="./pediatric/phototherapy.html">צהבת ביילוד</a></li>
-    </ul>
-</div>  
-
+<header-directive></header-directive>
+<div class="container main-content">
+  
+    <h3 style="text-align: right;margin: 20px 0px">מחלקת ילדים</h3>            
+    <div class="button-container">
+      <a href="./pediatric/phototherapy" class="square-button">        
+        <i class="fa-solid fa-baby"></i>
+          <span>צהבת ביילוד</span>
+      </a>
+      <a href="./pediatric/triage" class="square-button">        
+        <i class="fa-solid fa-user-doctor"></i>
+          <span>טריאז'</span>
+      </a>
+  </div>
+</div>
+<div style="text-align: center; padding: 5px 0px 20px 20px;">
+  חסרה לכם אפליקציה? צריכים עוד כלי עזר? שתפו אותנו במייל ל <a href="y.katz.software@gmail.com">y.katz.software@gmail.com</a>
+</div> 
+<script src="../apps/3rd-party/angularjs/angular.min.js"></script>
+<script src="../apps/common/js/utils.js"></script>
+<script src="../apps/common/js/common-components.js"></script>
+<script>
+  var app = angular.module('app', ["common-directives"]);
+  app.controller('IndexController', function($scope) {
+  });
+</script>
 </body>
 </html>
