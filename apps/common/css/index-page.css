@@ -1,0 +1,106 @@
+  html, body {
+    padding: 0px;
+    text-align: right;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    overflow-y: auto; 
+    background-color: #E5FFFA;
+    color: #1D426E;
+    padding: 20px;
+    padding-top: 5px;
+    direction: rtl;
+  }
+  header {    
+    padding: 0;
+  }
+  .menu-link {
+    margin-top: 10px;
+    background-color: #3F6186;
+  }
+  main {
+    padding-bottom: calc(max(10dhv, 40px)); /*should be at leaset same as the height of the footer*/
+    overflow-y: auto;
+  }
+  header {
+    height: 20dvh;
+    text-align: center;
+  }
+  footer {
+    text-align: center;
+    padding: 0;
+    background-color: #F0FFFD;
+    /* Stick the footer to the bottom */    
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 9dvh;
+    min-height: 40px;
+    border-top: 1px solid #ccc;
+  }
+  .li-logo {
+    width: 10px;
+    height: 10px;
+  }
+  .guide-video {
+    width: 85dvw;
+    max-width: 390px;
+    max-height: 50dvh;
+    margin-top: 20px; 
+    
+  }
+  .video-container {
+    width: 100%;
+    margin-top: 30px; 
+  }
+  .page-content {
+    position: relative;
+    min-height: 100vh;  
+  }
+  .btn:hover {
+    background-color: #1FB5A3;
+  }
+
+h1, h2 {
+  font-size: 2.5rem;
+  font-weight: 500;
+  line-height: 1.2;    
+}
+
+h1, h2, h3, li {
+  color: #1D426E;
+}
+
+li {    
+    font-size: 1.5rem;
+    padding-right: 20px;
+}
+.star-items li {
+  position: relative;
+  padding-right: 30px; /* Adjust padding to accommodate bullet size */
+}
+
+.star-items li::before {
+
+  padding-inline-start: 0.4rem;  
+  border-radius: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;  
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 0.4em;  
+  width: 20px; /* Adjust width */
+  height: 20px; /* Adjust height */
+  background-image: url('../../assets/bullets/star.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.custom-link {
+  color: var(--blue);
+  display: inline-block;
+  position: relative;
+  text-decoration: none;
+}
