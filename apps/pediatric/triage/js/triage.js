@@ -1,5 +1,7 @@
 var app = angular.module("app", ["common-directives"]);
-  
+
+window.hospital = getParameterByName("hospital") || getFirstResourcePart();
+
 app.controller("TriageController", ['$scope', '$rootScope', '$http', '$timeout', function($scope, $rootScope, $http, $timeout) {
     const ctrl = this;
     window.ctrl = this;
@@ -72,7 +74,7 @@ app.controller("TriageController", ['$scope', '$rootScope', '$http', '$timeout',
     }
 
     function init() {
-        $http.get('data/canadian-pediatric-ed-triage.json').then(function(response) {
+        $http.get(`data/canadian-pediatric-ed-triage-${window.hospital}.json`).then(function(response) {
             // The response.data contains the JSON object
             ctrl.jsonData = response.data;
             ctrl.triageData = flattenJson(ctrl.jsonData);
@@ -82,7 +84,7 @@ app.controller("TriageController", ['$scope', '$rootScope', '$http', '$timeout',
         .catch(function(error) {
             console.log('Error fetching triage data file:', error);
         });
-        $http.get('data/valid-measures.json').then(function(response) {
+        $http.get(`data/valid-measures-${window.hospital}.json`).then(function(response) {
             // The response.data contains the JSON object
             ctrl.validMeasures = response.data;
         })
