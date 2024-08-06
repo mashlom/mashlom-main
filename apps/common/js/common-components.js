@@ -8,6 +8,10 @@ function setHospitalConfig() {
         "kaplan": {
             "logo": "/apps/assets/kaplan/logo.png",
             "hebrewName": "קפלן"
+        },
+        "emek": {
+            "logo": "/apps/assets/emek/logo.png",
+            "hebrewName": "העמק"
         }
     };
     window.hospitalConfig = window.allHospitalConfigs[window.hospital ? window.hospital : "apps"];
