@@ -12,6 +12,10 @@ function setHospitalConfig() {
         "emek": {
             "logo": "/apps/assets/emek/logo.png",
             "hebrewName": "העמק"
+        },
+        "assuta": {
+            "logo": "/apps/assets/assuta/logo.png",
+            "hebrewName": "אסותא אשדוד"
         }
     };
     window.hospitalConfig = window.allHospitalConfigs[window.hospital ? window.hospital : "apps"];

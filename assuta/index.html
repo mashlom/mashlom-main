@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>מה שלומי - בית החולים אסותא אשדוד</title>
+    <link rel="manifest" href="/apps/common/manifest.json">
+    <link rel="icon" href="/apps/assets/logo/fav-icon96x96.png">
+    <meta property='og:title' content="בית החולים אסותא אשדוד"/>
+    <meta property='og:type' content='Article'/>
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property='og:site_name' content='mashlom.me'/>
+    <meta property='og:image' content='https://mashlom.me/apps/assets/logo/FullLogo1200x630.jpg'/>
+    <meta property="og:image:secure_url" content="https://mashlom.me/apps/assets/logo/FullLogo1200x630.jpg" />
+    <meta property='og:url' content="https://mashlom.me/assuta/"/>
+    <meta property='og:description' content="כלי עזר לצוותי הרפואה עבור בית החולים אסותא אשדוד"/>
+    <meta name="description" content="כלי עזר לצוותי הרפואה עבור בית החולים אסותא אשדוד" />
+    <meta name="keywords" content="רופאים, מחשבונים, mashlom.me, בית חולים אסותא אשדוד" />
+    <meta name="robots" content="index, follow, NOODP" />
+    <link href="../apps/3rd-party/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../apps/common/css/common.css">
+    <link rel="stylesheet" href="../apps/common/css/index-page.css">
+    <link rel="stylesheet" href="../apps/3rd-party/fontawesome/fontawesome-free-6.5.1-web/css/all.min.css">
+</head>
+<body ng-app="app" ng-controller="IndexController as ctrl">
+<header-directive></header-directive>
+<div class="container main-content">
+  
+    <h3 style="text-align: right;margin: 20px 0px">מלר"ד ילדים - אסותא אשדוד</h3>
+    <div class="button-container">
+      <a href="./pediatric/phototherapy" class="square-button">        
+        <i class="fa-solid fa-baby"></i>
+          <span>צהבת ביילוד</span>
+      </a>
+      <a href="./pediatric/eos" class="square-button in-development">        
+        <i class="fa-solid fa-vial-virus"></i>
+          <span>אלח דם</span>
+      </a>
+    </div>
+    <h3 style="text-align: right;margin: 20px 0px">מלר"ד ילדים</h3>            
+    <div class="button-container">
+      <a href="./pediatric/triage" class="square-button">        
+        <i class="fa-solid fa-user-doctor"></i>
+          <span>טריאז'</span>
+      </a>
+  </div>
+</div>
+<div style="text-align: center; padding: 5px 0px 20px 20px;">
+  חסרה לכם אפליקציה? צריכים עוד כלי עזר? שתפו אותנו במייל  <a href="mashlom.me@gmail.com">mashlom.me@gmail.com</a>
+</div> 
+<script src="../apps/3rd-party/angularjs/angular.min.js"></script>
+<script src="../apps/common/js/utils.js"></script>
+<script src="../apps/common/js/common-components.js"></script>
+<script>
+  var app = angular.module('app', ["common-directives"]);
+  app.controller('IndexController', function($scope) {
+  });
+</script>
+</body>
+</html>
