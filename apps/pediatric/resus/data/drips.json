@@ -3,23 +3,59 @@
         {
             "name": "Adrenaline",
             "howToGive": "IV",
-            "dose_per_kg_per_min": 0.1,
             "dose_unit": "mcg",
             "allowed_dose_range": "0.05-1 mcg/kg/min",
-            "default_dilution_volume_ml": 50,
+            "calc_type": "DilutionInstructions",
             "default_dilution_volume_unit": "ml",
-            "target_volume_ml_per_hour": 1,
-            "calc_type": "DilutionInstructions"
+            "default_dilution_volume_ml": 50,
+            "definition_by_weights":[
+                {
+                    "min_kg": 0,
+                    "max_kg": 20,
+                    "dose_per_kg_per_min": 0.1,
+                    "target_volume_ml_per_hour": 1
+                },
+                {
+                    "min_kg": 20,
+                    "max_kg": 60,
+                    "dose_per_kg_per_min": 0.15,
+                    "target_volume_ml_per_hour": 2
+                },
+                {
+                    "min_kg": 60,
+                    "max_kg": 2000,
+                    "dose_per_kg_per_min": 0.075,
+                    "target_volume_ml_per_hour": 4
+                }
+            ]
         },
         {
             "name": "Noradrenline",
             "howToGive": "IV",
-            "dose_per_kg_per_min": 0.1,
             "dose_unit": "mcg",
             "allowed_dose_range": "0.05-1 mcg/kg/min",
+            "calc_type": "DilutionInstructions",
             "default_dilution_volume_ml": 50,
-            "target_volume_ml_per_hour": 1,
-            "calc_type": "DilutionInstructions"
+            "definition_by_weights":[
+                {
+                    "min_kg": 0,
+                    "max_kg": 20,
+                    "dose_per_kg_per_min": 0.1,
+                    "target_volume_ml_per_hour": 1
+                },
+                {
+                    "min_kg": 20,
+                    "max_kg": 60,
+                    "dose_per_kg_per_min": 0.15,
+                    "target_volume_ml_per_hour": 2
+                },
+                {
+                    "min_kg": 60,
+                    "max_kg": 2000,
+                    "dose_per_kg_per_min": 0.075,
+                    "target_volume_ml_per_hour": 4
+                }
+            ]
         },
         {
             "name": "Dopamine",
@@ -47,8 +83,8 @@
             "dose_per_kg_per_hour": 0.1,
             "dose_unit": "mg",
             "allowed_dose_range": "0.1-0.5 mg/kg/Hr",
-            "default_dilution_volume_ml": 50,
-            "target_volume_ml_per_hour": 1,
+            "default_dilution_volume_ml": 10,
+            "target_volume_ml_per_hour": 5,
             "calc_type": "DilutionInstructions"
         },
         {
@@ -57,8 +93,8 @@
             "dose_per_kg_per_hour": 0.1,
             "dose_unit": "mg",
             "allowed_dose_range": "0.1-0.4 mg/kg/Hr",
-            "default_dilution_volume_ml": 50,
-            "target_volume_ml_per_hour": 1,
+            "default_dilution_volume_ml": 10,
+            "target_volume_ml_per_hour": 5,
             "calc_type": "DilutionInstructions"
         },
         {

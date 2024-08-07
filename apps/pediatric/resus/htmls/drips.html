@@ -16,7 +16,7 @@
               <b> {{ctrl.calcDilutionPerKg(drip).doseForDilution}} {{ctrl.calcDilutionPerKg(drip).unitsForDilution}}</b>
               in
               <b>{{drip.default_dilution_volume_ml}} ml</b>
-              ({{drip.target_volume_ml_per_hour}}ml/Hr)
+              ({{ctrl.getTargetVolumePerHour(drip)}}ml/Hr)
             </span>
             <span ng-if="drip.calc_type==='InfusionSpeed'">
               {{drip.name}}:
@@ -25,8 +25,7 @@
               {{drip.existing_dilution_concentration_dose_unit}}/ml)
             </span>
             <br>
-            Initial Rate: {{ctrl.getDoseByTimeUnit(drip)}} {{drip.dose_unit}}/kg/{{
-              (!!drip.dose_per_kg_per_min) ? 'minute' : 'hour' }}
+            Initial Rate: {{ctrl.getDoseByWeightAndTimeUnit(drip)}} {{drip.dose_unit}}/kg/{{ctrl.getTimeUnitString(drip)}}
             <br>  Rate Range: {{drip.allowed_dose_range}}
           </span>
           <i class="fa-solid fa-circle-info" style="margin-left: 10px; cursor: pointer;" data-bs-toggle="modal"
@@ -41,30 +40,30 @@
                   </h5>
                 </div>
                 <div ng-if="drip.calc_type==='DilutionInstructions'" class="modal-body">
-                  <b>Initial intravenous infusion rate: </b> {{ctrl.getDoseByTimeUnit(drip)}} {{drip.dose_unit}}/kg/{{
-                  (!!drip.dose_per_kg_per_min) ? 'minute' : 'hour' }}<br />
+                  <b>Initial intravenous infusion rate: </b> {{ctrl.getDoseByWeightAndTimeUnit(drip)}} {{drip.dose_unit}}/kg/{{
+                    ctrl.getTimeUnitString(drip) }}<br />
                   <b>Calculation for a child weighing {{ctrl.weight}} kg:</b>
                   <ul>
                     <li>Total dose per hour: {{ctrl.calcDilutionPerKg(drip).doseBeforeDilution}}
                       {{ctrl.calcDilutionPerKg(drip).unitsBeforeDilution}}
-                      (calculated as {{ctrl.getDoseByTimeUnit(drip)}} {{drip.dose_unit}}/kg/{{
-                      (!!drip.dose_per_kg_per_min) ? 'minute' : 'hour' }} * {{ctrl.weight}} kg
-                      {{!!drip.dose_per_kg_per_min ? '* 60 minutes' : ''}})</li>
+                      (calculated as {{ctrl.getDoseByWeightAndTimeUnit(drip)}} {{drip.dose_unit}}/kg/{{
+                      ctrl.getTimeUnitString(drip) }} * {{ctrl.weight}} kg
+                      {{ctrl.isDripMinuteDefinition(drip) ? '* 60 minutes' : ''}})</li>
                     <li>Dilution: To prepare a solution in {{drip.default_dilution_volume_ml}} ml, add
                       {{ctrl.calcDilutionPerKg(drip).doseForDilution}} {{ctrl.calcDilutionPerKg(drip).unitsForDilution}}
-                      of the drug (calculated as {{ctrl.calcDilutionPerKg(drip).doseBeforeDilution}}
-                      {{ctrl.calcDilutionPerKg(drip).unitsBeforeDilution}} * {{drip.default_dilution_volume_ml}} ml)</li>
+                      of the drug (calculated as ({{ctrl.calcDilutionPerKg(drip).doseBeforeDilution}}
+                      {{ctrl.calcDilutionPerKg(drip).unitsBeforeDilution}} * {{drip.default_dilution_volume_ml}} ml) / {{ctrl.getTargetVolumePerHour(drip)}} ml) </li>
                   </ul>
                   <b>Note:</b> The intravenous infusion rate range is {{drip.allowed_dose_range}}.
                 </div>
                 <div ng-if="drip.calc_type==='InfusionSpeed'" class="modal-body">
-                  <b>Intravenous infusion rate: </b> {{ctrl.getDoseByTimeUnit(drip)}} {{drip.dose_unit}}/kg/{{
-                  (!!drip.dose_per_kg_per_min) ? 'minute' : 'hour' }}<br />
+                  <b>Intravenous infusion rate: </b> {{ctrl.getDoseByWeightAndTimeUnit(drip)}} {{drip.dose_unit}}/kg/{{
+                  ctrl.getTimeUnitString(drip) }}<br />
                   <b>Calculation for a child weighing {{ctrl.weight}} kg:</b><br />
                   <ul>
                     <li>Total dose per hour: {{ctrl.getDripDosePerHourPerWeight(drip)}} {{drip.dose_unit}}
-                      (calculated as {{ctrl.getDoseByTimeUnit(drip)}} {{drip.dose_unit}}/kg/{{
-                      (!!drip.dose_per_kg_per_min) ? 'minute' : 'hour' }} * {{ctrl.weight}} kg)</li>
+                      (calculated as {{ctrl.getDoseByWeightAndTimeUnit(drip)}} {{drip.dose_unit}}/kg/{{
+                      ctrl.getTimeUnitString(drip) }} * {{ctrl.weight}} kg)</li>
                     <li>Existing medication dilution: {{drip.existing_dilution_concentration}}
                       {{drip.existing_dilution_concentration_dose_unit}}/ml
                     <li>Set intravenous infusion rate to: {{ctrl.calcInfusionSpeed(drip)}}ml/Hr (calculated as total dose

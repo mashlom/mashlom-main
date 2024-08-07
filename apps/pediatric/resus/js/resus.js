@@ -25,9 +25,9 @@ app.controller("ResusController", ['$scope', '$rootScope', '$timeout', '$http', 
         $http.get('./data/resus-drugs-definitions.json').then(function (response) {
             ctrl.drugsData = response.data;
             ctrl.drugDefinitonsForUI = ctrl.createDrugDefinitonsForUI(response.data)
-            ctrl.drugsData.sections.forEach(function(section) {
+            ctrl.drugsData.sections.forEach(function (section) {
                 section.$isExpanded = false; // Start with all sections collapsed
-            });    
+            });
         });
         $http.get('./data/airways.json').then(function (response) {
             ctrl.airwaysData = response.data;
@@ -44,7 +44,7 @@ app.controller("ResusController", ['$scope', '$rootScope', '$timeout', '$http', 
         return data.sections.flatMap(category => {
             return category.drugs.map(drug => {
                 return {
-                    "drug_name": drug.name,
+                    "drug_name": `${drug.name} ${drug.howToGive}`,
                     "dosage": `${drug.dose_per_kg} ${drug.dose_unit}`,
                     "medical_concentration": drug.concentration ? `${drug.concentration} ${drug.dose_unit}/ml` : "",
                     "max_dose": drug.maxDose ? `${drug.maxDose} ${drug.maxDoseUnit}` : ""
@@ -59,7 +59,7 @@ app.controller("ResusController", ['$scope', '$rootScope', '$timeout', '$http', 
 
     ctrl.dripDefinition = function (drugName) {
         return ctrl.dripsDefinitions[drugName];
-    }    
+    }
 
     ctrl.formatNumber = function (num) {
         // Use toFixed(2) to get a string with two decimal places
@@ -152,19 +152,61 @@ app.controller("ResusController", ['$scope', '$rootScope', '$timeout', '$http', 
         }
     };
 
-    ctrl.getDoseByTimeUnit = function (drip) {
-        return drip.dose_per_kg_per_min ?? drip.dose_per_kg_per_hour;
-    };
+    // Get dose_per_kg_per_min or hour
+    ctrl.getDoseByWeightAndTimeUnit = function (drip) {
+        const definition = ctrl.getDripDefinition(drip);
+        return definition.dose_per_kg_per_min ?? definition.dose_per_kg_per_hour;
+    }
+
+    // Target_volume_ml_per_hour
+    ctrl.getTargetVolumePerHour = function (drip) {
+        const definition = ctrl.getDripDefinition(drip);
+        return definition.target_volume_ml_per_hour;
+    }
+
+    // Get time unit in drip
+    ctrl.getTimeUnitString = function (drip) {
+        return ctrl.isDripMinuteDefinition(drip) ? 'minute' : 'hour';
+    }
+
+    // Check if drip is minute or hour
+    ctrl.isDripMinuteDefinition = function (drip) {
+        const definition = ctrl.getDripDefinition(drip);
+        return definition.dose_per_kg_per_min ? true : false;
+    }
+
+    ctrl.getDripDefinition = function (drip) {
+        if (drip.definition_by_weights) {
+            return findDefinitionByWeight(drip.definition_by_weights);
+        }
+        return drip;
+    }
+
+    function findDefinitionByWeight(definition_by_weights) {
+        for (let range of definition_by_weights) {
+            if (ctrl.weight >= range.min_kg && ctrl.weight < range.max_kg) {
+                return range;
+            }
+        }
+        throw new Error("Weight out of defined ranges");
+    }
 
     ctrl.calcDilutionPerKg = function (drip) {
-        return calcDilutionPerKg(drip, ctrl.weight);
+        const { dose_per_kg_per_min, dose_per_kg_per_hour, target_volume_ml_per_hour } = ctrl.getDripDefinition(drip);
+        return innerCalcDilutionPerKg(drip, ctrl.weight, dose_per_kg_per_min, dose_per_kg_per_hour, target_volume_ml_per_hour);
     };
+
+    ctrl.getDripDosePerHourPerWeight = function (drip) {
+        const definition = ctrl.getDripDefinition(drip);
+        return ctrl.formatNumber(calcDosePerHourPerWeight(definition, ctrl.weight,
+            definition.dose_per_kg_per_min, definition.dose_per_kg_per_hour));
+    }
 
     ctrl.closeTooltip = function () {
         ctrl.tooltipIndex = "";
     }
 
-    ctrl.getDoseByWeightWithMaxLimitFormatted = function(drugDefintion){
+    ctrl.getDoseByWeightWithMaxLimitFormatted = function (drugDefintion) {
         return ctrl.formatNumber(ctrl.getDoseByWeightWithMaxLimit(drugDefintion));
     }
 
@@ -176,25 +218,22 @@ app.controller("ResusController", ['$scope', '$rootScope', '$timeout', '$http', 
         return doseByWeight;
     }
 
-    ctrl.getDripDosePerHourPerWeight = function (drugData) {
-        return ctrl.formatNumber(calcDosePerHourPerWeight(drugData, ctrl.weight));
-    }
-
-    ctrl.calcInfusionSpeed = function (drugData) {
-        const dosePerKg = calcDosePerHourPerWeight(drugData, ctrl.weight);
-        if (drugData.dose_unit !== drugData.existing_dilution_concentration_dose_unit) {
-            throw new Error("Dosage unit and existing concentration does not match. need to implement units aligmnet before calculation. drug with error:" + drugData.name);
+    ctrl.calcInfusionSpeed = function (drip) {
+        const definition = ctrl.getDripDefinition(drip);
+        const dosePerKg = calcDosePerHourPerWeight(definition, ctrl.weight, definition.dose_per_kg_per_min, definition.dose_per_kg_per_hour);
+        if (drip.dose_unit !== drip.existing_dilution_concentration_dose_unit) {
+            throw new Error("Dosage unit and existing concentration does not match. need to implement units aligmnet before calculation. drug with error:" + drip.name);
         }
-        const [numerator, denominator] = ctrl.splitRatio(drugData.existing_dilution_concentration);
+        const [numerator, denominator] = ctrl.splitRatio(drip.existing_dilution_concentration);
         const concentration = numerator / denominator;
         return ctrl.formatNumber(dosePerKg / concentration);  // Volume = Mass / Concentration
     }
 
-    ctrl.toggleSection = function(index) {
+    ctrl.toggleSection = function (index) {
         ctrl.drugsData.sections[index].$isExpanded = !ctrl.drugsData.sections[index].$isExpanded;
     };
 
-    ctrl.toggleDrips = function() {
+    ctrl.toggleDrips = function () {
         ctrl.dripsExpanded = !ctrl.dripsExpanded;
     }
 
