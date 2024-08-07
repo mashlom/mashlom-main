@@ -28,6 +28,9 @@
             <b>{{ctrl.splitRatio(drug.concentration)[0]}} {{drug.dose_unit}} per
               {{ctrl.splitRatio(drug.concentration)[1]}} ml </b>
           </div>
+          <div ng-if="!!drug.prepare_instructions">
+              {{ drug.prepare_instructions }}
+          </div>
         </span>
         <i class="fa-solid fa-circle-info" style="margin-left: 10px; cursor: pointer;" data-bs-toggle="modal"
           data-bs-target="#infoModal1_{{$index}}{{$parent.$index}}"></i>
