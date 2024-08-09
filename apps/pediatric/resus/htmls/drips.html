@@ -28,7 +28,7 @@
             Initial rate: {{ctrl.getDripRate(drip)}} {{drip.dose_unit}}/kg/{{ctrl.getTimeUnitString(drip)}}
             <br>  Rate range: {{drip.allowed_dose_range}}
           </span>
-          <div data-bs-toggle="modal" data-bs-target="#infoModal1_drips_{{$index}}">
+          <div data-bs-toggle="modal" data-bs-target="#infoModal1_drips_{{$index}}" class="info-button">
             <i class="fa-solid fa-circle-info" style="margin-left: 10px; cursor: pointer;" ></i>
           </div>
           <div class="modal fade" id="infoModal1_drips_{{$index}}" tabindex="-1"
