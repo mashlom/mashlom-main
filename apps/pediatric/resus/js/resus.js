@@ -330,6 +330,10 @@ app.controller("ResusController", ['$scope', '$rootScope', '$timeout', '$http', 
         return age.replace("month", "חודשים").replace("year", "שנים");
     }
 
+    ctrl.exportToPdf = function() {
+        exportDataToPdf();
+    };
+
     init();
 }]);
 
