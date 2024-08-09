@@ -56,6 +56,10 @@
                   <b>Min dose: </b>
                   {{drug.minDose}}&nbsp;{{drug.minDoseUnit}}<br/>
                 </div>
+                <div ng-if="!!drug.concentration">
+                  <b>Concentration: </b>{{ctrl.splitRatio(drug.concentration)[0]}} {{drug.dose_unit}} per
+                  {{ctrl.splitRatio(drug.concentration)[1]}} ml
+                </div>
               </div>
             </div>
           </div>
