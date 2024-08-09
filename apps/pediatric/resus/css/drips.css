@@ -1,9 +1,10 @@
 .drugs-header {
   color: white;
   background-color: #103C6E;
-  padding-top: 5px;
-  padding-bottom: 5px;
+  padding-top: 10px;
+  padding-bottom: 10px;
   font-size: 1rem;
+  border-radius: 5px;
 }
 
 .bold-text {

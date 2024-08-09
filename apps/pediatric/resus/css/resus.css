@@ -118,15 +118,13 @@ h1 {
 
 .list-group-item {
   border: none;
-  border-top: 1px solid #6585a0;
-  border-radius: 0; /* Remove rounded corners */
-}
-
-.list-group-item:nth-child(odd) {
-  border: none;
   border-bottom: 1px solid #6585a0;
   border-radius: 0; /* Remove rounded corners */
 }
+.custom-list-group .list-group-item:last-child {
+  border-bottom: none;
+}
+
 
 .cards-container {
   width: 100%; /* Set a width */
@@ -182,4 +180,15 @@ h1 {
   color:white;
   background-color: #1FB5A3;
   width: 70px;
+}
+
+.collapseable.ng-hide-add,
+.collapseable.ng-hide-remove {
+  transition: all 0.5s ease-in-out;
+  max-height: 1000px; /* Adjust this value based on your content */
+  overflow: hidden;
+}
+
+.collapseable.ng-hide {
+  max-height: 0;
 }

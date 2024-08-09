@@ -6,9 +6,9 @@
     </span>
     <span class="section-name">{{section.name}}</span>
   </h4>
-  <div ng-show="section.$isExpanded">
-  <ul class="list-group" ng-repeat="drug in section.drugs track by $index">
-    <li class="list-group-item">
+  <div ng-hide="!section.$isExpanded" id="collapseable-area-drugs" class="collapseable" >
+  <ul class="list-group custom-list-group">
+    <li class="list-group-item" ng-repeat="drug in section.drugs track by $index">
       <div style="display: flex; justify-content: space-between; text-align: left; color: var(--page-font-color);">
         <span>
           <div ng-if="!drug.type">
@@ -20,7 +20,7 @@
             {{drug.name}}: <b>{{ctrl.calcAmountToAdminister(drug)}} {{ctrl.getAdministrationUnit(drug)}}</b> - <span
               ng-class="{'bold-text': drug.howToGive && drug.howToGive.trim() !== 'IV'}">{{drug.howToGive}}</span>
           </div>
-          Calculated Dose: {{drug.dose_per_kg}} {{drug.dose_unit}}/kg<br />
+          Calculated dose: {{drug.dose_per_kg}} {{drug.dose_unit}}/kg<br />
           <div ng-if="ctrl.shouldDispalyConcentration(drug)">
             Concentration: <b>{{ctrl.splitRatio(drug.concentration)[0]}} {{drug.dose_unit}} per
               {{ctrl.splitRatio(drug.concentration)[1]}} ml </b>
@@ -29,8 +29,9 @@
             <span style="color:red;"><b>Used max dose of {{drug.maxDose}}&nbsp;{{drug.maxDoseUnit}}</b></span>
           </div>
         </span>
-        <i class="fa-solid fa-circle-info" style="margin-left: 10px; cursor: pointer;" data-bs-toggle="modal"
-          data-bs-target="#infoModal1_{{$index}}{{$parent.$index}}"></i>
+        <div data-bs-toggle="modal" data-bs-toggle="modal" data-bs-target="#infoModal1_{{$index}}{{$parent.$index}}">
+          <i class="fa-solid fa-circle-info" style="margin-left: 10px; cursor: pointer;" ></i>
+        </div>
         <div class="modal fade" id="infoModal1_{{$index}}{{$parent.$index}}" tabindex="-1"
           aria-labelledby="infoModalLabel__{{$index}}{{$parent.$index}}" aria-hidden="true">
           <div class="modal-dialog">
@@ -41,18 +42,18 @@
                 </h5>
               </div>
               <div class="modal-body">
-                <b>Dosage Used: </b>{{drug.dose_per_kg}} {{drug.dose_unit}}/kg<br />
-                <div ng-if="!!drug.dose_range"><b>Dosage Range: </b>{{drug.dose_range}}<br /></div>
+                <b>Dosage used: </b>{{drug.dose_per_kg}} {{drug.dose_unit}}/kg<br />
+                <div ng-if="!!drug.dose_range"><b>Dosage range: </b>{{drug.dose_range}}<br /></div>
                 <div ng-if="!!drug.prepare_instructions">
-                  <b>Dilution Instructions: </b>
+                  <b>Dilution instructions: </b>
                   {{ drug.prepare_instructions }}<br/>
                 </div>
                 <div ng-if="!!drug.maxDose">
-                  <b>Max Dose: </b>
+                  <b>Max dose: </b>
                   {{drug.maxDose}}&nbsp;{{drug.maxDoseUnit}}<br/>
                 </div>
                 <div ng-if="!!drug.minDose">
-                  <b>Min Dose: </b>
+                  <b>Min dose: </b>
                   {{drug.minDose}}&nbsp;{{drug.minDoseUnit}}<br/>
                 </div>
               </div>

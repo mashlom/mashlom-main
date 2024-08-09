@@ -6,7 +6,7 @@
     </span>
     <span class="section-name">Drips</span>
   </h4>
-  <div ng-show="ctrl.dripsExpanded">
+  <div ng-hide="!ctrl.dripsExpanded" id="collapseable-area-drips" class="collapseable">
     <ul class="list-group" ng-repeat="drip in ctrl.dripsDefinitions track by $index">
       <li class="list-group-item">
         <div style="display: flex; justify-content: space-between; text-align: left; color: var(--page-font-color);">
@@ -25,11 +25,12 @@
               {{drip.existing_dilution_concentration_dose_unit}}/ml)
             </span>
             <br>
-            Initial Rate: {{ctrl.getDripRate(drip)}} {{drip.dose_unit}}/kg/{{ctrl.getTimeUnitString(drip)}}
-            <br>  Rate Range: {{drip.allowed_dose_range}}
+            Initial rate: {{ctrl.getDripRate(drip)}} {{drip.dose_unit}}/kg/{{ctrl.getTimeUnitString(drip)}}
+            <br>  Rate range: {{drip.allowed_dose_range}}
           </span>
-          <i class="fa-solid fa-circle-info" style="margin-left: 10px; cursor: pointer;" data-bs-toggle="modal"
-            data-bs-target="#infoModal1_drips_{{$index}}"></i>
+          <div data-bs-toggle="modal" data-bs-target="#infoModal1_drips_{{$index}}">
+            <i class="fa-solid fa-circle-info" style="margin-left: 10px; cursor: pointer;" ></i>
+          </div>
           <div class="modal fade" id="infoModal1_drips_{{$index}}" tabindex="-1"
             aria-labelledby="infoModalLabel_drips_{{$index}}" aria-hidden="true">
             <div class="modal-dialog">
@@ -40,14 +41,14 @@
                   </h5>
                 </div>
                 <div ng-if="drip.calc_type==='DilutionInstructions'" class="modal-body">
-                  <b>Initial Rate:</b> {{ctrl.getDripRate(drip)}} {{drip.dose_unit}}/kg/{{
+                  <b>Initial rate:</b> {{ctrl.getDripRate(drip)}} {{drip.dose_unit}}/kg/{{
                     ctrl.getTimeUnitString(drip) }}<br />
-                  <b>Rate Range:</b> {{drip.allowed_dose_range}}
+                  <b>Rate range:</b> {{drip.allowed_dose_range}}
                 </div>
                 <div ng-if="drip.calc_type==='InfusionSpeed'" class="modal-body">
-                  <b>Initial Rate:</b> {{ctrl.getDripRate(drip)}} {{drip.dose_unit}}/kg/{{
+                  <b>Initial rate:</b> {{ctrl.getDripRate(drip)}} {{drip.dose_unit}}/kg/{{
                   ctrl.getTimeUnitString(drip) }}<br />
-                  <b>Rate Range:</b> {{drip.allowed_dose_range}}
+                  <b>Rate range:</b> {{drip.allowed_dose_range}}
                 </div>
               </div>
             </div>

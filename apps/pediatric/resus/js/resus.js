@@ -1,4 +1,4 @@
-var app = angular.module("app", ["common-directives"]);
+var app = angular.module("app", ["ngAnimate", "common-directives"]);
 
 app.controller("ResusController", ['$scope', '$rootScope', '$timeout', '$http', function ($scope, $rootScope, $timeout, $http) {
     const ctrl = this;
@@ -232,6 +232,13 @@ app.controller("ResusController", ['$scope', '$rootScope', '$timeout', '$http', 
 
     ctrl.toggleDrips = function () {
         ctrl.dripsExpanded = !ctrl.dripsExpanded;
+        // since its the end of the div, expanding the drips make it under the fold.
+        // so we scroll to it.
+        if (ctrl.dripsExpanded) {
+            $timeout(function() {
+                scrollToElement('collapseable-area-drips');
+            }, 150);
+        }
     }
 
     ctrl.splitRatio = function (ratio) {

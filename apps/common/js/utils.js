@@ -74,3 +74,10 @@ function updateQueryParameter(key, value, url) {
         window.history.pushState({path:newurl},'',newurl);
     }
 }
+
+function scrollToElement(elementId) {
+    var element = document.getElementById(elementId);
+    if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+}

@@ -99,16 +99,16 @@
         <div class="card">
           <div class="card-body row">
             <div class="col-md-6" style="padding-top: 10px;">
-              <h3>Airways</h3>
-              <ul class="list-group" style="background-color:#FFECCC;border-radius: 10px;padding:10px;">
+              <h5 style="font-weight: bold;">Airways</h5>
+              <ul class="list-group" style="background-color:#B9EDE7;border-radius: 10px;padding:15px; line-height: 1rem;">
                 <span class="defi-data">Laryngiscope blade: {{ctrl.getBlade()}}</span><br>
                 <span class="defi-data">ETT diameter (Cuffed): {{ctrl.getEttDiameter()}}</span><br>
                 <span class="defi-data">LMA Size: {{ctrl.getLma()}}</span>
               </ul>
             </div>
             <div class="col-md-6" style="padding-top: 10px;"> 
-              <h3>Defibrillator</h3>
-              <ul class="list-group" style="background-color:#FFECCC;border-radius: 10px;padding:10px;">
+              <h5 style="font-weight: bold;">Defibrillator</h5>
+              <ul class="list-group" style="background-color:#B9EDE7;border-radius: 10px;padding:15px; line-height: 1rem;">
                 <span class="defi-data"> {{ctrl.getDefi(2)}} (2J/Kg)</span><br>
                 <span class="defi-data">{{ctrl.getDefi(4)}} (4J/Kg)</span>
               </ul>
@@ -149,6 +149,7 @@
 </footer>
 <script src="../../3rd-party/angularjs/angular.min.js"></script>
 <script src="../../3rd-party/angularjs/angular-sanitize.min.js"></script>
+<script src="../../3rd-party/angularjs/angular-animate.min.js"></script>
 <script src="../../3rd-party/bootstrap/bootstrap.bundle.min.js"></script>
 <script src="js/calculation.js"></script>
 <script src="../../common/js/common-components.js"></script>
