@@ -53,6 +53,10 @@ app.controller("ResusController", ['$scope', '$rootScope', '$timeout', '$http', 
         });
     };
 
+    ctrl.shouldDispalyConcentration = function (drug){
+        return drug.shouldDispalyConcentration;
+    }
+
     ctrl.dripInstructions = function (drugName) {
         return ctrl.dripsInstructions[drugName];
     }

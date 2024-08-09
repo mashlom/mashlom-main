@@ -48,7 +48,8 @@
                "dose_unit": "mg",
                "concentration": "500/1",
                "maxDose": "2000",
-               "maxDoseUnit": "mg"
+               "maxDoseUnit": "mg",
+               "shouldDispalyConcentration": true
             },
             {
                "name": "Calcium gluconate",
@@ -138,7 +139,8 @@
                "dose_unit": "mg",
                "concentration": "1/1",
                "maxDose": "10",
-               "maxDoseUnit": "mg"
+               "maxDoseUnit": "mg",
+               "shouldDispalyConcentration": true
             }
          ]
       },
@@ -237,7 +239,8 @@
                "dose_unit": "mg",
                "concentration": "5/1",
                "maxDose": "10",
-               "maxDoseUnit": "mg"
+               "maxDoseUnit": "mg",
+               "shouldDispalyConcentration": true
             },
             {
                "name": "Keppra",
@@ -288,7 +291,8 @@
                "dose_unit": "mg",
                "concentration": "1/1",
                "maxDose": "10",
-               "maxDoseUnit": "mg"
+               "maxDoseUnit": "mg",
+               "shouldDispalyConcentration": true
             },
             {
                "name": "Midazolam",
@@ -297,7 +301,8 @@
                "dose_unit": "mg",
                "concentration": "1/1",
                "maxDose": "10",
-               "maxDoseUnit": "mg"
+               "maxDoseUnit": "mg",
+               "shouldDispalyConcentration": true
             }
          ]
       },
