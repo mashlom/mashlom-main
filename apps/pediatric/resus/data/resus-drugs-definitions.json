@@ -21,6 +21,8 @@
                "concentration": "1/10",
                "maxDose": "1",
                "maxDoseUnit": "mg",
+               "minDose": "0.1",
+               "minDoseUnit": "mg",
                "prepare_instructions": "To get Atropine 1mg/10ml (1:10000) take 1 ml of Atropine 1mg/ml and dilute it  with 9 ml of NACL 0.9%"
             },
             {

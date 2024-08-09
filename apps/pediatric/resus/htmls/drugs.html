@@ -51,6 +51,10 @@
                   <b>Max Dose: </b>
                   {{drug.maxDose}}&nbsp;{{drug.maxDoseUnit}}<br/>
                 </div>
+                <div ng-if="!!drug.minDose">
+                  <b>Min Dose: </b>
+                  {{drug.minDose}}&nbsp;{{drug.minDoseUnit}}<br/>
+                </div>
               </div>
             </div>
           </div>

@@ -219,6 +219,9 @@ app.controller("ResusController", ['$scope', '$rootScope', '$timeout', '$http', 
         if (drugDefintion.maxDose) {
             doseByWeight = Math.min(drugDefintion.maxDose, doseByWeight);
         }
+        if (drugDefintion.minDose){
+            doseByWeight = Math.max(drugDefintion.minDose, doseByWeight);
+        }
         return doseByWeight;
     }
 
