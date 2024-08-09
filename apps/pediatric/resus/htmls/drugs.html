@@ -21,12 +21,12 @@
               ng-class="{'bold-text': drug.howToGive && drug.howToGive.trim() !== 'IV'}">{{drug.howToGive}}</span>
           </div>
           Calculated Dose: {{drug.dose_per_kg}} {{drug.dose_unit}}/kg<br />
-          <div ng-if="!!drug.maxDose && drug.maxDose==ctrl.getDoseByWeightWithMaxLimit(drug)">
-            <span style="color:red;"><b>Used max dose of {{drug.maxDose}}&nbsp;{{drug.maxDoseUnit}}</b></span>
-          </div>
           <div ng-if="ctrl.shouldDispalyConcentration(drug)">
             Concentration: <b>{{ctrl.splitRatio(drug.concentration)[0]}} {{drug.dose_unit}} per
               {{ctrl.splitRatio(drug.concentration)[1]}} ml </b>
+          </div>
+          <div ng-if="!!drug.maxDose && drug.maxDose==ctrl.getDoseByWeightWithMaxLimit(drug)">
+            <span style="color:red;"><b>Used max dose of {{drug.maxDose}}&nbsp;{{drug.maxDoseUnit}}</b></span>
           </div>
         </span>
         <i class="fa-solid fa-circle-info" style="margin-left: 10px; cursor: pointer;" data-bs-toggle="modal"

@@ -8,23 +8,21 @@
             "calc_type": "DilutionInstructions",
             "default_dilution_volume_unit": "ml",
             "default_dilution_volume_ml": 50,
+            "dose_per_kg_per_min": 0.1,
             "definition_by_weights":[
                 {
                     "min_kg": 0,
                     "max_kg": 20,
-                    "dose_per_kg_per_min": 0.1,
                     "target_volume_ml_per_hour": 1
                 },
                 {
                     "min_kg": 20,
                     "max_kg": 60,
-                    "dose_per_kg_per_min": 0.15,
                     "target_volume_ml_per_hour": 2
                 },
                 {
                     "min_kg": 60,
                     "max_kg": 2000,
-                    "dose_per_kg_per_min": 0.075,
                     "target_volume_ml_per_hour": 4
                 }
             ]
@@ -36,23 +34,21 @@
             "allowed_dose_range": "0.05-1 mcg/kg/min",
             "calc_type": "DilutionInstructions",
             "default_dilution_volume_ml": 50,
+            "dose_per_kg_per_min": 0.1,
             "definition_by_weights":[
                 {
                     "min_kg": 0,
                     "max_kg": 20,
-                    "dose_per_kg_per_min": 0.1,
                     "target_volume_ml_per_hour": 1
                 },
                 {
                     "min_kg": 20,
                     "max_kg": 60,
-                    "dose_per_kg_per_min": 0.15,
                     "target_volume_ml_per_hour": 2
                 },
                 {
                     "min_kg": 60,
                     "max_kg": 2000,
-                    "dose_per_kg_per_min": 0.075,
                     "target_volume_ml_per_hour": 4
                 }
             ]

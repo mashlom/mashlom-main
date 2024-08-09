@@ -25,7 +25,7 @@
               {{drip.existing_dilution_concentration_dose_unit}}/ml)
             </span>
             <br>
-            Initial Rate: {{ctrl.getDoseByWeightAndTimeUnit(drip)}} {{drip.dose_unit}}/kg/{{ctrl.getTimeUnitString(drip)}}
+            Initial Rate: {{ctrl.getDripRate(drip)}} {{drip.dose_unit}}/kg/{{ctrl.getTimeUnitString(drip)}}
             <br>  Rate Range: {{drip.allowed_dose_range}}
           </span>
           <i class="fa-solid fa-circle-info" style="margin-left: 10px; cursor: pointer;" data-bs-toggle="modal"
@@ -36,16 +36,16 @@
               <div class="modal-content">
                 <div class="modal-header green">
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  <h5 class="modal-title" id="infoModalLabel_drips_{{$index}}">Calculation of <b>{{drip.name}}</b> Drips
+                  <h5 class="modal-title" id="infoModalLabel_drips_{{$index}}"><b>{{drip.name}}</b> Drips
                   </h5>
                 </div>
                 <div ng-if="drip.calc_type==='DilutionInstructions'" class="modal-body">
-                  <b>Initial Rate:</b> {{ctrl.getDoseByWeightAndTimeUnit(drip)}} {{drip.dose_unit}}/kg/{{
+                  <b>Initial Rate:</b> {{ctrl.getDripRate(drip)}} {{drip.dose_unit}}/kg/{{
                     ctrl.getTimeUnitString(drip) }}<br />
                   <b>Rate Range:</b> {{drip.allowed_dose_range}}
                 </div>
                 <div ng-if="drip.calc_type==='InfusionSpeed'" class="modal-body">
-                  <b>Initial Rate:</b> {{ctrl.getDoseByWeightAndTimeUnit(drip)}} {{drip.dose_unit}}/kg/{{
+                  <b>Initial Rate:</b> {{ctrl.getDripRate(drip)}} {{drip.dose_unit}}/kg/{{
                   ctrl.getTimeUnitString(drip) }}<br />
                   <b>Rate Range:</b> {{drip.allowed_dose_range}}
                 </div>

@@ -157,14 +157,13 @@ app.controller("ResusController", ['$scope', '$rootScope', '$timeout', '$http', 
     };
 
     // Get dose_per_kg_per_min or hour
-    ctrl.getDoseByWeightAndTimeUnit = function (drip) {
-        const definition = ctrl.getDripDefinition(drip);
-        return definition.dose_per_kg_per_min ?? definition.dose_per_kg_per_hour;
+    ctrl.getDripRate = function (drip) {
+        return drip.dose_per_kg_per_min ?? drip.dose_per_kg_per_hour;
     }
 
     // Target_volume_ml_per_hour
     ctrl.getTargetVolumePerHour = function (drip) {
-        const definition = ctrl.getDripDefinition(drip);
+        const definition = ctrl.getDripOverrideDefinitionsByWeight(drip);
         return definition.target_volume_ml_per_hour;
     }
 
@@ -175,11 +174,10 @@ app.controller("ResusController", ['$scope', '$rootScope', '$timeout', '$http', 
 
     // Check if drip is minute or hour
     ctrl.isDripMinuteDefinition = function (drip) {
-        const definition = ctrl.getDripDefinition(drip);
-        return definition.dose_per_kg_per_min ? true : false;
+        return drip.dose_per_kg_per_min ? true : false;
     }
 
-    ctrl.getDripDefinition = function (drip) {
+    ctrl.getDripOverrideDefinitionsByWeight = function (drip) {
         if (drip.definition_by_weights) {
             return findDefinitionByWeight(drip.definition_by_weights);
         }
@@ -196,15 +194,8 @@ app.controller("ResusController", ['$scope', '$rootScope', '$timeout', '$http', 
     }
 
     ctrl.calcDilutionPerKg = function (drip) {
-        const { dose_per_kg_per_min, dose_per_kg_per_hour, target_volume_ml_per_hour } = ctrl.getDripDefinition(drip);
-        return innerCalcDilutionPerKg(drip, ctrl.weight, dose_per_kg_per_min, dose_per_kg_per_hour, target_volume_ml_per_hour);
+        return innerCalcDilutionPerKg(drip, ctrl.weight, ctrl.getTargetVolumePerHour(drip));
     };
-
-    ctrl.getDripDosePerHourPerWeight = function (drip) {
-        const definition = ctrl.getDripDefinition(drip);
-        return ctrl.formatNumber(calcDosePerHourPerWeight(definition, ctrl.weight,
-            definition.dose_per_kg_per_min, definition.dose_per_kg_per_hour));
-    }
 
     ctrl.closeTooltip = function () {
         ctrl.tooltipIndex = "";
@@ -226,8 +217,7 @@ app.controller("ResusController", ['$scope', '$rootScope', '$timeout', '$http', 
     }
 
     ctrl.calcInfusionSpeed = function (drip) {
-        const definition = ctrl.getDripDefinition(drip);
-        const dosePerKg = calcDosePerHourPerWeight(definition, ctrl.weight, definition.dose_per_kg_per_min, definition.dose_per_kg_per_hour);
+        const dosePerKg = calcDosePerHourPerWeight(drip, ctrl.weight);
         if (drip.dose_unit !== drip.existing_dilution_concentration_dose_unit) {
             throw new Error("Dosage unit and existing concentration does not match. need to implement units aligmnet before calculation. drug with error:" + drip.name);
         }
