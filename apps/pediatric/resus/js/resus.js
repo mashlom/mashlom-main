@@ -20,6 +20,8 @@ app.controller("ResusController", ['$scope', '$rootScope', '$timeout', '$http', 
     ctrl.esitmatedMaleWeight = "";
     ctrl.esitmatedFemaleWeight = "";
     ctrl.tooltipIndex = "";
+    ctrl.patientId = "";
+    ctrl.patientName = "";
 
     function init() {
         $http.get('./data/resus-drugs-definitions.json').then(function (response) {
@@ -331,7 +333,10 @@ app.controller("ResusController", ['$scope', '$rootScope', '$timeout', '$http', 
     }
 
     ctrl.exportToPdf = function() {
-        exportDataToPdf();
+        exportDataToPdf({
+            "patientName" : ctrl.patientName,
+            "patientId" : ctrl.patientId
+        });
     };
 
     init();
