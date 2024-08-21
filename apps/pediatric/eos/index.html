@@ -60,12 +60,12 @@
                 <div class="col-5 col-md-3" style="padding-left: 0px;margin-left: 10px;max-width: 100px;">
                   <input placeholder="שבועות" ng-model-options="{ allowInvalid: true}" inputmode="decimal" type="text" pattern="[0-9]{0,3}"
                           min="30" max="45" 
-                          maxlength="3" style="max-width: 90px;" ng-model="ctrl.pregnancyLengthWeeks" class="form-control" id="pregnancyLengthWeeks" select-on-click >
+                          maxlength="3" style="max-width: 90px;min-width: 50px;" ng-model="ctrl.pregnancyLengthWeeks" class="form-control" id="pregnancyLengthWeeks" select-on-click >
                 </div>
                 <div class="col-5 col-md-3" style="padding-right: 0px;max-width: 100px;">
                   <input placeholder="+ ימים" ng-model-options="{ allowInvalid: true}" inputmode="decimal" type="text" pattern="[0-6]{0,1}"
                           max="6" min="0" 
-                          maxlength="3" style="max-width: 90px;" ng-model="ctrl.pregnancyLengthDays" class="form-control" id="pregnancyLengthDays" select-on-click >
+                          maxlength="3" style="max-width: 90px;min-width: 50px;" ng-model="ctrl.pregnancyLengthDays" class="form-control" id="pregnancyLengthDays" select-on-click >
                   </div>
                 </div>
             </div>
