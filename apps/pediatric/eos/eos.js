@@ -34,6 +34,7 @@ app.controller("EosController", ['$scope', '$rootScope', '$timeout', function($s
     ctrl.eos = undefined;
     ctrl.eosString = undefined;
     ctrl.preganancyWeekValidity = true;
+    ctrl.tempratureValidity = true;
 
     ctrl.openPanel = function(page) {
       history.pushState({ panel: page }, '', '#' + page);
@@ -122,16 +123,25 @@ app.controller("EosController", ['$scope', '$rootScope', '$timeout', function($s
 
     ctrl.isValidPreganancyWeek = function() {
       return ctrl.pregnancyLengthWeeks >= 34 && ctrl.pregnancyLengthWeeks <= 43
-    }
+    };
+
+    ctrl.isValidTemprature = function() {
+      return ctrl.temprature >= 36
+    };
 
     ctrl.checkPregnancyLength = function() {      
       ctrl.preganancyWeekValidity = !ctrl.pregnancyLengthWeeks // we don't want to raise error when the field is empty.
                 || ctrl.isValidPreganancyWeek();
-    }    
+    };
+
+    ctrl.checkTemprature = function() {      
+      ctrl.tempratureValidity = !ctrl.temprature // we don't want to raise error when the field is empty.
+                || ctrl.isValidTemprature();
+    };
 
     ctrl.allValuesSatisfied = function() {
       return !!ctrl.intercept && !!ctrl.temprature && !!ctrl.rom && !!ctrl.pregnancyLengthWeeks &&
-             !!ctrl.antibioticTreatment && !!ctrl.gbs && ctrl.isValidPreganancyWeek();
+             !!ctrl.antibioticTreatment && !!ctrl.gbs && ctrl.isValidPreganancyWeek() && ctrl.isValidTemprature();
     };
 
     ctrl.calcEosPerClinicalCondition = function() {

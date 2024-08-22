@@ -48,8 +48,10 @@
             </div>
             <div class="col input-col">
                 <input  ng-model-options="{ allowInvalid: true}" inputmode="decimal" type="text" pattern="[0-9]{1,4}[.]{0,1}[0-9]{0,1}" maxlength="5" style="max-width: 90px;" ng-model="ctrl.temprature" 
-                        class="form-control" id="temprature" max="45" min="36" select-on-click >
+                        class="form-control" id="temprature" max="45" min="36" select-on-click 
+                        ng-blur="ctrl.checkTemprature()" >
             </div>
+            <span ng-if="!ctrl.tempratureValidity" style="color:red;">טמפרטורת גוף מינימלית היא 36.</span>
         </div>        
         <div class="row form-group">
             <div class="col-auto caption-fs col-auto-text-cols d-flex align-items-center">
@@ -68,7 +70,7 @@
                           maxlength="3" style="max-width: 90px;min-width: 50px;" ng-model="ctrl.pregnancyLengthDays" class="form-control" id="pregnancyLengthDays" select-on-click >
                   </div>
                 </div>
-                <span ng-if="!ctrl.preganancyWeekValidity" style="color:red;">המחשבון מתייחס רק לשבועות 34 עד 43.</span>                          
+                <span ng-if="!ctrl.preganancyWeekValidity" style="color:red;">המחשבון מתייחס רק לשבועות 34 עד 43.</span>
             </div>
         </div>        
         <div class="row form-group">
