@@ -112,7 +112,7 @@ app.controller("EosController", ['$scope', '$rootScope', '$timeout', function($s
 
     function computeTemprature() {
         return (ctrl.temprature * (9/5)) + 32 // convert to C from F
-    }   
+    }
 
     function computePregnancyLength() {
       if (ctrl.pregnancyLengthDays) {
@@ -121,23 +121,23 @@ app.controller("EosController", ['$scope', '$rootScope', '$timeout', function($s
       return Number(ctrl.pregnancyLengthWeeks);
     }
 
-    ctrl.isValidPreganancyWeek = function() {
-      return ctrl.pregnancyLengthWeeks >= 34 && ctrl.pregnancyLengthWeeks <= 43
-    };
-
     ctrl.isValidTemprature = function() {
       return ctrl.temprature >= 36
     };
 
-    ctrl.checkPregnancyLength = function() {      
-      ctrl.preganancyWeekValidity = !ctrl.pregnancyLengthWeeks // we don't want to raise error when the field is empty.
-                || ctrl.isValidPreganancyWeek();
-    };
+    ctrl.isValidPreganancyWeek = function() {
+      return ctrl.pregnancyLengthWeeks >= 34 && ctrl.pregnancyLengthWeeks <= 43
+    }
 
     ctrl.checkTemprature = function() {      
       ctrl.tempratureValidity = !ctrl.temprature // we don't want to raise error when the field is empty.
                 || ctrl.isValidTemprature();
     };
+
+    ctrl.checkPregnancyLength = function() {      
+      ctrl.preganancyWeekValidity = !ctrl.pregnancyLengthWeeks // we don't want to raise error when the field is empty.
+                || ctrl.isValidPreganancyWeek();
+    };   
 
     ctrl.allValuesSatisfied = function() {
       return !!ctrl.intercept && !!ctrl.temprature && !!ctrl.rom && !!ctrl.pregnancyLengthWeeks &&
@@ -164,55 +164,72 @@ app.controller("EosController", ['$scope', '$rootScope', '$timeout', function($s
     };
 
     ctrl.getClinicalRecommendation = function(clinicalCondition) {
-      if (ctrl.tooHighTemprature()) {
-        return 'טיפול אנטיביוטי אמפירי';
+      const recommendation = ctrl.getRecommendation(clinicalCondition);
+      if (!!!ctrl.temprature) {
+        return '';
       }
-      const eosPerClinicalCondition = ctrl.eosPerClinicalCondition[clinicalCondition];
-
-      if (eosPerClinicalCondition < 1) {
-        return "ללא תרביות, ללא טיפול אנטיביוטי";
+      if (recommendation == "ANTIBIOTICS_VITALS_PER_NICU") {
+        return 'טיפול אנטיביוטי אמפירי';        
       }
-      else if (eosPerClinicalCondition < 3 && eosPerClinicalCondition >= 1) {
+      if (recommendation == "BLOOD_CULTURE_VITALS_EVERY_4_HOURS") {
         return 'תרביות דם';
-      }
-      else {
-        return 'טיפול אנטיביוטי אמפירי';
+      } else {
+        return "ללא תרביות, ללא טיפול אנטיביוטי";
       }
     };
 
+    ctrl.getRecommendation = function(clinicalRecommendation) {
+      if (ctrl.tooHighTemprature()) {
+        return "ANTIBIOTICS_VITALS_PER_NICU";            
+      }
+      if (clinicalRecommendation == 'Clinical Illness') {
+        return "ANTIBIOTICS_VITALS_PER_NICU";
+      }
+      const riskPerCondition = ctrl.eosPerClinicalCondition[clinicalRecommendation];
+      if (riskPerCondition < 1) {
+        if ((ctrl.eos * 1000) < 1) {
+          return "ROUTINE_VITALS";
+        }
+        else {
+          return "VITALS_EVERY_4_HOURS";
+        }
+      }
+      if (riskPerCondition >= 1 && riskPerCondition < 3) {
+        return "BLOOD_CULTURE_VITALS_EVERY_4_HOURS"
+      }
+      if (riskPerCondition >= 3) {
+        return "ANTIBIOTICS_VITALS_PER_NICU";
+      }
+    };
+  
+
     ctrl.getClinicalConditionColor = function(clinicalCondition) {
+      const recommendation = ctrl.getRecommendation(clinicalCondition);
       if (!!!ctrl.temprature) {
         return 'none';
       }
-      if (parseInt(ctrl.temprature) >= 39) {
+      if (recommendation == "ANTIBIOTICS_VITALS_PER_NICU") {
         return 'red';        
       }
-      if (ctrl.eosPerClinicalCondition[clinicalCondition] < 1)
-      {
+      if (recommendation == "ROUTINE_VITALS") {
         return 'green';
-      }
-      if (ctrl.eosPerClinicalCondition[clinicalCondition] >= 1 && ctrl.eosPerClinicalCondition[clinicalCondition] < 3) {
+      } else {
         return 'yellow';
-      }
-      if (ctrl.eosPerClinicalCondition[clinicalCondition] >= 3) {
-        return 'red';
       }
     }
 
     ctrl.getTrackingRecommendation = function(clinicalCondition) {
-      if (ctrl.tooHighTemprature()) {
-        return 'ניטור רציף';
+      const recommendation = ctrl.getRecommendation(clinicalCondition);
+      if (!!!ctrl.temprature) {
+        return 'none';
       }
-      const eosPerClinicalCondition = ctrl.eosPerClinicalCondition[clinicalCondition];
-
-      if (eosPerClinicalCondition < 1) {
-        return "מעקב שגרתי";
+      if (recommendation == "ANTIBIOTICS_VITALS_PER_NICU") {
+        return 'ניטור רציף';        
       }
-      else if (eosPerClinicalCondition < 3 && eosPerClinicalCondition >= 1) {
+      if (recommendation == "ROUTINE_VITALS") {
+        return 'מעקב שגרתי';
+      } else {
         return 'סימנים חיוניים כל 4 שעות למשך 24 שעות';
-      }
-      else {
-        return 'ניטור רציף';
       }
     };
 
@@ -294,8 +311,11 @@ app.directive('clinicalRecommendation', function() {
         scope.tooHighTemprature = function() {          
           return ctrl.tooHighTemprature();
         };
-      }
 
+        scope.getRecommendation = function() {
+          return ctrl.getRecommendation(scope.condition);
+        }
+      }
   };
 });
 
