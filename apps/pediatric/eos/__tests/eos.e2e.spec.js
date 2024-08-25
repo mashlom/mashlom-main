@@ -1,24 +1,15 @@
 const puppeteer = require('puppeteer');
 const testCases = require('./testCases')
 
-const LIGHT_TREATMENT = {
-  NO_NEED_CARE: 'לא נדרש טיפול באור',
-  NEED_CARE: 'נדרש טיפול באור',
-  ALERT: 'ערך בילירובין מתקרב לסף טיפול באור'
+const WELL_APPEARING = {
+  NO_CULTURE: 'ללא תרביות, ללא טיפול אנטיביוטי',
+  REGULAR_FOLLOW_UP: 'מעקב שגרתי',
+  EMPIRIC_ANTIBIOTICS: 'טיפול אנטיביוטי אמפירי'
 }
-
-const BLOOD_TRANSFUSION = {
-  ALERT: 'ערך בילירובין מתקרב לסף החלפת דם',
-  NEED: 'עובר את סף החלפת דם',
-  IVIG: 'ערך בילירובין מתקרב לסף החלפת דם, יש לשקול מתן IVIG',
-  NEED_UNDER_SIX: 'עובר את סף החלפת דם (בילירובין גדול מגיל הילד)'
-}
-
-const transfusionNameToId = {
-  [BLOOD_TRANSFUSION.ALERT]: 'התראה',
-  [BLOOD_TRANSFUSION.NEED]: 'עובר',
-  [BLOOD_TRANSFUSION.IVIG]: 'התראה IVIG',
-  [BLOOD_TRANSFUSION.NEED_UNDER_SIX]: 'עובר גדול מגיל ילוד'
+const UiResultToJsonShortString = {
+  [WELL_APPEARING.NO_CULTURE]: 'ללא תרבית',
+  [WELL_APPEARING.REGULAR_FOLLOW_UP]: 'שגרתי',
+  [WELL_APPEARING.EMPIRIC_ANTIBIOTICS]: 'אנטיביוטי אמפירי'
 }
 const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
@@ -88,10 +79,24 @@ const getEosResult = async (fever, birthWeek, plusDays, rom, gbs, antibiotics) =
 
   // Get the result and return it
   const eosRaw = await page.$eval('#eosStatistics', el => el.textContent);
+
+
+  const listItems = await page.evaluate(() => {
+    // Select all <li> elements within the specified section
+    const items = Array.from(document.querySelectorAll('#headingOne ul li'));
+  
+    // Return the text content of each <li> element as an array
+    return items.map(item => item.textContent.trim());
+  });
+
+  // const _wellAppearingRaw = 'ללא תרביות, ללא טיפול אנטיביוטי';
+  const _wellAppearingRaw = listItems[1];
+  const wellAppearing = UiResultToJsonShortString[_wellAppearingRaw.trim()];
+
   const eosStat = Number(eosRaw.trim());
   await browser.close();
 
-  return { eosStat };
+  return { eosStat, wellAppearing };
 }
 
 describe('eos-e2e', () => {
@@ -99,8 +104,10 @@ describe('eos-e2e', () => {
   it.each(testCases)(
     "test case %o",
     async ({ fever, birthWeek, plusDays, rom, gbs, antibiotics, expectedResult }) => {
-      const { eosStat } = await getEosResult(fever, birthWeek, plusDays, rom, gbs, antibiotics);
+      const { eosStat, wellAppearing } = await getEosResult(fever, birthWeek, plusDays, rom, gbs, antibiotics);
       expect(eosStat).toEqual(expectedResult.eosStat)
+      expect(wellAppearing).toEqual(expectedResult.wellAppearingSecondItem)
+
     }
   );
 });
