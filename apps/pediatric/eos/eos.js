@@ -1,5 +1,20 @@
 var app = angular.module("app", ["common-directives"]);
 
+window.allHospitalConfigs = {
+  "apps": {
+    "minTempratureBeforeForcingAntibiotics": 41 // more that the maximum Keisaer supports
+  },
+  "kaplan": {
+  },
+  "emek": {
+  },
+  "assuta": {
+    "minTempratureBeforeForcingAntibiotics": 39
+  }
+};
+
+MIN_TEMPRATURE_BEFORE_FORCING_ANTIBIOTICS = getHospitalConfig("minTempratureBeforeForcingAntibiotics");
+
 function isElementInViewport(el) {
   const rect = el.getBoundingClientRect();
   return (
@@ -122,7 +137,7 @@ app.controller("EosController", ['$scope', '$rootScope', '$timeout', function($s
     }
 
     ctrl.isValidTemprature = function() {
-      return ctrl.temprature >= 36
+      return ctrl.temprature >= 36 && ctrl.temprature <= 40;
     };
 
     ctrl.isValidPreganancyWeek = function() {
@@ -234,7 +249,7 @@ app.controller("EosController", ['$scope', '$rootScope', '$timeout', function($s
     };
 
     ctrl.tooHighTemprature = function() {          
-      return parseInt(ctrl.temprature) >= 39;
+      return parseInt(ctrl.temprature) >= MIN_TEMPRATURE_BEFORE_FORCING_ANTIBIOTICS;
     };
     
     ctrl.resetAll = function() {
