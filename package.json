@@ -12,6 +12,9 @@
     "puppeteer": "^22.10.0"
   },
   "jest": {
-    "testEnvironment": "jest-environment-jsdom"
+    "testEnvironment": "jest-environment-jsdom",
+    "setupFiles": [
+      "./setup-jest.js"
+    ]
   }
 }
