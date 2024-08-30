@@ -1,0 +1,78 @@
+// @import '@styles/variables';
+// @import '@styles/mixins';
+@import '../styles/shared';
+.page-header {
+  display: flex;
+  padding: 10px;
+  vertical-align: top;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #d7d7d7;
+
+  .header-main-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-right: 18px;
+
+    .header-logo {
+      display: block;
+      margin: 5px 0;
+
+      img {
+        width: 100%;
+      }
+    }
+
+    .header-contact {
+      display: flex;
+      align-items: flex-start;
+      font-size: 20px;
+      height: 47px;
+      padding: 14px;
+      margin-right: 18px;
+      border-right: 1px solid #e2e2e2;
+
+      .assuta-call-text {
+        color: var(--green);
+        font-weight: bold;
+        display: flex;
+      }
+
+      .assuta-call-phone {
+        color: var(--blue1);
+        font-weight: 700;
+        margin: 0px 10px;
+      }
+    }
+  }
+}
+
+@include respond-to(sm) {
+  .page-header .header-main-section .header-contact {
+    display: none;
+  }
+
+  .page-header .header-main-section {
+    margin-right: 0;
+    margin-left: 4px;
+  }
+}
+
+
+@include respond-to(lg) {
+  .header-contact {
+    flex-direction: column;
+    margin-bottom: 2px;
+  }
+    .page-header .header-main-section .header-contact {
+      font-size: 14px;
+      &.is-eng{
+        display: none;
+      }
+    }
+
+  .page-header {
+    padding-bottom: 14px;
+  }
+}
