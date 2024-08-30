@@ -1,8 +1,14 @@
 {
   "scripts": {
     "start": "http-server -o",
+    "gatsby:build": "npm run build --workspace=apps-builder",
+    "gatsby:develop": "npm run develop --workspace=apps-builder",
+    "gatsby:clean": "npm run clean --workspace=apps-builder",
     "test": "jest"
   },
+  "workspaces": [
+    "apps-builder"
+  ],
   "devDependencies": {
     "angular-mocks": "^1.5.0-beta.2",
     "http-server": "^14.1.1",

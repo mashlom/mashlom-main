@@ -1,0 +1,70 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");
+
+@import 'normalize.css';
+@import './variables';
+@import './mixins';
+
+:root {
+    /* Colors vars */
+    --white: #ffffff;
+    --blue: #0e2f74;
+    --blue1: #0f2d6c;
+    --black: #000000;
+    --green: #72a00e;
+    --gray: #d7d7d7;
+
+    /* Font vars */
+    --font-size-small: 14px;
+    --font-size-medium: 16px;
+    --font-size-large: 18px;
+    --font-weight-regular: 400;
+    --font-weight-bold: 700;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    margin: 0;
+    color: var(--black);
+    font-size: var(--font-size-medium);
+    font-family: "Open Sans", sans-serif;
+    font-weight: var(--font-weight-regular);
+    overflow-x: hidden;
+    direction: rtl;
+    background-color: var(--white);
+}
+
+a {
+    color: var(--blue);
+    text-decoration: none;
+}
+
+a:visited,
+a:hover {
+    // color: var(--black);
+    text-decoration: none;
+}
+
+nav ul,
+nav ol {
+    list-style: none;
+    list-style-image: none;
+    margin: 0;
+    padding: 0;
+}
+
+img {
+    vertical-align: middle;
+}
+
+:focus-visible {
+    outline: none;
+}
