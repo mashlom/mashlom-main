@@ -57,6 +57,35 @@ describe('ResusController', () => {
     );
 
 
+    it('defibrilator not passing threshold', () => {
+        const $scope = {};
+        const controller = $controller('ResusController', { $scope });
+        controller.weight = 49;
+        const defiResultMultiBy2KJ = controller.getDefi(2);
+        expect(defiResultMultiBy2KJ).toBe(98);
+        const defiResultMultiBy4KJ = controller.getDefi(4);
+        expect(defiResultMultiBy4KJ).toBe(196);
+    });
+
+    it('defibrilator parital pass', () => {
+        const $scope = {};
+        const controller = $controller('ResusController', { $scope });
+        controller.weight = 51;
+        const defiResultMultiBy2KJ = controller.getDefi(2);
+        expect(defiResultMultiBy2KJ).toBe(102);
+        const defiResultMultiBy4KJ = controller.getDefi(4);
+        expect(defiResultMultiBy4KJ).toBe(200);
+    });
+
+    it('defibrilator both pass', () => {
+        const $scope = {};
+        const controller = $controller('ResusController', { $scope });
+        controller.weight = 101;
+        const defiResultMultiBy2KJ = controller.getDefi(2);
+        expect(defiResultMultiBy2KJ).toBe(200);
+        const defiResultMultiBy4KJ = controller.getDefi(4);
+        expect(defiResultMultiBy4KJ).toBe(200);
+    });
     // it('should find administer function', () => {
     //     const $scope = {};
     //     const controller = $controller('ResusController', { $scope });
