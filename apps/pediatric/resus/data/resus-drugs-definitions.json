@@ -92,7 +92,7 @@
          "name": "Sedation & RSI",
          "drugs": [
             {
-               "name": "Ketamin 1mg",
+               "name": "Ketamin 1mg/Kg",
                "howToGive": "IV",
                "dose_per_kg": 1,
                "dose_range": "mg/kg(0.5-2)",
@@ -100,7 +100,7 @@
                "concentration": "10/1"
             },
             {
-               "name": "Ketamin 1.5mg",
+               "name": "Ketamin 1.5mg/Kg",
                "howToGive": "IV",
                "dose_per_kg": 1.5,
                "dose_range": "mg/kg(0.5-2)",

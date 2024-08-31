@@ -81,3 +81,19 @@ function scrollToElement(elementId) {
         element.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 }
+
+function getHospitalConfig(property) {
+    window.hospital = getParameterByName("hospital") || getFirstResourcePart();
+    const hospital = window.hospital;
+    const allConfigs = window.allHospitalConfigs;
+  
+    if (allConfigs[hospital] && allConfigs[hospital].hasOwnProperty(property)) {
+      return allConfigs[hospital][property];
+    } else if (allConfigs.apps && allConfigs.apps.hasOwnProperty(property)) {
+      console.log(`Property "${property}" not found for ${hospital}. Falling back to "apps" configuration.`);
+      return allConfigs.apps[property];
+    } else {
+      console.log(`Property "${property}" not found for ${hospital} or in "apps" configuration.`);
+      return undefined;
+    }
+  }

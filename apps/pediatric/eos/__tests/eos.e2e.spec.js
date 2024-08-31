@@ -16,7 +16,7 @@ const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 const getEosResult = async (fever, birthWeek, plusDays, rom, gbs, antibiotics) => {
   const browser = await puppeteer.launch({ headless: true, devtools: false });
   const page = await browser.newPage();
-  await page.goto('http://localhost:8080/apps/pediatric/eos/');
+  await page.goto('http://localhost:8000/apps/pediatric/eos/');
 
   // waiting for terms popup
   await sleep(100);
@@ -58,14 +58,14 @@ const getEosResult = async (fever, birthWeek, plusDays, rom, gbs, antibiotics) =
 
   // Set Antibiotics status
   let noneRadio;
-  if (antibiotics === 'none') {
-    noneRadio = await page.waitForSelector("#none");
-  } else if (antibiotics === '4plus') {
+  if (antibiotics === 'broad-4') {
     noneRadio = await page.waitForSelector("#broad-4");
-  } else if (antibiotics === '4minus') {
+  } else if (antibiotics === 'broad-2') {
     noneRadio = await page.waitForSelector("#broad-2");
-  } else if (antibiotics === 'gps-specific') {
+  } else if (antibiotics === 'GBS-2') {
     noneRadio = await page.waitForSelector("#GBS-2");
+  } else if (antibiotics === 'none') {
+    noneRadio = await page.waitForSelector("#none");
   }
   await noneRadio.click();
 
@@ -94,20 +94,129 @@ const getEosResult = async (fever, birthWeek, plusDays, rom, gbs, antibiotics) =
   const wellAppearing = UiResultToJsonShortString[_wellAppearingRaw.trim()];
 
   const eosStat = Number(eosRaw.trim());
+  const clinicalIllnessEos = Number(await page.$eval('#clinicalIllnessEos', el => el.textContent))
+  const equivocalEos = Number(await page.$eval('#equivocalEos', el => el.textContent))
+  const wellAppearingEos = Number(await page.$eval('#wellAppearingEos', el => el.textContent))
   await browser.close();
 
-  return { eosStat, wellAppearing };
+  return { eosStat, wellAppearingEos, equivocalEos, clinicalIllnessEos, wellAppearing };
 }
 
-describe('eos-e2e', () => {
+describe('eos-e2e-alignment-with-kaiser', () => {
   jest.setTimeout(5000);
   it.each(testCases)(
     "test case %o",
     async ({ fever, birthWeek, plusDays, rom, gbs, antibiotics, expectedResult }) => {
-      const { eosStat, wellAppearing } = await getEosResult(fever, birthWeek, plusDays, rom, gbs, antibiotics);
-      expect(eosStat).toEqual(expectedResult.eosStat)
-      expect(wellAppearing).toEqual(expectedResult.wellAppearingSecondItem)
-
+      const { eosStat, wellAppearingEos, equivocalEos, clinicalIllnessEos, wellAppearing } = await getEosResult(fever, birthWeek, plusDays, rom, gbs, antibiotics);      
+      expect(eosStat).toEqual(expectedResult.eosStat);
+      expect(wellAppearingEos).toEqual(expectedResult.wellAppearingEos);
+      expect(equivocalEos).toEqual(expectedResult.equivocalEos);
+      expect(clinicalIllnessEos).toEqual(expectedResult.clinicalIllnessEos);
     }
   );
+});
+
+test('eos-e2e-temprature-too-low', async () => {
+  const browser = await puppeteer.launch({ headless: true, devtools: false });
+  const page = await browser.newPage();
+  await page.goto('http://localhost:8000/apps/pediatric/eos/');
+
+  // waiting for terms popup
+  await sleep(100);
+
+  // Check if the modal exists
+  const modal = await page.$('#usage-terms-dialog-backdrop');
+
+  if (modal) {
+    // Click the "I accept" button if the modal is present
+    await page.click('#acceptTerms');
+  }
+
+  // Set fever 
+  await page.focus('#temprature');
+  await page.keyboard.type("35");
+  // de-focus, to get the error msg
+  await page.focus('#pregnancyLengthDays');
+  value = await page.$eval('#temprature-error', el => el.textContent);
+  expect(value).toEqual("המחשבון מתייחס לחום בטווח 36-40 בלבד.");
+
+  await browser.close();
+});
+
+test('eos-e2e-temprature-too-high', async () => {
+  const browser = await puppeteer.launch({ headless: true, devtools: false });
+  const page = await browser.newPage();
+  await page.goto('http://localhost:8000/apps/pediatric/eos/');
+
+  // waiting for terms popup
+  await sleep(100);
+
+  // Check if the modal exists
+  const modal = await page.$('#usage-terms-dialog-backdrop');
+
+  if (modal) {
+    // Click the "I accept" button if the modal is present
+    await page.click('#acceptTerms');
+  }
+
+  // Set fever 
+  await page.focus('#temprature');
+  await page.keyboard.type("41");
+  // de-focus, to get the error msg
+  await page.focus('#pregnancyLengthDays');
+  value = await page.$eval('#temprature-error', el => el.textContent);
+  expect(value).toEqual("המחשבון מתייחס לחום בטווח 36-40 בלבד.");
+  await browser.close();
+});
+
+test('eos-e2e-pregnancy-week-too-high', async () => {
+  const browser = await puppeteer.launch({ headless: true, devtools: false });
+  const page = await browser.newPage();
+  await page.goto('http://localhost:8000/apps/pediatric/eos/');
+
+  // waiting for terms popup
+  await sleep(100);
+
+  // Check if the modal exists
+  const modal = await page.$('#usage-terms-dialog-backdrop');
+
+  if (modal) {
+    // Click the "I accept" button if the modal is present
+    await page.click('#acceptTerms');
+  }
+
+  // Set fever 
+  await page.focus('#pregnancyLengthWeeks');
+  await page.keyboard.type("44");
+  // de-focus, to get the error msg
+  await page.focus('#pregnancyLengthDays');
+  value = await page.$eval('#pregnancyWeeks-error', el => el.textContent);
+  expect(value).toEqual("המחשבון מתייחס רק לשבועות 34 עד 43.");
+  await browser.close();
+});
+
+test('eos-e2e-pregnancy-week-too-low', async () => {
+  const browser = await puppeteer.launch({ headless: true, devtools: false });
+  const page = await browser.newPage();
+  await page.goto('http://localhost:8000/apps/pediatric/eos/');
+
+  // waiting for terms popup
+  await sleep(100);
+
+  // Check if the modal exists
+  const modal = await page.$('#usage-terms-dialog-backdrop');
+
+  if (modal) {
+    // Click the "I accept" button if the modal is present
+    await page.click('#acceptTerms');
+  }
+
+  // Set fever 
+  await page.focus('#pregnancyLengthWeeks');
+  await page.keyboard.type("33");
+  // de-focus, to get the error msg
+  await page.focus('#pregnancyLengthDays');
+  value = await page.$eval('#pregnancyWeeks-error', el => el.textContent);
+  expect(value).toEqual("המחשבון מתייחס רק לשבועות 34 עד 43.");
+  await browser.close();
 });

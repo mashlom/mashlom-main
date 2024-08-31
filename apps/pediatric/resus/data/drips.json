@@ -79,7 +79,7 @@
             "dose_per_kg_per_hour": 0.1,
             "dose_unit": "mg",
             "allowed_dose_range": "0.1-0.5 mg/kg/Hr",
-            "default_dilution_volume_ml": 10,
+            "default_dilution_volume_ml": 50,
             "target_volume_ml_per_hour": 5,
             "calc_type": "DilutionInstructions"
         },
@@ -89,7 +89,7 @@
             "dose_per_kg_per_hour": 0.1,
             "dose_unit": "mg",
             "allowed_dose_range": "0.1-0.4 mg/kg/Hr",
-            "default_dilution_volume_ml": 10,
+            "default_dilution_volume_ml": 50,
             "target_volume_ml_per_hour": 5,
             "calc_type": "DilutionInstructions"
         },
