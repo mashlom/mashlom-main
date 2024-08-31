@@ -196,7 +196,7 @@ app.controller("ResusController", ['$scope', '$rootScope', '$timeout', '$http', 
     }
 
     ctrl.calcDilutionPerKg = function (drip) {
-        return innerCalcDilutionPerKg(drip, ctrl.weight, ctrl.getTargetVolumePerHour(drip));
+        return ctrl.innerCalcDilutionPerKg(drip, ctrl.weight, ctrl.getTargetVolumePerHour(drip));
     };
 
     ctrl.closeTooltip = function () {
@@ -338,6 +338,41 @@ app.controller("ResusController", ['$scope', '$rootScope', '$timeout', '$http', 
             "patientId" : ctrl.patientId
         });
     };
+
+    ctrl.innerCalcDilutionPerKg = function(drugData, kg, target_volume_ml_per_hour) {
+        const dosePerKg = ctrl.calcDosePerHourPerWeight(drugData, kg);
+        const dose_to_add = (drugData.default_dilution_volume_ml / target_volume_ml_per_hour) * dosePerKg;
+        const { dose: doseForDilution, units: unitsForDilution } = ctrl.prettifyUnits(dose_to_add, drugData.dose_unit);
+        const { dose: doseBeforeDilution, units: unitsBeforeDilution } = ctrl.prettifyUnits(dosePerKg, drugData.dose_unit);
+        return { doseBeforeDilution: ctrl.formatNumberToFixed2(doseBeforeDilution), unitsBeforeDilution, doseForDilution: ctrl.formatNumberToFixed2(doseForDilution), unitsForDilution };
+    }
+    
+    ctrl.calcDosePerHourPerWeight = function(drugData, kg) {
+        let drug_per_hour = 0;
+        if (drugData.dose_per_kg_per_min) {
+            drug_per_hour = drugData.dose_per_kg_per_min * 60;
+        } else if (drugData.dose_per_kg_per_hour) {
+            drug_per_hour = drugData.dose_per_kg_per_hour;
+        } else {
+            throw new Error("neither minute nor hour provided to drug " + drugData.name);
+        }
+        return drug_per_hour * kg;
+    }
+    
+    ctrl.formatNumberToFixed2 = function(num) {
+        return parseFloat(num.toFixed(2));
+    }
+    
+    ctrl.prettifyUnits = function(dose, units) {
+        if (dose < 1000) {
+            return { dose, units }
+        } else {
+            if (units === 'mcg') {
+                return { dose: dose / 1000, units: 'mg' }
+            }
+            return { dose, units }
+        }
+    }
 
     init();
 }]);

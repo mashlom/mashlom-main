@@ -1,11 +1,13 @@
 require('angular');
 require('angular-mocks');
-require('../js/resus'); // Require your AngularJS module
+require('../js/resus');
+require('../js/calculation');
 angular.module('ngAnimate', []); // Mocking ngAnimate
 angular.module('common-directives', []); // Mocking common-directives
 const fs = require('fs');
 const testCasesDrugs = require('./test-cases-drugs')
 const testCasesDrugsMaxDose = require('./test-cases-drugs-max-dose')
+const testCasesDrips = require('./test-cases-drips')
 
 describe('ResusController', () => {
     let $controller;
@@ -16,13 +18,34 @@ describe('ResusController', () => {
         $controller = _$controller_;
     }));
 
-    const drugMap = loadAndProcessJSON('./apps/pediatric/resus/__tests/resus-drugs-definitions-duplicate-testing.json');
+    const drugMap = loadAndProcessDrugsJSON('./apps/pediatric/resus/__tests/resus-drugs-definitions-duplicate-testing.json');
+    const dripsMap = loadAndProcessDripsJSON('./apps/pediatric/resus/__tests/drips-definition-duplicate.json');
 
     function getDrugData(name, howToGive, dose_per_kg) {
         // Create the key from the input parameters
         const key = `${name}|${howToGive}|${dose_per_kg}`;
-        return drugMap.get(key) || null;  // Return null if the key doesn't exist
+        return drugMap.get(key) || null;
     }
+
+    function getDripData(name){
+        return dripsMap.get(name) || null;  
+    }
+
+    it.each(testCasesDrips)(
+        "Drip Test Case %o",
+        async ({ childWeight, drugName, expectedResult }) => {
+            const $scope = {};
+            const controller = $controller('ResusController', { $scope });
+            controller.weight = childWeight;
+            const drip = getDripData(drugName.trim());
+
+            const doseForDilution = controller.calcDilutionPerKg(drip).doseForDilution;
+            const volumePerHour = controller.getTargetVolumePerHour(drip);
+            expect(doseForDilution).toBe(expectedResult.doseForDilution);
+            expect(drip.default_dilution_volume_ml).toBe(expectedResult.default_dilution_volume_ml);
+            expect(volumePerHour.toString() + 'ml/hr').toBe(expectedResult.volumePerHour);
+        }
+    );
 
     it.each(testCasesDrugs)(
         "Drugs Test Case %o",
@@ -39,7 +62,7 @@ describe('ResusController', () => {
             expect(result).toBe(expectedAmount.toString());
         }
     );
-    
+
     it.each(testCasesDrugsMaxDose)(
         "Passed Max Dose Test Case %o",
         async ({ childWeight, drugName, drugType, dosage, expectedResult }) => {
@@ -55,6 +78,7 @@ describe('ResusController', () => {
             expect(result).toBe(expectedAmount.toString());
         }
     );
+
 
 
     it('defibrilator not passing threshold', () => {
@@ -98,7 +122,7 @@ describe('ResusController', () => {
     //     expect(result).toBe('1');
     // });
 
-    function loadAndProcessJSON(filePath) {
+    function loadAndProcessDrugsJSON(filePath) {
         // Read the JSON file
         const data = fs.readFileSync(filePath, 'utf8');
         const jsonData = JSON.parse(data);
@@ -113,6 +137,20 @@ describe('ResusController', () => {
                 const key = `${drug.name}|${drug.howToGive}|${drug.dose_per_kg}`;
                 hashMap.set(key, drug);
             });
+        });
+
+        return hashMap;
+    }
+
+    function loadAndProcessDripsJSON(filePath) {
+        const data = fs.readFileSync(filePath, 'utf8');
+        const jsonData = JSON.parse(data);
+
+        const hashMap = new Map();
+
+        jsonData.drugs.forEach(drip => {
+            const key = `${drip.name}`;
+            hashMap.set(key, drip);
         });
 
         return hashMap;
