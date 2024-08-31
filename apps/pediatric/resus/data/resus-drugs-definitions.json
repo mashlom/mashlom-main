@@ -109,7 +109,7 @@
             },
             {
                "name": "Propofol",
-               "howToGive": "IV ",
+               "howToGive": "IV",
                "dose_per_kg": 1,
                "dose_range": "mg/kg (0.5-3)",
                "dose_unit": "mg",
@@ -151,7 +151,7 @@
          "drugs": [
             {
                "name": "Suxamethonium",
-               "howToGive": "IV ",
+               "howToGive": "IV",
                "dose_per_kg": 1,
                "dose_range": "mg/kg(1-2)",
                "dose_unit": "mg",
@@ -161,7 +161,7 @@
             },
             {
                "name": "Rocuronium",
-               "howToGive": "IV ",
+               "howToGive": "IV",
                "dose_per_kg": 1,
                "dose_range": "mg/kg(0.6-1.2)",
                "dose_unit": "mg",
@@ -277,7 +277,7 @@
             },
             {
                "name": "Valproic acid",
-               "howToGive": "IV ",
+               "howToGive": "IV",
                "dose_per_kg": 40,
                "dose_range": "mg/kg(20-40)",
                "dose_unit": "mg",
