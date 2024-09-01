@@ -219,7 +219,7 @@ app.controller("ResusController", ['$scope', '$rootScope', '$timeout', '$http', 
     }
 
     ctrl.calcInfusionSpeed = function (drip) {
-        const dosePerKg = calcDosePerHourPerWeight(drip, ctrl.weight);
+        const dosePerKg = ctrl.calcDosePerHourPerWeight(drip, ctrl.weight);
         if (drip.dose_unit !== drip.existing_dilution_concentration_dose_unit) {
             throw new Error("Dosage unit and existing concentration does not match. need to implement units aligmnet before calculation. drug with error:" + drip.name);
         }
