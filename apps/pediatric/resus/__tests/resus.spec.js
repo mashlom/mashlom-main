@@ -9,6 +9,7 @@ const path = require('path');
 const testCasesDrugs = require('./test-cases-drugs')
 const testCasesDrugsMaxDose = require('./test-cases-drugs-max-dose')
 const testCasesDrips = require('./test-cases-drips')
+const testCasesDripsSpeed = require('./test-cases-drips-speed')
 
 describe('ResusController', () => {
     let $controller;
@@ -31,6 +32,19 @@ describe('ResusController', () => {
     function getDripData(name) {
         return dripsMap.get(name) || null;
     }
+
+    it.each(testCasesDripsSpeed)(
+        "Drip Speed Test Case %o",
+        async ({ childWeight, drugName, expectedResult }) => {
+            const $scope = {};
+            const controller = $controller('ResusController', { $scope });
+            controller.weight = childWeight;
+            const drip = getDripData(drugName.trim());
+
+            const infusionSpeed = controller.calcInfusionSpeed(drip);
+            expect(infusionSpeed.toString() + 'ml/hr').toBe(expectedResult.speed);
+        }
+    );
 
     it.each(testCasesDrips)(
         "Drip Test Case %o",
@@ -79,8 +93,6 @@ describe('ResusController', () => {
             expect(result).toBe(expectedAmount.toString());
         }
     );
-
-
 
     it('defibrilator not passing threshold', () => {
         const $scope = {};
@@ -142,19 +154,6 @@ describe('ResusController', () => {
 
         expect(json1).toEqual(json2);
     });
-    
-    
-    // it('should find administer function', () => {
-    //     const $scope = {};
-    //     const controller = $controller('ResusController', { $scope });
-    //     controller.weight = 5;
-
-    //     let result = controller.calcAmountToAdminister(getDrugData("Adrenaline 1:10,000", "מתן בפוש רק בהחייאה IV", 0.01));
-    //     expect(result).toBe('0.5');
-
-    //     result = controller.calcAmountToAdminister(getDrugData("Atropine 1:10,000", "IV", 0.02));
-    //     expect(result).toBe('1');
-    // });
 
     function loadAndProcessDrugsJSON(filePath) {
         // Read the JSON file
