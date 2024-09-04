@@ -5,6 +5,7 @@ require('../js/calculation');
 angular.module('ngAnimate', []); // Mocking ngAnimate
 angular.module('common-directives', []); // Mocking common-directives
 const fs = require('fs');
+const path = require('path');
 const testCasesDrugs = require('./test-cases-drugs')
 const testCasesDrugsMaxDose = require('./test-cases-drugs-max-dose')
 const testCasesDrips = require('./test-cases-drips')
@@ -27,8 +28,8 @@ describe('ResusController', () => {
         return drugMap.get(key) || null;
     }
 
-    function getDripData(name){
-        return dripsMap.get(name) || null;  
+    function getDripData(name) {
+        return dripsMap.get(name) || null;
     }
 
     it.each(testCasesDrips)(
@@ -110,6 +111,39 @@ describe('ResusController', () => {
         const defiResultMultiBy4KJ = controller.getDefi(4);
         expect(defiResultMultiBy4KJ).toBe(200);
     });
+
+    test('drips definition hard compare - jsons should be identical', () => {
+        const filePath1 = path.join(__dirname, 'drips-definition-duplicate.json');
+        const filePath2 = path.join(__dirname, '..', 'data', 'drips.json');
+
+        const json1 = JSON.parse(fs.readFileSync(filePath1, 'utf8'));
+        const json2 = JSON.parse(fs.readFileSync(filePath2, 'utf8'));
+
+        expect(json1).toEqual(json2);
+    });
+
+    test('airways hard compare - jsons should be identical', () => {
+        const filePath1 = path.join(__dirname, 'airways-duplicate.json');
+        const filePath2 = path.join(__dirname, '..', 'data', 'airways.json');
+
+        const json1 = JSON.parse(fs.readFileSync(filePath1, 'utf8'));
+        const json2 = JSON.parse(fs.readFileSync(filePath2, 'utf8'));
+
+        expect(json1).toEqual(json2);
+    });
+
+
+    test('drug definition hard compare - jsons should be identical', () => {
+        const filePath1 = path.join(__dirname, 'resus-drugs-definitions-duplicate-testing.json');
+        const filePath2 = path.join(__dirname, '..', 'data', 'resus-drugs-definitions.json');
+
+        const json1 = JSON.parse(fs.readFileSync(filePath1, 'utf8'));
+        const json2 = JSON.parse(fs.readFileSync(filePath2, 'utf8'));
+
+        expect(json1).toEqual(json2);
+    });
+    
+    
     // it('should find administer function', () => {
     //     const $scope = {};
     //     const controller = $controller('ResusController', { $scope });
