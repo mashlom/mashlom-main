@@ -82,6 +82,7 @@ app.controller("PhototherapyController", ['$scope', '$rootScope', '$timeout', fu
         if (!ctrl.handleValuesSatisifed(callback)) {
             return;
         }
+        ctrl.bilirubin = ctrl.bilirubin.replace(/,/g, '.');
         // if the user types a two digits numbers - its weird that we immediately shows him the value after the
         // first digit. usually, the sign will be nagative. it doesn't feel good.
         // so -

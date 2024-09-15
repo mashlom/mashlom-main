@@ -42,8 +42,17 @@ const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 const getPhototherapyResult = async (isAbove38, isRisky, bilirobinValue, ageInHours) => {
   const browser = await puppeteer.launch({headless: true, devtools: true });
   const page = await browser.newPage();
-  await page.goto('http://localhost:8080/apps/pediatric/phototherapy/');
+  await page.goto('http://localhost:8000/apps/pediatric/phototherapy/');
 
+  await sleep(100);
+
+  // Check if the modal exists
+  const modal = await page.$('#usage-terms-dialog-backdrop');
+
+  if (modal) {
+    // Click the "I accept" button if the modal is present
+    await page.click('#acceptTerms');
+  }
 
   // Set up the input
   if (isAbove38) {
