@@ -47,7 +47,7 @@
                 חום אימהי מקסימלי:
             </div>
             <div class="col input-col">
-                <input  ng-model-options="{ allowInvalid: true}" inputmode="decimal" type="text" pattern="[0-9]{1,4}[.]{0,1}[0-9]{0,1}" maxlength="5" style="max-width: 90px;" ng-model="ctrl.temprature" 
+                <input  ng-model-options="{ allowInvalid: true}" inputmode="decimal" type="text" pattern="[0-9]{1,4}[,.]{0,1}[0-9]{0,1}" maxlength="5" style="max-width: 90px;" ng-model="ctrl.temprature" 
                         class="form-control" id="temprature" max="40" min="36" select-on-click 
                         ng-blur="ctrl.checkTemprature()" >
             </div>
@@ -78,7 +78,7 @@
               משך פקיעת הקרומים:
           </div>
           <div class="col input-col">
-              <input placeholder="שעות" ng-model-options="{ allowInvalid: true}" inputmode="decimal" type="text" pattern="[0-9]{1,4}[.]{0,1}[0-9]{0,1}" maxlength="3" style="max-width: 90px;" ng-model="ctrl.rom" 
+              <input placeholder="שעות" ng-model-options="{ allowInvalid: true}" inputmode="decimal" type="text" pattern="[0-9]{1,4}[,.]{0,1}[0-9]{0,1}" maxlength="4" style="max-width: 90px;" ng-model="ctrl.rom" 
                       class="form-control" id="rom" max="150" min="0" select-on-click >
           </div>
       </div>        

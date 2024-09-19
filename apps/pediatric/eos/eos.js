@@ -137,6 +137,7 @@ app.controller("EosController", ['$scope', '$rootScope', '$timeout', function($s
     }
 
     ctrl.isValidTemprature = function() {
+      ctrl.temprature = ctrl.temprature.replace(/,/g, '.');
       return ctrl.temprature >= 36 && ctrl.temprature <= 40;
     };
 
@@ -267,7 +268,9 @@ app.controller("EosController", ['$scope', '$rootScope', '$timeout', function($s
     ctrl.computeEOS = function() {            
       if (!ctrl.allValuesSatisfied()) {
         return false;
-      }      
+      }
+      ctrl.temprature = ctrl.temprature.replace(/,/g, '.');
+      ctrl.rom = ctrl.rom.replace(/,/g, '.');
       const alreadyHasEos = !!ctrl.eosString;
       const betas =  computeInterceptBeta() + (0.8680 * computeTemprature()) - 
                                 (6.9325 * computePregnancyLength()) + (0.0877 * Math.pow(computePregnancyLength(), 2)) + 
