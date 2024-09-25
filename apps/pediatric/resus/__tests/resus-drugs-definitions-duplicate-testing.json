@@ -14,6 +14,14 @@
                "prepare_instructions": "To get Adrenaline 1mg/10ml (1:10,000) take 1 ml of Adrenaline 1mg/1ml and dilute it  with 9 ml of NACL 0.9%"
             },
             {
+               "name": "Adrenaline 1:10,000",
+               "howToGive": "ET",
+               "dose_per_kg": 0.1,
+               "dose_unit": "mg",
+               "concentration": "1/1",
+               "comment": "add 5 ml of NACL prior to administration"
+            },
+            {
                "name": "Atropine 1:10,000",
                "howToGive": "IV",
                "dose_per_kg": 0.02,
@@ -39,7 +47,8 @@
                "howToGive": "מתן בפוש רק בהחייאה IV",
                "dose_per_kg": 1,
                "dose_unit": "mg",
-               "concentration": "10/1"
+               "concentration": "10/1",
+               "administrationInstructions": "slow push over 2-4 min"
             },
             {
                "name": "Magnesium Sulfate",

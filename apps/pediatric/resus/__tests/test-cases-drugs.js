@@ -1,6 +1,7 @@
 
 module.exports = [
     { childWeight: 5, drugName: 'Adrenaline 1:10,000', drugType: 'מתן בפוש רק בהחייאה IV', dosage: 0.01, expectedResult: { totalDose: 0.05, volume: 0.5 } },
+    { childWeight: 5, drugName: 'Adrenaline 1:10,000', drugType: 'ET', dosage: 0.1, expectedResult: { totalDose: 0.5, volume: 0.5 } },
     { childWeight: 5, drugName: 'Atropine 1:10,000', drugType: 'IV', dosage: 0.02, expectedResult: { totalDose: 0.1, volume: 1 } },
     { childWeight: 5, drugName: 'Amiodarone', drugType: 'מתן בפוש רק בהחייאה IV', dosage: 5, expectedResult: { totalDose: 25, volume: 0.5 } },
     { childWeight: 5, drugName: 'Lidocaine', drugType: 'מתן בפוש רק בהחייאה IV', dosage: 1, expectedResult: { totalDose: 5, volume: 0.5 } },
@@ -36,6 +37,7 @@ module.exports = [
     { childWeight: 5, drugName: 'Sugammadex', drugType: 'IV', dosage: 16, expectedResult: { totalDose: 80, volume: 0.8 } },
     { childWeight: 5, drugName: 'Charcoal ', drugType: 'PO', dosage: 1, expectedResult: { totalDose: 5, volume: 25 } },
     { childWeight: 25, drugName: 'Adrenaline 1:10,000 ', drugType: 'מתן בפוש רק בהחייאה IV', dosage: 0.01, expectedResult: { totalDose: 0.25, volume: 2.5 } },
+    { childWeight: 25, drugName: 'Adrenaline 1:10,000', drugType: 'ET', dosage: 0.1, expectedResult: { totalDose: 2.5, volume: 2.5 } },
     { childWeight: 25, drugName: 'Atropine 1:10,000', drugType: 'IV', dosage: 0.02, expectedResult: { totalDose: 0.5, volume: 5 } },
     { childWeight: 25, drugName: 'Amiodarone ', drugType: 'מתן בפוש רק בהחייאה IV', dosage: 5, expectedResult: { totalDose: 125, volume: 2.5 } },
     { childWeight: 25, drugName: 'Lidocaine', drugType: 'מתן בפוש רק בהחייאה IV', dosage: 1, expectedResult: { totalDose: 25, volume: 2.5 } },
