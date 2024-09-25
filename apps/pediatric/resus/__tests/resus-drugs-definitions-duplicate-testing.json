@@ -38,7 +38,6 @@
                "name": "Lidocaine",
                "howToGive": "מתן בפוש רק בהחייאה IV",
                "dose_per_kg": 1,
-               "dose_range": "mg/kg over 2-4 min",
                "dose_unit": "mg",
                "concentration": "10/1"
             },
@@ -150,7 +149,7 @@
          "name": "Muscle relaxants",
          "drugs": [
             {
-               "name": "Suxamethonium",
+               "name": "Suxamethonium (scoline)",
                "howToGive": "IV",
                "dose_per_kg": 1,
                "dose_range": "mg/kg(1-2)",
@@ -312,7 +311,7 @@
          "name": "Incresed ICP",
          "drugs": [
             {
-               "name": "Manitol",
+               "name": "Manitol 20%",
                "howToGive": "IV",
                "dose_per_kg": 1,
                "dose_range": "gr/kg(0.5-1)",
