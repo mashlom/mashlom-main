@@ -28,6 +28,9 @@
           <div ng-if="!!drug.comment">
               {{drug.comment}}
           </div>
+          <div ng-if="!!drug.warnText">
+            <span style="color:red;"><b>{{drug.warnText}}</b></span>
+          </div>
           <div ng-if="!!drug.maxDose && drug.maxDose==ctrl.getDoseByWeightWithMaxLimit(drug)">
             <span style="color:red;"><b>Used max dose of {{drug.maxDose}}&nbsp;{{drug.maxDoseUnit}}</b></span>
           </div>

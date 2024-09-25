@@ -344,11 +344,12 @@
                "name": "Naloxone",
                "howToGive": "IV",
                "dose_per_kg": 0.1,
-               "dose_range": "mg/kg (up to 4 doses)",
+               "dose_range": "mg/kg",
                "dose_unit": "mg",
                "concentration": "0.4/1",
                "maxDose": "2",
-               "maxDoseUnit": "mg"
+               "maxDoseUnit": "mg",
+               "warnText": "up to 2 mg per dose up to 4 doses"
             },
             {
                "name": "Flumazenil",
