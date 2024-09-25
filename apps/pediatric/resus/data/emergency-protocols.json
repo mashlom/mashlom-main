@@ -1,0 +1,170 @@
+{
+    "emergencyProtocols": [
+        {
+            "section": "PALS / טראומה",
+            "protocols": [
+                {
+                    "name": "דום לבבי (cardiac arrest)",
+                    "algorithmFile": "shavatz-algorithm.pdf",
+                    "protocolFile": "shavatz.pdf"
+                },
+                {
+                    "name": "טכיקרדיה",
+                    "algorithmFile": "shavatz-algorithm.pdf",
+                    "protocolFile": "shavatz.pdf"
+                },
+                {
+                    "name": "ברדיקרדיה סימפטומטית",
+                    "algorithmFile": "shavatz-algorithm.pdf",
+                    "protocolFile": "shavatz.pdf"
+                },
+                {
+                    "name": "Massive blood transfusion",
+                    "algorithmFile": "shavatz-algorithm.pdf",
+                    "protocolFile": "shavatz.pdf"
+                }
+            ]
+        },
+        {
+            "section": "אלקטרוליטים",
+            "protocols": [
+                {
+                    "name": "היפוקלצמיה",
+                    "algorithmFile": "shavatz-algorithm.pdf",
+                    "protocolFile": "shavatz.pdf"
+                },
+                {
+                    "name": "היפרקלמיה",
+                    "algorithmFile": "shavatz-algorithm.pdf",
+                    "protocolFile": "shavatz.pdf"
+                },
+                {
+                    "name": "היפוקלמיה",
+                    "algorithmFile": "shavatz-algorithm.pdf",
+                    "protocolFile": "shavatz.pdf"
+                },
+                {
+                    "name": "היפונתרמיה",
+                    "algorithmFile": "shavatz-algorithm.pdf",
+                    "protocolFile": "shavatz.pdf"
+                }
+            ]
+        },
+        {
+            "section": "מטבולי / אנדוקריני / נפרולוגי",
+            "protocols": [
+                {
+                    "name": "היפוגליקמיה",
+                    "algorithmFile": "shavatz-algorithm.pdf",
+                    "protocolFile": "shavatz.pdf"                    
+                },
+                {
+                    "name": "DKA",
+                    "algorithmFile": "shavatz-algorithm.pdf",
+                    "protocolFile": "shavatz.pdf"
+                },
+                {
+                    "name": "היפראמונימיה",
+                    "algorithmFile": "shavatz-algorithm.pdf",
+                    "protocolFile": "shavatz.pdf"
+                },
+                {
+                    "name": "יל\"ד",
+                    "algorithmFile": "shavatz-algorithm.pdf",
+                    "protocolFile": "shavatz.pdf"
+                }
+            ]
+        },
+        {
+            "section": "נשימתי / אלרגי",
+            "protocols": [
+                {
+                    "name": "אסטמה",
+                    "algorithmFile": "shavatz-algorithm.pdf",
+                    "protocolFile": "shavatz.pdf"
+                },
+                {
+                    "name": "סטרידור",
+                    "algorithmFile": "shavatz-algorithm.pdf",
+                    "protocolFile": "shavatz.pdf"
+                },
+                {
+                    "name": "שאיפת גוף זר",
+                    "algorithmFile": "shavatz-algorithm.pdf",
+                    "protocolFile": "shavatz.pdf"
+                },
+                {
+                    "name": "אנגיואדמה",
+                    "algorithmFile": "shavatz-algorithm.pdf",
+                    "protocolFile": "shavatz.pdf"
+                },
+                {
+                    "name": "אנפילקסיס",
+                    "algorithmFile": "shavatz-algorithm.pdf",
+                    "protocolFile": "shavatz.pdf"
+                }
+            ]
+        },
+        {
+            "section": "הרעלות ומצבי חירום סביבתיים",
+            "protocols": [
+                {
+                    "name": "הכשת נחש",
+                    "algorithmFile": "shavatz-algorithm.pdf",
+                    "protocolFile": "shavatz.pdf"
+                },
+                {
+                    "name": "עקיצת עקרב",
+                    "algorithmFile": "shavatz-algorithm.pdf",
+                    "protocolFile": "shavatz.pdf"
+                },
+                {
+                    "name": "טביעה",
+                    "algorithmFile": "shavatz-algorithm.pdf",
+                    "protocolFile": "shavatz.pdf"
+                },
+                {
+                    "name": "הרעלת אקמול",
+                    "algorithmFile": "shavatz-algorithm.pdf",
+                    "protocolFile": "shavatz.pdf"
+                }
+            ]
+        },
+        {
+            "section": "פסיכיאטרי / נוירולוגי",
+            "protocols": [
+                {
+                    "name": "סטטוס אפילפטיקוס",
+                    "algorithmFile": "shavatz-algorithm.pdf",
+                    "protocolFile": "shavatz.pdf"
+                },
+                {
+                    "name": "אגיטציה ופסיכוזה חדשה",
+                    "algorithmFile": "shavatz-algorithm.pdf",
+                    "protocolFile": "shavatz.pdf"
+                },
+                {
+                    "name": "שבץ מוחי",
+                    "algorithmFile": "shavatz-algorithm.pdf",
+                    "protocolFile": "shavatz.pdf"
+                }
+            ]
+        },
+        {
+            "section": "זיהומי",
+            "protocols": [
+                {
+                    "name": "חום ונויטרופניה",
+                    "algorithmFile": "shavatz-algorithm.pdf",
+                    "protocolFile": "shavatz.pdf"
+                },
+                {
+                    "name": "שוק ספטי",
+                    "algorithmFile": "shavatz-algorithm.pdf",
+                    "protocolFile": "shavatz.pdf"
+                }
+            ]
+        }
+    ]
+}
+

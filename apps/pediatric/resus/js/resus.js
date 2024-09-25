@@ -1,9 +1,9 @@
-var app = angular.module("app", ["ngAnimate", "common-directives"]);
+var app = angular.module("app", ["common-directives"]);
 
 app.controller("ResusController", ['$scope', '$rootScope', '$timeout', '$http', function ($scope, $rootScope, $timeout, $http) {
     const ctrl = this;
     window.ctrl = this;
-    ctrl.dataShown = 'CALCULATOR'; // possible values: CALCULATOR, WEIGHTS, LMA
+    ctrl.dataShown = 'CALCULATOR'; // possible values: CALCULATOR, WEIGHTS, LMA, EMERGENCY_PROTOCOLS
     ctrl.weight;
     ctrl.age;
     ctrl.ageScale = 'YEARS';
@@ -22,6 +22,7 @@ app.controller("ResusController", ['$scope', '$rootScope', '$timeout', '$http', 
     ctrl.tooltipIndex = "";
     ctrl.patientId = "";
     ctrl.patientName = "";
+    ctrl.RESUS_V2 = getParameterByName("resus_v2");
 
     function init() {
         $http.get('./data/resus-drugs-definitions.json').then(function (response) {

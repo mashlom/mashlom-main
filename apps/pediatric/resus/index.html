@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="css/resus.css">
 <link rel="stylesheet" href="css/drugs.css">
 <link rel="stylesheet" href="css/drips.css">
+<link rel="stylesheet" href="css/emergency-protocols.css">
 <script src="../../common/js/utils.js"></script>
 <link rel="icon" href="/assets/logo/fav-icon96x96.png">
 <link rel="manifest" href="/apps/common/manifest.json">
@@ -125,6 +126,7 @@
 <weights ng-show="ctrl.dataShown=='WEIGHTS'" ></weights>
 <lma ng-show="ctrl.dataShown=='LMA'"></lma>
 <definitions ng-show="ctrl.dataShown=='DRUGDEFINITIONS'"></definitions >
+<emergency-protocols ng-show="ctrl.dataShown=='EMERGENCY_PROTOCOLS'"></emergency-protocols >  
 </div>
 <div class="modal fade" id="exportToPdf" tabindex="-1"
   aria-labelledby="exportToPdf" aria-hidden="true">
@@ -171,6 +173,11 @@
       </div>
       <div class="text">נתוני תרופות</div>
     </a>
+    <a class="footer-button" ng-show="ctrl.RESUS_V2" ng-click="ctrl.openPanel('EMERGENCY_PROTOCOLS')">
+      <div class="bottom-menu-color"><i class="fa-solid fa-file-invoice"></i>
+      </div>
+      <div class="text">פרוטוקולי חירום</div>
+    </a>
     <!-- <a data-bs-toggle="modal" data-bs-target="#exportToPdf" style="background-color: black;">ייצא ל PDF</a> -->
   </div>
   </div>
@@ -184,5 +191,6 @@
 <script src="../../common/js/common-components.js"></script>
 <script src="../../common/js/pdf-exporter.js"></script>
 <script src="js/resus.js"></script>
+<script src="js/protocols.js"></script>
 </body>
 </html>
