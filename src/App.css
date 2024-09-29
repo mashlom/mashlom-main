@@ -1,43 +1,103 @@
 :root {
-  --buttons-background-color: #6495ed;
-  --page-font-color: #1d426e;
+  --buttons-background-color: #3F6186;
+  --buttons-background-color-hover: #3F6186;
+  --page-font-color: #1D426E;
   --buttons-color: white;
-  --header-background: #e5fffa;
-  --header-text-color: #6585a0;
+  --header-background: #E5FFFA;
+  --header-text-color: #6585A0;
   --page-background-color: white;
   --main-content-background-color: white;
   --footer-background: white;
-  --footer-color: #81bdef;
+  --footer-color: #81BDEF;
   --font-color: #faf0e6;
   --border-color: #ccc;
   --bottom-menu-color: var(--page-font-color);
 }
-body,
-html {
-  direction: rtl;
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  /* line-height: 5rem; */
-  overflow: hidden;
+
+html, body {
   color: var(--page-font-color) !important;
-  background-color: #e5fffa;
+  background-color: var(--page-background-color);
+  overflow-x: hidden;
+  direction: rtl;
+  max-width: 700px;
+  margin: 0 auto;
+  height: 100%;
+  width: 100%;
   font-family: 'Font Awesome 6 Free', 'Lucida Grande', sans-serif;
 }
-.container {
-  text-align: center;
+
+.app-shell {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
 }
+
+.main-content {
+  background-color: var(--main-content-background-color);
+  overflow-y: auto;
+  text-align: center;
+  height: min(calc(92dvh - 45px), calc(100dvh - 75px - 45px));
+  border: 1px solid var(--border-color);    
+  flex-grow: 1;
+}
+
+.header {
+  height: 50px;
+  background-color: var(--header-background);
+  border: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10px;
+}
+
+.header-mashlom-logo {
+  max-height: 45px;
+  padding-left: 5px;
+  padding-bottom: 3px;
+  padding-top: 4px;
+}
+
+.header-assuta-logo {
+  max-height: 42px;
+  padding-right: 5px;
+  padding-bottom: 2px;
+  max-width: 55px;
+}
+
+.header-text {
+  color: var(--header-text-color);
+  text-align: center;
+  font-weight: 600;
+  font-size: 13px;
+  font-family: Helvetica;
+  padding: 0;
+}
+
+.buttons-color {
+  background-color: var(--buttons-background-color);
+  color: var(--buttons-color);
+}
+
+.buttons-color:hover {
+  background-color: var(--buttons-background-color-hover);
+  color: var(--buttons-color);
+}
+
+.bottom-menu-color {
+  color: var(--bottom-menu-color);
+}
+
 .logo {
   max-height: 200px;
   max-width: 100%;
   height: auto;
 }
+
 .subtitle {
   font-size: 2em;
 }
+
 .title {
   font-size: 3em;
 }

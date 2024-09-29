@@ -9,15 +9,6 @@ const IframeWrapper: React.FC<IframeWrapperProps> = ({
   url,
   title = 'Iframe content',
 }) => {
-  useEffect(() => {
-    // Disable scrolling on the body when the component mounts
-    document.body.style.overflow = 'hidden';
-    
-    // Re-enable scrolling when the component unmounts
-    return () => {
-      document.body.style.overflow = 'auto';
-    };
-  }, []);
 
   return (
     <div 

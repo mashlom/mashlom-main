@@ -3,7 +3,6 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { hospitals } from '../config/hospitals';
 import AppsContainer from '../components/AppsContainer.tsx';
 import { MashlomAppType } from '../config/apps.ts';
-import Header from '../components/Header.tsx';
 import Footer from '../components/Footer.tsx';
 import IframeWrapper from '../components/IframeWrapper.tsx';
 
@@ -26,7 +25,6 @@ const HospitalAppList: React.FC<{
   apps: MashlomAppType[];
 }> = ({ hospital, apps }) => (
   <>
-    <Header credit="111" />
     <div>
       <h1>{hospitals[hospital].name}</h1>
       <AppsContainer apps={apps} hospital="assuta" />

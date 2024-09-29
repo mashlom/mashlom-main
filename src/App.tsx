@@ -5,19 +5,31 @@ import {
   Route,
   Outlet,
   useRouteError,
+  useLocation,
   useNavigate,
   RouteObject,
 } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
+import Header from './components/Header'; // Make sure this path is correct
 import Home from './pages/Home';
 import Hospital from './pages/Hospital';
 import NotFound from './pages/NotFound';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
+
 const Shell: React.FC = () => {
+  const location = useLocation();
+
+  // If we're at the root path, render the Home component
+  if (location.pathname === '/') {
+    return <Home />;
+  }
   return (
     <div className="app-shell">
-      <Outlet />
+      <Header credit="העמק" />
+      <div className="container main-content">
+        <Outlet />
+      </div>
     </div>
   );
 };
@@ -53,6 +65,7 @@ const routes: RouteObject[] = [
     ],
   },
 ];
+
 const App: React.FC = () => {
   return (
     <HelmetProvider>
@@ -96,7 +109,7 @@ const App: React.FC = () => {
           ))}
         </Routes>
       </Router>
-    </HelmetProvider>
+      </HelmetProvider>
   );
 };
 

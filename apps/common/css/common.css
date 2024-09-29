@@ -17,7 +17,7 @@
 html, body {
   color: var(--page-font-color) !important;
   background-color: var(--page-background-color);
-  overflow-x: hidden;
+  overflow: hidden;
   direction: rtl;
   max-width: 700px;
   margin: 0 auto;

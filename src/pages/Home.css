@@ -1,0 +1,37 @@
+  .homepage-container {
+    
+    position: fixed;
+    top: 0px;
+    right: 0px;
+    width: 100vw;
+    height: 100vh;
+    border: none;
+    margin: 0px !important;
+    padding: 0px !important;
+    overflow: hidden;
+    z-index: 999999;    
+    background-color: #e5fffa;
+}
+
+.text-structure {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;    
+    flex-direction: column;
+    line-height: 6.5rem;    
+}
+  
+  .logo {
+    padding-top: 10vh;  
+    max-height: 200px;
+    max-width: 100%;    
+  }
+  
+  .subtitle {
+    font-size: 2em;
+  }
+  
+  .title {
+    font-size: 3em;
+  }
