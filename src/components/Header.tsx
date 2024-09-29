@@ -1,18 +1,24 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
 
-const Header = ({ credit, hospitalLogo }) => {
-  const [leftLogoUrl, setLeftLogoUrl] = useState('');
-  const [creditStr, setCreditStr] = useState('');
+interface HeaderProps {
+  credit?: string;
+  hospitalLogo?: string;
+}
+
+const Header: React.FC<HeaderProps> = ({ credit, hospitalLogo }) => {
+  const [leftLogoUrl, setLeftLogoUrl] = useState<string>('');
+  const [creditStr, setCreditStr] = useState<string>('');
 
   useEffect(() => {
-    // Assuming window.hospitalConfig.logo is available
-    setLeftLogoUrl(hospitalLogo);
+    if (hospitalLogo) {
+      setLeftLogoUrl(hospitalLogo);
+    }
 
     if (credit) {
       setCreditStr(`הוכן בסיוע בי"ח ${credit}`);
     }
-  }, [credit]);
+  }, [credit, hospitalLogo]);
 
   return (
     <header className="d-flex justify-content-between align-items-center header">

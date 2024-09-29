@@ -26,7 +26,7 @@ const Shell: React.FC = () => {
   }
   return (
     <div className="app-shell">
-      <Header credit="העמק" />
+      <Header credit="העמק" hospitalLogo="assets/emek/logo.png"  />
       <div className="container main-content">
         <Outlet />
       </div>
