@@ -27,8 +27,7 @@ export const hospitals: Record<string, HospitalConfig> = {
     apps: [
       MashlomApps.PHOTOTHERAPY,
       MashlomApps.EOS,
-      MashlomApps.TRIAGE,
-      MashlomApps.DEMO,
+      MashlomApps.TRIAGE
     ],
     theme: {
       primaryColor: '#007bff',
@@ -38,9 +37,8 @@ export const hospitals: Record<string, HospitalConfig> = {
     name: 'קפלן',
     apps: [
       MashlomApps.PHOTOTHERAPY,
-      MashlomApps.EOS,
       MashlomApps.TRIAGE,
-      MashlomApps.DEMO,
+      MashlomApps.RESUS,
     ],
     theme: {
       primaryColor: '#007bff',
@@ -49,10 +47,9 @@ export const hospitals: Record<string, HospitalConfig> = {
   emek: {
     name: 'מרכז רפואי העמק;',
     apps: [
-      MashlomApps.PHOTOTHERAPY,
-      MashlomApps.EOS,
+      MashlomApps.RESUS,
       MashlomApps.TRIAGE,
-      MashlomApps.DEMO,
+      MashlomApps.PHOTOTHERAPY,
     ],
     theme: {
       primaryColor: '#007bff',

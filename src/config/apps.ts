@@ -19,9 +19,8 @@ interface AppConfig {
 
 export const AppsConfigList: Record<MashlomAppType, AppConfig> = {
   eos: {
-    title: 'EOS',
-    icon: 'faUser',
-    inDevelopment: true,
+    title: 'אלח דם',
+    icon: 'faVialVirus',
     credit: 'אסותא אשדוד'
   },
   demo: {
@@ -30,18 +29,19 @@ export const AppsConfigList: Record<MashlomAppType, AppConfig> = {
     credit: 'דמו בית חולים'
   },
   triage: {
-    title: 'Triage',
-    icon: 'faUser',
+    title: 'טריאז\'',
+    icon: 'faUserDoctor',
     credit: 'אסותא אשדוד'
   },
   phototherapy: {
-    title: 'Phototherapy',
-    icon: 'faSyringe',
+    title: 'צהבת ביילוד',
+    icon: 'faBaby',
     credit: 'אסותא אשדוד'
   },
   resus: {
-    title: 'Resus',
-    icon: 'faBaby',
-    credit: 'העמק'
+    title: 'תרופות החייאה',
+    icon: 'faSyringe',
+    credit: 'העמק',
+    inDevelopment: true
   },
 };
