@@ -8,7 +8,7 @@ interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps> = ({ credit, hospitalLogo }) => {
-  const [leftLogoUrl, setLeftLogoUrl] = useState<string>('');
+  const [, setLeftLogoUrl] = useState<string>('');
   const [creditStr, setCreditStr] = useState<string>('');
 
   useEffect(() => {

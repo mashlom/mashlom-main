@@ -5,12 +5,10 @@ import {
   Route,
   Outlet,
   useRouteError,
-  useLocation,
   useNavigate,
   RouteObject,
 } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
-import Header from './components/Header'; // Make sure this path is correct
 import Home from './pages/Home';
 import Hospital from './pages/Hospital';
 import NotFound from './pages/NotFound';
