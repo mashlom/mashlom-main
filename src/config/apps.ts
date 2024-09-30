@@ -10,6 +10,12 @@ export const MashlomApps = {
 
 export type MashlomAppType = typeof MashlomApps[keyof typeof MashlomApps];
 
+export interface AppSection {
+    name: string;
+    apps: MashlomAppType[];  
+}
+
+
 interface AppConfig {
     title: string;
     icon: keyof typeof Icons;

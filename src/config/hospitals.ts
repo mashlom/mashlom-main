@@ -1,8 +1,9 @@
-import { MashlomApps, MashlomAppType } from './apps';
+import { MashlomApps, AppSection } from './apps';
 
 export interface HospitalConfig {
   name: string;
-  apps: MashlomAppType[];
+  // apps: MashlomAppType[];
+  sections: AppSection[];
   theme: {
     primaryColor: string;
     // Add more theme properties as needed
@@ -12,11 +13,21 @@ export interface HospitalConfig {
 export const hospitals: Record<string, HospitalConfig> = {
   apps: {
     name: 'כללי',
-    apps: [
-      MashlomApps.PHOTOTHERAPY,
-      MashlomApps.EOS,
-      MashlomApps.TRIAGE,
-      MashlomApps.DEMO,
+    sections: [
+      {
+        name: 'מחלקת ילדים',
+        apps:[
+          MashlomApps.PHOTOTHERAPY,
+          MashlomApps.EOS,
+        ]
+      },
+      {
+        name: 'מלר"ד ילדים',
+        apps:[
+          MashlomApps.TRIAGE,
+          MashlomApps.RESUS
+        ]
+      }
     ],
     theme: {
       primaryColor: '#007bff',
@@ -24,10 +35,20 @@ export const hospitals: Record<string, HospitalConfig> = {
   },
   assuta: {
     name: 'אסותא אשדוד',
-    apps: [
-      MashlomApps.PHOTOTHERAPY,
-      MashlomApps.EOS,
-      MashlomApps.TRIAGE
+    sections: [
+      {
+        name: 'מחלקת ילדים',
+        apps:[
+          MashlomApps.PHOTOTHERAPY,
+          MashlomApps.EOS,
+        ]
+      },
+      {
+        name: 'מלר"ד ילדים',
+        apps:[
+          MashlomApps.TRIAGE,
+        ]
+      }
     ],
     theme: {
       primaryColor: '#007bff',
@@ -35,10 +56,15 @@ export const hospitals: Record<string, HospitalConfig> = {
   },
   kaplan: {
     name: 'קפלן',
-    apps: [
-      MashlomApps.PHOTOTHERAPY,
-      MashlomApps.TRIAGE,
-      MashlomApps.RESUS,
+    sections: [
+      {
+        name: 'מלר"ד ילדים - קפלן',
+        apps:[
+          MashlomApps.PHOTOTHERAPY,
+          MashlomApps.TRIAGE,
+          MashlomApps.RESUS,
+        ]
+      }
     ],
     theme: {
       primaryColor: '#007bff',
@@ -46,10 +72,15 @@ export const hospitals: Record<string, HospitalConfig> = {
   },
   emek: {
     name: 'מרכז רפואי העמק;',
-    apps: [
-      MashlomApps.RESUS,
-      MashlomApps.TRIAGE,
-      MashlomApps.PHOTOTHERAPY,
+    sections: [
+      {
+        name: 'מלר"ד ילדים',
+        apps:[
+          MashlomApps.RESUS,
+          MashlomApps.TRIAGE,
+          MashlomApps.PHOTOTHERAPY,
+        ]
+      }
     ],
     theme: {
       primaryColor: '#007bff',

@@ -23,14 +23,14 @@ const appComponents: Record<
 
 const HospitalAppList: React.FC<{
   hospital: string;
+  section: string;
   apps: MashlomAppType[];
-}> = ({ hospital, apps }) => (
+}> = ({ hospital, apps, section }) => (
   <>
     <div>
-      <h1>{hospitals[hospital].name}</h1>
-      <AppsContainer apps={apps} hospital="assuta" />
+      <h1>{section}</h1>
+      <AppsContainer apps={apps} hospital={hospital} />
     </div>
-    <Footer type="informative" />
   </>
 );
 
@@ -44,7 +44,8 @@ const Hospital: React.FC = () => {
 
   useEffect(() => {
     if (hospital && app && hospitalConfig) {
-      const isAppValid = hospitalConfig.apps.includes(app);
+      const isAppValid = hospitalConfig.sections.some(section =>
+        section.apps.includes(app));
       if (!isAppValid) {
         // If the app is not valid for this hospital, redirect to the hospital's index
         navigate(`/${hospital}`, { replace: true });
@@ -57,7 +58,8 @@ const Hospital: React.FC = () => {
   }
 
   if (app) {
-    const isAppValid = hospitalConfig.apps.includes(app);
+    const isAppValid = hospitalConfig.sections.some(section =>
+      section.apps.includes(app));
     if (isAppValid) {
       const AppComponent = appComponents[app];
 
@@ -95,10 +97,15 @@ const Hospital: React.FC = () => {
   return (
     <div>
       <Header credit="" hospitalName={hospital} />
-      <HospitalAppList
-        hospital={hospital || 'assuta'}
-        apps={hospitalConfig.apps}
-      />
+      {hospitalConfig.sections.map((sectionItem, index) => (
+        <HospitalAppList
+          key={index}
+          hospital={hospital || 'assuta'}
+          apps={sectionItem.apps}  // Pass apps of the current section
+          section={sectionItem.name}  // Pass the section name
+        />
+      ))}
+      <Footer type="informative" />
     </div>
   );
 };
