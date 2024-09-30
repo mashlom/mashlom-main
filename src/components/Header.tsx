@@ -1,25 +1,28 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
 import Image from './Image';
-
 interface HeaderProps {
   credit?: string;
-  hospitalLogo?: string;
+  hospitalName?: string;
 }
 
-const Header: React.FC<HeaderProps> = ({ credit, hospitalLogo }) => {
+const Header: React.FC<HeaderProps> = ({ credit, hospitalName }) => {
   const [, setLeftLogoUrl] = useState<string>('');
   const [creditStr, setCreditStr] = useState<string>('');
 
   useEffect(() => {
-    if (hospitalLogo) {
-      setLeftLogoUrl(hospitalLogo);
+    if (hospitalName) {
+      setLeftLogoUrl(hospitalName);
     }
 
     if (credit) {
       setCreditStr(`הוכן בסיוע בי"ח ${credit}`);
     }
-  }, [credit, hospitalLogo]);
+  }, [credit, hospitalName]);
+
+  function isSpecificHosptial() {
+    return hospitalName !== 'apps';
+  }
 
   return (
     <header className="d-flex justify-content-between align-items-center header">
@@ -35,12 +38,12 @@ const Header: React.FC<HeaderProps> = ({ credit, hospitalLogo }) => {
       </div>
 
       <div className="d-flex justify-content-end align-items-center" style={{ width: '15%' }}>
-        <Image
-          src={`${hospitalLogo}/logo.png`}
+      {isSpecificHosptial() && (<Image
+          src={`${hospitalName}/logo.png`}
           alt="Hospital Logo"
           className="header-assuta-logo"
           marginBottom="2px"
-        />
+        />)}
       </div>
     </header>
   );

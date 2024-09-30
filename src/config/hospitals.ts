@@ -10,7 +10,7 @@ export interface HospitalConfig {
 }
 
 export const hospitals: Record<string, HospitalConfig> = {
-  all: {
+  apps: {
     name: 'כללי',
     apps: [
       MashlomApps.PHOTOTHERAPY,

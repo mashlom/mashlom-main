@@ -40,7 +40,7 @@ const Hospital: React.FC = () => {
     app?: MashlomAppType;
   }>();
   const navigate = useNavigate();
-  const hospitalConfig = hospitals[hospital || 'all'];
+  const hospitalConfig = hospitals[hospital || 'apps'];
 
   useEffect(() => {
     if (hospital && app && hospitalConfig) {
@@ -94,7 +94,7 @@ const Hospital: React.FC = () => {
   // If no app is specified or app is invalid, show the hospital's app list
   return (
     <div>
-      <Header credit="" hospitalLogo={hospital} />
+      <Header credit="" hospitalName={hospital} />
       <HospitalAppList
         hospital={hospital || 'assuta'}
         apps={hospitalConfig.apps}
