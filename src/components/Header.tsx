@@ -1,5 +1,6 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
+import Image from './Image';
 
 interface HeaderProps {
   credit?: string;
@@ -34,7 +35,12 @@ const Header: React.FC<HeaderProps> = ({ credit, hospitalLogo }) => {
       </div>
 
       <div className="d-flex justify-content-end align-items-center" style={{ width: '15%' }}>
-        {leftLogoUrl && <img src={leftLogoUrl} alt="Hospital Logo" className="header-assuta-logo" />}
+        <Image
+          src={`${hospitalLogo}/logo.png`}
+          alt="Hospital Logo"
+          className="header-assuta-logo"
+          marginBottom="2px"
+        />
       </div>
     </header>
   );

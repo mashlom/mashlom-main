@@ -34,5 +34,29 @@ export const hospitals: Record<string, HospitalConfig> = {
       primaryColor: '#007bff',
     },
   },
+  kaplan: {
+    name: 'קפלן',
+    apps: [
+      MashlomApps.PHOTOTHERAPY,
+      MashlomApps.EOS,
+      MashlomApps.TRIAGE,
+      MashlomApps.DEMO,
+    ],
+    theme: {
+      primaryColor: '#007bff',
+    },
+  },
+  emek: {
+    name: 'מרכז רפואי העמק;',
+    apps: [
+      MashlomApps.PHOTOTHERAPY,
+      MashlomApps.EOS,
+      MashlomApps.TRIAGE,
+      MashlomApps.DEMO,
+    ],
+    theme: {
+      primaryColor: '#007bff',
+    },
+  },
   // Add more hospitals here
 };

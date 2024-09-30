@@ -17,19 +17,11 @@ import NotFound from './pages/NotFound';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
-const Shell: React.FC = () => {
-  const location = useLocation();
 
-  // If we're at the root path, render the Home component
-  if (location.pathname === '/') {
-    return <Home />;
-  }
+const Shell: React.FC = () => {
   return (
     <div className="app-shell">
-      <Header credit="העמק" hospitalLogo="assets/emek/logo.png"  />
-      <div className="container main-content">
-        <Outlet />
-      </div>
+      <Outlet />
     </div>
   );
 };

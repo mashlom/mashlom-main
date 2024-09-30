@@ -5,6 +5,7 @@ import AppsContainer from '../components/AppsContainer.tsx';
 import { MashlomAppType } from '../config/apps.ts';
 import Footer from '../components/Footer.tsx';
 import IframeWrapper from '../components/IframeWrapper.tsx';
+import Header from '../components/Header.tsx';
 
 // Map of possible app components
 const appComponents: Record<
@@ -92,10 +93,13 @@ const Hospital: React.FC = () => {
 
   // If no app is specified or app is invalid, show the hospital's app list
   return (
-    <HospitalAppList
-      hospital={hospital || 'assuta'}
-      apps={hospitalConfig.apps}
-    />
+    <div>
+      <Header credit="" hospitalLogo={hospital} />
+      <HospitalAppList
+        hospital={hospital || 'assuta'}
+        apps={hospitalConfig.apps}
+      />
+    </div>
   );
 };
 
