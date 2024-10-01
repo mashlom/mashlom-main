@@ -18,6 +18,11 @@ const appComponents: Record<
     type: 'iframe',
     urlPattern: 'https://mashlom.me/apps/pediatric/eos/?hospital=${hospital}',
   },
+  resus: {
+    type: 'iframe',
+    urlPattern: 'https://mashlom.me/apps/pediatric/resus/?hospital=${hospital}',
+  },
+  //resus: React.lazy(() => import('../apps/Resus/Resus.tsx')),
   // Add more apps here
 };
 
