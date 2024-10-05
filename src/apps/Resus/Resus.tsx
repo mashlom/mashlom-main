@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import '../AppStyle.css';
 import Drugs from './Drugs';
 import Drips from './Drips';
 import drugsDataFile from './data/resus-drugs-definitions.json';
 import airwaysDataFile from './data/airways.json';
+import Image from '../../components/Image';
 
 interface DrugDefinition {
   drug_name: string;
@@ -135,7 +137,11 @@ const Resus: React.FC = () => {
               </div>
               <div className="col-auto me-auto">
                 <span onClick={resetAll}>
-                  <img className="reset-button" src="../../assets/refresh.png" alt="Reset" />
+                <Image
+                    src={`refresh.png`}
+                    alt="reset button"
+                    className="reset-button"
+                    />                  
                 </span>
               </div>
             </div>

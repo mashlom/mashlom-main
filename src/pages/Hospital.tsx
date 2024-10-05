@@ -19,10 +19,6 @@ const appComponents: Record<
     type: 'iframe',
     urlPattern: 'https://mashlom.me/apps/pediatric/eos/?hospital=${hospital}',
   },
-  [MashlomApps.RESUS]: {
-    type: 'iframe',
-    urlPattern: 'https://mashlom.me/apps/pediatric/resus/?hospital=${hospital}',
-  },
   [MashlomApps.PHOTOTHERAPY]: {
     type: 'iframe',
     urlPattern: 'https://mashlom.me/apps/pediatric/phototherapy/?hospital=${hospital}',
@@ -31,7 +27,11 @@ const appComponents: Record<
     type: 'iframe',
     urlPattern: 'https://mashlom.me/apps/pediatric/triage/?hospital=${hospital}',
   },
-  //resus: React.lazy(() => import('../apps/Resus/Resus.tsx')),
+  // [MashlomApps.RESUS]: {
+  //   type: 'iframe',
+  //   urlPattern: 'https://mashlom.me/apps/pediatric/resus/?hospital=${hospital}',
+  // },
+  [MashlomApps.RESUS]: React.lazy(() => import('../apps/Resus/Resus.tsx')),
   // Add more apps here
 };
 
@@ -106,15 +106,18 @@ const Hospital: React.FC = () => {
         >;
         return (
           <Suspense fallback={<div>Loading...</div>}>
+            <Header credit="" hospitalName={hospital} />
+            <SEO
+              tabTitle='מה שלומי - כלי עזר לצוותי רפואה'
+              title="מה שלומי - כלי עזר לצוותי רפואה"
+              description="כלי עזר לצוותי הרפואה"
+              keywords="רופאים, מחשבונים, mashlom.me"
+              url={`https://mashlom.me/#/${hospital}/${app}`}
+            />
             <LazyComponent hospital={hospital} />
           </Suspense>
         );
       }
-      // return (
-      //   <Suspense fallback={<div>Loading...</div>}>
-      //     <AppComponent hospital={hospital} />
-      //   </Suspense>
-      // );
     }
   }
 
