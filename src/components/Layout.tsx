@@ -17,8 +17,9 @@ const Layout: React.FC<LayoutProps> = ({ children, seo }) => {
         title={seo.title}
         description={seo.description ? seo.description : ''}
         keywords={seo.keywords ? seo.keywords : ''}
+        url=''
+        tabTitle={seo.title}
       />
-
       <div className="container">
         {children}
       </div>

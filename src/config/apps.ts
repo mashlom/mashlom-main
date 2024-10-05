@@ -1,4 +1,5 @@
 import * as Icons from '@fortawesome/free-solid-svg-icons';
+import { SEOProps } from '../components/SEO';
 
 export const MashlomApps = {
   EOS: 'eos',
@@ -15,39 +16,74 @@ export interface AppSection {
     apps: MashlomAppType[];  
 }
 
-
 interface AppConfig {
     title: string;
     icon: keyof typeof Icons;
     inDevelopment?: boolean;
     credit: string;
+    seo: SEOProps;
 }
 
 export const AppsConfigList: Record<MashlomAppType, AppConfig> = {
-  eos: {
+  [MashlomApps.EOS]: {
     title: 'אלח דם',
     icon: 'faVialVirus',
-    credit: 'אסותא אשדוד'
+    credit: 'אסותא אשדוד',
+    seo: {
+      tabTitle: "אלח דם - חטיבת ילדים",
+      title: "אלח דם, חטיבת ילדים",
+      url: "https://mashlom.me/#/apps/eos",
+      description: "מחשבון טיפול באלח דם",
+      keywords: "רופאים, מחשבונים, רפואת ילדים, יילוד, eos, אלח דם, early onset sepsis"
+    }
   },
-  demo: {
+  [MashlomApps.DEMO]: {
     title: 'Demo',
     icon: 'faBaby',
-    credit: 'דמו בית חולים'
+    credit: 'דמו בית חולים',
+    seo: {
+      tabTitle: "אפליקציית דמו",
+      title: "דמו",
+      url: "",
+      description: "",
+      keywords: "דמו"
+    }
   },
-  triage: {
+  [MashlomApps.TRIAGE]: {
     title: 'טריאז\'',
     icon: 'faUserDoctor',
-    credit: 'אסותא אשדוד'
+    credit: 'אסותא אשדוד',
+    seo: {
+      tabTitle: "טריאז' מיון - מחלקת ילדים",
+      title: "טריאז' מיון, חטיבת ילדים",
+      url: "https://mashlom.me/#/apps/triage",
+      description: "טריאז' מיון ילדים",
+      keywords: "רופאים, מחשבונים, רפואת ילדים, טריאז', Pediatric Canadian Triage"
+    }
   },
-  phototherapy: {
+  [MashlomApps.PHOTOTHERAPY]: {
     title: 'צהבת ביילוד',
     icon: 'faBaby',
-    credit: 'אסותא אשדוד'
+    credit: 'אסותא אשדוד',
+    seo: {
+      tabTitle: "צהבת ביילוד - חטיבת ילדים",
+      title: "צהבת ביילוד, חטיבת ילדים",
+      url: "https://mashlom.me/#/apps/phototherapy",
+      description: "מחשבון טיפול בצהבת ביילוד",
+      keywords: "רופאים, מחשבונים, רפואת ילדים, צהבת, יילוד, עקומת בוטאני, phototherapy"
+    }
   },
-  resus: {
+  [MashlomApps.RESUS]: {
     title: 'תרופות החייאה',
     icon: 'faSyringe',
     credit: 'העמק',
-    inDevelopment: true
+    inDevelopment: true,
+    seo: {
+      tabTitle: "תרופות החייאה - מלרד ילדים",
+      title: 'תרופות החייאה, מלר"ד ילדים',
+      url: "https://mashlom.me/#/apps/resus",
+      description: "מחשבון תרופות החייאה",
+      keywords: "רופאים, מחשבונים, רפואת ילדים, תרופות החייאה, resus"
+    }
   },
 };

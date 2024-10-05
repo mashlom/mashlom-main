@@ -2,10 +2,11 @@ import React, { Suspense, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { hospitals } from '../config/hospitals';
 import AppsContainer from '../components/AppsContainer.tsx';
-import { MashlomApps, MashlomAppType } from '../config/apps.ts';
+import { AppsConfigList, MashlomApps, MashlomAppType } from '../config/apps.ts';
 import Footer from '../components/Footer.tsx';
 import IframeWrapper from '../components/IframeWrapper.tsx';
 import Header from '../components/Header.tsx';
+import SEO from '../components/SEO.tsx';
 
 // Map of possible app components
 const appComponents: Record<
@@ -13,7 +14,7 @@ const appComponents: Record<
   | React.LazyExoticComponent<React.ComponentType<any>>
   | { type: 'iframe'; urlPattern: string }
 > = {
-  demo: React.lazy(() => import('../apps/Demo/index.tsx')),
+  [MashlomApps.DEMO]: React.lazy(() => import('../apps/Demo/index.tsx')),
   [MashlomApps.EOS]: {
     type: 'iframe',
     urlPattern: 'https://mashlom.me/apps/pediatric/eos/?hospital=${hospital}',
@@ -85,8 +86,19 @@ const Hospital: React.FC = () => {
           '${hospital}',
           hospital || 'assuta'
         );
+        const { seo } = AppsConfigList[app];
+        let hospitalSepcificSuffix = ""
+        if (hospitalConfig){
+          hospitalSepcificSuffix = ` - ${hospitalConfig.name}`
+        }
+        
+        const updatedSeo = {
+          ...seo,
+          tabTitle: `${seo.title}${hospitalSepcificSuffix}`,
+        };
+        
         return (
-          <IframeWrapper url={iframeUrl} title={`${app} for ${hospital}`} />
+          <IframeWrapper url={iframeUrl} title={`${app} for ${hospital}`} seo={updatedSeo} />
         );
       } else {
         const LazyComponent = AppComponent as React.LazyExoticComponent<
@@ -110,6 +122,13 @@ const Hospital: React.FC = () => {
   return (
     <div>
       <Header credit="" hospitalName={hospital} />
+      <SEO
+        tabTitle='מה שלומי - כלי עזר לצוותי רפואה'
+        title="מה שלומי - כלי עזר לצוותי רפואה"
+        description="כלי עזר לצוותי הרפואה"
+        keywords="רופאים, מחשבונים, mashlom.me"
+        url="https://mashlom.me/#/apps/"
+      />
       {hospitalConfig.sections.map((sectionItem, index) => (
         <HospitalAppList
           key={index}

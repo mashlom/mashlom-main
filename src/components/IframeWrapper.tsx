@@ -1,13 +1,16 @@
 import React from 'react';
+import SEO, { SEOProps } from './SEO';
 
 interface IframeWrapperProps {
   url: string;
   title?: string;
+  seo: SEOProps;
 }
 
 const IframeWrapper: React.FC<IframeWrapperProps> = ({
   url,
   title = 'Iframe content',
+  seo
 }) => {
 
   return (
@@ -26,6 +29,13 @@ const IframeWrapper: React.FC<IframeWrapperProps> = ({
         zIndex: 999999,
       }}
     >
+      <SEO
+        tabTitle={seo.tabTitle}
+        title={seo.title}
+        description={seo.description}
+        keywords={seo.keywords}
+        url={seo.url}
+      />
       <iframe
         src={url}
         title={title}

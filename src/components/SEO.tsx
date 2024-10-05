@@ -1,29 +1,31 @@
 import React from 'react';
-import { Helmet, HelmetProvider } from 'react-helmet-async';
+import { Helmet } from 'react-helmet';
 
-interface SEOProps {
+export interface SEOProps {
+  tabTitle: string
   title: string;
   description: string;
-  keywords?: string;
+  keywords: string;
+  url: string;
 }
 
-const Seo: React.FC<SEOProps> = ({ title, description, keywords }) => (
-  <HelmetProvider>
+const SEO: React.FC<SEOProps> = ({ tabTitle, title, description, keywords, url }) => {
+  return (
     <Helmet>
-      <title>{title}</title>
+      <meta property='og:title' content={title} />
+      <meta property='og:type' content='Article' />
+      <meta property="og:image:type" content="image/jpeg" />
+      <meta property='og:site_name' content='mashlom.me' />
+      <meta property='og:image' content="https://mashlom.me/apps/assets/logo/FullLogo1200x630.jpg" />
+      <meta property="og:image:secure_url" content="https://mashlom.me/apps/assets/logo/FullLogo1200x630.jpg" />
+      <meta property='og:url' content={url} />
+      <meta property='og:description' content={description} />
       <meta name="description" content={description} />
-      {keywords && <meta name="keywords" content={keywords} />}
-      <meta property="og:title" content={title} />
-      <meta property="og:description" content={description} />
-      <meta property="og:type" content="Article" />
-      <meta
-        property="og:image"
-        content="https://mashlom.me/apps/assets/logo/FullLogo1200x630.jpg"
-      />
-      <meta property="og:url" content="https://mashlom.me" />
-      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="keywords" content={keywords} />
+      <meta name="robots" content="index, follow, NOODP" />
+      <title>{tabTitle}</title>
     </Helmet>
-  </HelmetProvider>
-);
+  );
+};
 
-export default Seo;
+export default SEO;
