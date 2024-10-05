@@ -228,7 +228,7 @@ const Resus: React.FC = () => {
                   </div>
                 </div>
               </div>
-              <Drugs />
+              <Drugs weight={Number(weight)}></Drugs>
               <Drips />
             </div>
           )}
