@@ -2,7 +2,7 @@ import React, { Suspense, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { hospitals } from '../config/hospitals';
 import AppsContainer from '../components/AppsContainer.tsx';
-import { MashlomAppType } from '../config/apps.ts';
+import { MashlomApps, MashlomAppType } from '../config/apps.ts';
 import Footer from '../components/Footer.tsx';
 import IframeWrapper from '../components/IframeWrapper.tsx';
 import Header from '../components/Header.tsx';
@@ -14,13 +14,21 @@ const appComponents: Record<
   | { type: 'iframe'; urlPattern: string }
 > = {
   demo: React.lazy(() => import('../apps/Demo/index.tsx')),
-  eos: {
+  [MashlomApps.EOS]: {
     type: 'iframe',
     urlPattern: 'https://mashlom.me/apps/pediatric/eos/?hospital=${hospital}',
   },
-  resus: {
+  [MashlomApps.RESUS]: {
     type: 'iframe',
     urlPattern: 'https://mashlom.me/apps/pediatric/resus/?hospital=${hospital}',
+  },
+  [MashlomApps.PHOTOTHERAPY]: {
+    type: 'iframe',
+    urlPattern: 'https://mashlom.me/apps/pediatric/phototherapy/?hospital=${hospital}',
+  },
+  [MashlomApps.TRIAGE]: {
+    type: 'iframe',
+    urlPattern: 'https://mashlom.me/apps/pediatric/triage/?hospital=${hospital}',
   },
   //resus: React.lazy(() => import('../apps/Resus/Resus.tsx')),
   // Add more apps here
