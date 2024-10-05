@@ -81,24 +81,24 @@ const Hospital: React.FC = () => {
         return <div>App not found</div>;
       }
 
+      const { seo } = AppsConfigList[app];
+      let hospitalSepcificSuffix = ""
+      if (hospitalConfig){
+        hospitalSepcificSuffix = ` - ${hospitalConfig.name}`
+      }
+      const appSeo = {
+        ...seo,
+        tabTitle: `${seo.title}${hospitalSepcificSuffix}`,
+      };
+      
       if (typeof AppComponent === 'object' && AppComponent.type === 'iframe') {
         const iframeUrl = AppComponent.urlPattern.replace(
           '${hospital}',
           hospital || 'assuta'
         );
-        const { seo } = AppsConfigList[app];
-        let hospitalSepcificSuffix = ""
-        if (hospitalConfig){
-          hospitalSepcificSuffix = ` - ${hospitalConfig.name}`
-        }
-        
-        const updatedSeo = {
-          ...seo,
-          tabTitle: `${seo.title}${hospitalSepcificSuffix}`,
-        };
         
         return (
-          <IframeWrapper url={iframeUrl} title={`${app} for ${hospital}`} seo={updatedSeo} />
+          <IframeWrapper url={iframeUrl} title={`${app} for ${hospital}`} seo={appSeo} />
         );
       } else {
         const LazyComponent = AppComponent as React.LazyExoticComponent<
@@ -106,14 +106,8 @@ const Hospital: React.FC = () => {
         >;
         return (
           <Suspense fallback={<div>Loading...</div>}>
-            <Header credit="" hospitalName={hospital} />
-            <SEO
-              tabTitle='מה שלומי - כלי עזר לצוותי רפואה'
-              title="מה שלומי - כלי עזר לצוותי רפואה"
-              description="כלי עזר לצוותי הרפואה"
-              keywords="רופאים, מחשבונים, mashlom.me"
-              url={`https://mashlom.me/#/${hospital}/${app}`}
-            />
+            <Header credit={AppsConfigList[app].credit} hospitalName={hospital} />
+            <SEO {...appSeo}/>
             <LazyComponent hospital={hospital} />
           </Suspense>
         );

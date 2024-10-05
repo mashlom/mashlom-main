@@ -2,12 +2,16 @@ import { MashlomApps, AppSection } from './apps';
 
 export interface HospitalConfig {
   name: string;
-  // apps: MashlomAppType[];
   sections: AppSection[];
   theme: {
     primaryColor: string;
-    // Add more theme properties as needed
   };
+}
+
+export enum Hospitals {
+  ASSUTA_ASHDOD = 'assuta',
+  KAPLAN = 'kaplan',
+  EMEK = 'emek',
 }
 
 export const hospitals: Record<string, HospitalConfig> = {
@@ -33,7 +37,7 @@ export const hospitals: Record<string, HospitalConfig> = {
       primaryColor: '#007bff',
     },
   },
-  assuta: {
+  [Hospitals.ASSUTA_ASHDOD]: {
     name: 'אסותא אשדוד',
     sections: [
       {
@@ -54,7 +58,7 @@ export const hospitals: Record<string, HospitalConfig> = {
       primaryColor: '#007bff',
     },
   },
-  kaplan: {
+  [Hospitals.KAPLAN]: {
     name: 'קפלן',
     sections: [
       {
@@ -70,8 +74,8 @@ export const hospitals: Record<string, HospitalConfig> = {
       primaryColor: '#007bff',
     },
   },
-  emek: {
-    name: 'מרכז רפואי העמק;',
+  [Hospitals.EMEK]: {
+    name: 'מרכז רפואי העמק',
     sections: [
       {
         name: 'מלר"ד ילדים',
@@ -86,5 +90,4 @@ export const hospitals: Record<string, HospitalConfig> = {
       primaryColor: '#007bff',
     },
   },
-  // Add more hospitals here
 };
