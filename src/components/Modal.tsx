@@ -87,6 +87,7 @@ const Modal = ({
         )}
         <Button
           variant="primary"
+          style={{backgroundColor: "#103C6E"}}
           onClick={() => {
             if (primaryButton?.onClick) {
               primaryButton.onClick();

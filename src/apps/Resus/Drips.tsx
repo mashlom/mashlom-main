@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { FaCircleInfo } from 'react-icons/fa6';
 import dripsData from './data/drips.json';
 import DripInfoDialog from './DripInfoDialog';
@@ -34,10 +34,19 @@ const Drips: React.FC<DripsProps> = ({ weight }) => {
     const [dripsDefinitions, setDripsDefinitions] = useState<Drip[]>([]);
     const [selectedDrip, setSelectedDrip] = useState<Drip | null>(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const dripsRef = useRef<HTMLDivElement>(null);
   
     useEffect(() => {
       setDripsDefinitions(dripsData.drugs as Drip[]);
     }, []);
+
+    useEffect(() => {
+      if (dripsExpanded && dripsRef.current) {
+        setTimeout(() => {
+          dripsRef.current?.scrollIntoView({ behavior: 'smooth' });
+        }, 150);
+      }
+    }, [dripsExpanded]);
   
     const toggleDrips = () => setDripsExpanded(!dripsExpanded);
   
@@ -134,7 +143,7 @@ const Drips: React.FC<DripsProps> = ({ weight }) => {
   if (!weight) return null;
 
   return (
-    <div style={{ direction: 'ltr', marginTop: '0px'}}>
+    <div ref={dripsRef} style={{ direction: 'ltr', marginTop: '0px'}}>
       <h4 className="drugs-header" onClick={toggleDrips}>
         <span className="toggle-icon">
           {dripsExpanded ? '-' : '+'}
@@ -151,7 +160,7 @@ const Drips: React.FC<DripsProps> = ({ weight }) => {
                     {drip.calc_type === 'DilutionInstructions' ? (
                       <>
                         {drip.name}:
-                        <b> {calcDilutionPerKg(drip).doseForDilution} {calcDilutionPerKg(drip).unitsForDilution}</b>
+                        <b> {calcDilutionPerKg(drip).doseForDilution} {calcDilutionPerKg(drip).unitsForDilution} </b>
                         in
                         <b> {drip.default_dilution_volume_ml} ml</b>
                         ({getTargetVolumePerHour(drip)}ml/Hr)
@@ -159,7 +168,7 @@ const Drips: React.FC<DripsProps> = ({ weight }) => {
                     ) : (
                       <>
                         {drip.name}:
-                        <b> {calcInfusionSpeed(drip)}ml/Hr</b>
+                        <b> {calcInfusionSpeed(drip)}ml/Hr </b>
                         (existing concentration of {drip.existing_dilution_concentration}
                         {drip.existing_dilution_concentration_dose_unit}/ml)
                       </>

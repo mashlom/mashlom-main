@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import './DrugsAndDrips.css';
 import { FaCircleInfo } from 'react-icons/fa6';
 import DrugInfoDialog from './DrugInfoDialog';
@@ -41,11 +41,28 @@ const Drugs: React.FC<DrugsProps> = ({ weight }) => {
   const [expandedSections, setExpandedSections] = useState<Record<number, boolean>>({});
   const [selectedDrug, setSelectedDrug] = useState<Drug | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const sectionRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  useEffect(() => {
+    sectionRefs.current = sectionRefs.current.slice(0, drugsData.sections.length);
+  }, [drugsData.sections]);
+
   const toggleSection = (index: number) => {
-    setExpandedSections(prev => ({
-      ...prev,
-      [index]: !prev[index]
-    }));
+    setExpandedSections(prev => {
+      const newState = {
+        ...prev,
+        [index]: !prev[index]
+      };
+      
+      // Scroll to the section after state update
+      if (newState[index]) {
+        setTimeout(() => {
+          sectionRefs.current[index]?.scrollIntoView({ behavior: 'smooth' });
+        }, 0);
+      }
+      
+      return newState;
+    });
   };
 
   const openDrugInfoDialog = (drug: Drug) => {
@@ -108,7 +125,7 @@ const Drugs: React.FC<DrugsProps> = ({ weight }) => {
   return (
     <div style={{ direction: 'ltr' }}>
       {drugsData.sections.map((section, sectionIndex) => (
-        <div key={sectionIndex}>
+        <div key={sectionIndex} ref={el => sectionRefs.current[sectionIndex] = el}>
           <h4 
             className="drugs-header" 
             onClick={() => toggleSection(sectionIndex)}
