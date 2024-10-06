@@ -1,3 +1,12 @@
+.main-content {
+    background-color: var(--main-content-background-color);
+    overflow-y: auto;
+    text-align: center;
+    /* height: min(82vh, calc(100vh - 10vh - 75px)); */
+    height: min(calc(92dvh - 45px), calc(100dvh - 75px - 45px));
+    border: 1px solid var(--border-color);
+}
+
 .form-group {
     margin-top: 20px;
 }
@@ -10,6 +19,11 @@
     min-width: 130px;
 }
 
+.col-auto-buttons-cols {      
+    min-width: 130px;
+}
+
+
 .reset-button {
     margin-left: 10px;
     display: grid;
@@ -19,4 +33,47 @@
     width: calc(1.4rem + 1.5vw);
     cursor:pointer;
     margin-right:10px;
+  }
+
+  .group-container .form-group .form-check {
+    display: inline-block; /* Ensures form checks are displayed in line */
+    margin-right: 1rem; /* Adjust margin between form checks */
+  }
+  
+  .cards-container {
+      width: 100%; /* Set a width */
+      margin: 0 auto; /* Set margin to auto */
+      text-align: left;
+  }
+  
+  .form-group {
+      margin-top: 20px;
+  }
+
+  .back-button {
+    float: right;
+    margin: 5px;    
+    cursor: pointer;
+    box-shadow: 0 0 5px -1px rgba(0,0,0,0.2);
+    padding-right: 30px;
+    padding-left: 30px;
+    border-radius: 10px;
+    font-size: 30px;
+    color: var(--page-font-color);
+  }
+  .back-button:active {
+    box-shadow: 0 0 5px -1px rgba(0,0,0,0.6);
+  }
+
+  .back-button-img {
+    width: 30px;
+    height: 30px;
+  }
+
+  .circle {
+    display: inline-block;
+    width: 0.65em; /* Set the width and height to be the same as the font size */
+    height: 0.65em;
+    border-radius: 50%; /* Create a circle using border-radius */    
+    margin-left: 10px;
   }

@@ -1,0 +1,27 @@
+ 
+ 
+  
+      
+
+  
+  .cards-container {
+    width: 100%; /* Set a width */
+    margin: 0 auto; /* Set margin to auto */
+  }
+  
+  .table {
+    --bs-table-bg: #3DB5A5;
+    --bs-table-color: white;
+  }
+  .table-striped tbody tr:nth-of-type(odd) {
+    --bs-table-color: black;
+    --bs-table-bg-type: #f5fffd;
+    --bs-table-striped-bg: #f5fffd;  
+  }
+  
+  .table-striped tbody tr:nth-of-type(even) {
+    --bs-table-color: black;
+    --bs-table-bg-type: #ebf7ff;
+    --bs-table-striped-bg: #ebf7ff;  
+  }
+  

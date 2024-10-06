@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import './Resus.css';
 import '../AppStyle.css';
 import Drugs from './Drugs';
 import Drips from './Drips';
 import drugsDataFile from './data/resus-drugs-definitions.json';
 import airwaysDataFile from './data/airways.json';
 import Image from '../../components/Image';
+import { FaWeightScale } from 'react-icons/fa6';
 
 interface DrugDefinition {
   drug_name: string;
@@ -25,7 +27,6 @@ interface AirwaysForAge {
 }
 
 const Resus: React.FC = () => {    
-  const [dataShown] = useState('CALCULATOR');
   const [weight, setWeight] = useState<string>('');
   const [age, setAge] = useState<string>('');
   const [agesForDropDown, setAgesForDropDown] = useState<AgeOption[]>([]);
@@ -126,8 +127,7 @@ const Resus: React.FC = () => {
   };
 
   return (
-    <div id="calculator" style={{ overflow: 'hidden', paddingBottom: '10px' }} 
-         className={dataShown === 'CALCULATOR' ? '' : 'ng-hide'}>
+    <div className="container main-content">
       <div className="group-container">
         <form>
           <div>
@@ -166,14 +166,14 @@ const Resus: React.FC = () => {
               {age && (
                 <>
                   <div style={{ cursor: 'pointer' }}>
-                    <i className="fa-solid fa-weight-scale" style={{ marginLeft: '10px' }}></i>
+                   <FaWeightScale style={{ marginLeft: '10px' }} />
                     משקל משוערך בנים: {estimatedMaleWeight} ק"ג
                     <button type="button" className="btn btn-link ng-binding" onClick={applyMaleWeightRounded} style={{ paddingRight: '0.1rem' }}>
                       (הזן ערך מעוגל)
                     </button>
                   </div>
                   <div style={{ cursor: 'pointer', paddingTop: '10px' }}>
-                    <i className="fa-solid fa-weight-scale" style={{ marginLeft: '10px' }}></i>
+                    <FaWeightScale style={{ marginLeft: '10px' }} />
                     משקל משוערך בנות: {estimatedFemaleWeight} ק"ג
                     <button type="button" className="btn btn-link ng-binding" onClick={applyFemaleWeightRounded} style={{ paddingRight: '0.1rem' }}>
                       (הזן ערך מעוגל)
@@ -229,7 +229,7 @@ const Resus: React.FC = () => {
                 </div>
               </div>
               <Drugs weight={Number(weight)}></Drugs>
-              <Drips />
+              <Drips weight={Number(weight)} />
             </div>
           )}
         </form>

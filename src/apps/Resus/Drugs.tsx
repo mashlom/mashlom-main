@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import './DrugsAndDrips.css';
+import { FaCircleInfo } from 'react-icons/fa6';
+import DrugInfoDialog from './DrugInfoDialog';
 import drugsDataFile from './data/resus-drugs-definitions.json';
 
 interface Drug {
@@ -35,12 +38,19 @@ export interface DrugsProps {
 
 const Drugs: React.FC<DrugsProps> = ({ weight }) => {
   const drugsData: MedicationGuide = drugsDataFile;
-  const [expandedSections, setExpandedSections] = useState<Record<number, boolean>>({});  
+  const [expandedSections, setExpandedSections] = useState<Record<number, boolean>>({});
+  const [selectedDrug, setSelectedDrug] = useState<Drug | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const toggleSection = (index: number) => {
     setExpandedSections(prev => ({
       ...prev,
       [index]: !prev[index]
     }));
+  };
+
+  const openDrugInfoDialog = (drug: Drug) => {
+    setSelectedDrug(drug);
+    setIsModalOpen(true);
   };
 
   const formatNumber = (num: number) => {
@@ -110,8 +120,9 @@ const Drugs: React.FC<DrugsProps> = ({ weight }) => {
           </h4>
           {expandedSections[sectionIndex] && (
             <div id="collapseable-area-drugs" className="collapseable">
-              {section.drugs.map((drug, drugIndex) => (
-                <div key={drugIndex} style={{ display: 'flex', justifyContent: 'space-between', textAlign: 'left', color: 'var(--page-font-color)' }}>
+              <ul className="list-group custom-list-group">
+              {section.drugs.map((drug, drugIndex) => (                
+                <li key={drugIndex} className='list-group-item' style={{ display: 'flex', justifyContent: 'space-between', textAlign: 'left', color: 'var(--page-font-color)' }}>
                   <div>
                     {!drug.type ? (
                       <>
@@ -155,13 +166,23 @@ const Drugs: React.FC<DrugsProps> = ({ weight }) => {
                       </>
                     )}
                   </div>
-                  <div className="info-button">ℹ️</div>
-                </div>
-              ))}
+                  <div className="info-button" onClick={() => openDrugInfoDialog(drug)}>
+                      <FaCircleInfo style={{ marginLeft: '10px', cursor: 'pointer' }} />
+                  </div>
+                </li>
+              ))}              
+              </ul>
             </div>
           )}
         </div>
       ))}
+      {selectedDrug && (
+        <DrugInfoDialog
+          isOpen={isModalOpen}
+          setIsOpen={setIsModalOpen}
+          drug={selectedDrug}
+        />
+      )}
     </div>
   );
 };
