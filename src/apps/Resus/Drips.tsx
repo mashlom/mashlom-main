@@ -4,12 +4,13 @@ import dripsData from './data/drips.json';
 import DripInfoDialog from './DripInfoDialog';
 
 interface Drip {
+  id: string;
   name: string;
   howToGive: string;
   dose_unit: string;
   allowed_dose_range: string;
   calc_type: string;
-  default_dilution_volume_unit: string;
+  default_dilution_volume_unit?: string;
   default_dilution_volume_ml: number;
   dose_per_kg_per_min?: number;
   dose_per_kg_per_hour?: number;
@@ -153,8 +154,8 @@ const Drips: React.FC<DripsProps> = ({ weight }) => {
       {dripsExpanded && (
         <div id="collapseable-area-drips" className="collapseable">
           <ul className="list-group">
-            {dripsDefinitions.map((drip, index) => (
-              <li key={index} className="list-group-item">
+            {dripsDefinitions.map((drip) => (
+              <li key={drip.id} className="list-group-item">
                 <div style={{ display: 'flex', justifyContent: 'space-between', textAlign: 'left', color: 'var(--page-font-color)' }}>
                   <span>
                     {drip.calc_type === 'DilutionInstructions' ? (

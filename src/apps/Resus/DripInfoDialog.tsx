@@ -34,8 +34,8 @@ interface DripInfoDialogProps {
         primaryButton={{ text: 'סגור' }}
       >
         <div>
-          <p><strong>Initial rate:</strong> {getDripRate(drip)} {drip.dose_unit}/kg/{getTimeUnitString(drip)}</p>
-          <p><strong>Rate range:</strong> {drip.allowed_dose_range}</p>
+          <div><strong>Initial rate:</strong> {getDripRate(drip)} {drip.dose_unit}/kg/{getTimeUnitString(drip)}</div>
+          <div><strong>Rate range:</strong> {drip.allowed_dose_range}</div>
         </div>
       </Modal>
     );
