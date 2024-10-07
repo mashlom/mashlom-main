@@ -41,8 +41,8 @@ const HospitalAppList: React.FC<{
   apps: MashlomAppType[];
 }> = ({ hospital, apps, section }) => (
   <>
-    <div className='container main-content'>
-      <h1>{section}</h1>
+    <div>
+      <h3 style={{ textAlign: "right", margin: "20px 0px" }}>{section}</h3>
       <AppsContainer apps={apps} hospital={hospital} />
     </div>
   </>
@@ -126,6 +126,7 @@ const Hospital: React.FC = () => {
         keywords="רופאים, מחשבונים, mashlom.me"
         url="https://mashlom.me/#/apps/"
       />
+      <div className='container main-content'>
       {hospitalConfig.sections.map((sectionItem, index) => (
         <HospitalAppList
           key={index}
@@ -134,6 +135,7 @@ const Hospital: React.FC = () => {
           section={sectionItem.name}  // Pass the section name
         />
       ))}
+      </div>
       <Footer type="informative" />
     </div>
   );
