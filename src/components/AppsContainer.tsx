@@ -35,7 +35,6 @@ const TilesContainer = styled.div`
   gap: 10px;
   justify-content: flex-start;
   align-items: center;
-  padding: 20px;
 `;
 
 interface AppsContainerProps {

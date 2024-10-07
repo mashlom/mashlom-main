@@ -87,19 +87,10 @@ interface FooterProps {
 
 const FooterContainer = styled.footer<{ isInteractive: boolean }>`
   text-align: center;
-  color: white;
   padding: ${props => props.isInteractive ? '10px 0' : '5px 0 20px 20px'};
   background-color: ${props => props.isInteractive ? '#406286' : 'transparent'};
-`;
-
-const InformativeContent = styled.div`
-  a {
-    color: #406286;
-    text-decoration: none;
-    &:hover {
-      text-decoration: underline;
-    }
-  }
+  text-align: center;
+  padding: 5px 0px 20px 20px;
 `;
 
 const InteractiveContent = styled.div`
@@ -163,10 +154,10 @@ const Footer: React.FC<FooterProps> = ({ type, onSearch, onOpenMeasures, onOpenH
   if (type === 'informative') {
     return (
       <FooterContainer isInteractive={false}>
-        <InformativeContent>
+        <div>
           ליצירת קשר: <a href="mailto:mashlom.me@gmail.com">mashlom.me@gmail.com</a><br />
           לקריאת תנאי השימוש <a href="https://drive.google.com/file/d/1x8SNHDi9QbS-JYTWLYx7Yz7G68KlhWfM/view?usp=sharing" target="_blank" rel="noopener noreferrer">לחץ כאן</a>
-        </InformativeContent>
+        </div>
       </FooterContainer>
     );
   }

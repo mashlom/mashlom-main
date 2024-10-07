@@ -1,6 +1,6 @@
 
 
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -73,9 +73,8 @@ const Icon = styled(FontAwesomeIcon)`
   margin-bottom: 10px;
 `;
 
-const Title = styled.span<{ fontSize: number }>`
-  font-size: ${(props) => props.fontSize}rem;
-  font-weight: bold;
+const Title = styled.span`
+  font-size: 1rem;
   line-height: 1.2;
   max-height: 2.4em;
   overflow: hidden;
@@ -96,38 +95,14 @@ const ContentWrapper = styled.div`
 const AppTile: React.FC<AppTileProps> = ({ appId, hospital }) => {
   const { title, icon, inDevelopment = false } = AppsConfigList[appId];
   const selectedIcon = Icons[icon as keyof typeof Icons] as IconDefinition;
-  const [fontSize, setFontSize] = useState(1);
+  // const [fontSize, setFontSize] = useState(1);
   const titleRef = useRef<HTMLSpanElement>(null);
-
-  useEffect(() => {
-    const adjustFontSize = () => {
-      if (titleRef.current) {
-        const maxWidth = 80; // Maximum width in pixels
-        const maxHeight = 40; // Maximum height in pixels
-        let currentFontSize = 1;
-        titleRef.current.style.fontSize = `${currentFontSize}rem`;
-
-        while (
-          (titleRef.current.offsetWidth > maxWidth ||
-            titleRef.current.offsetHeight > maxHeight) &&
-          currentFontSize > 0.5
-        ) {
-          currentFontSize -= 0.1;
-          titleRef.current.style.fontSize = `${currentFontSize}rem`;
-        }
-
-        setFontSize(currentFontSize);
-      }
-    };
-
-    adjustFontSize();
-  }, [title]);
 
   return (
     <SquareButton to={`/${hospital}/${appId}`} inDevelopment={inDevelopment}>
       <ContentWrapper>
         <Icon icon={selectedIcon} />
-        <Title ref={titleRef} fontSize={fontSize}>
+        <Title ref={titleRef}>
           {title}
         </Title>
       </ContentWrapper>
