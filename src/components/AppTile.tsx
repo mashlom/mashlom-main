@@ -95,7 +95,6 @@ const ContentWrapper = styled.div`
 const AppTile: React.FC<AppTileProps> = ({ appId, hospital }) => {
   const { title, icon, inDevelopment = false } = AppsConfigList[appId];
   const selectedIcon = Icons[icon as keyof typeof Icons] as IconDefinition;
-  // const [fontSize, setFontSize] = useState(1);
   const titleRef = useRef<HTMLSpanElement>(null);
 
   return (

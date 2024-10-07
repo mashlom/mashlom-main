@@ -42,7 +42,6 @@ const StyledBootstrapModal = styled(BootstrapModal)`
 const Modal = ({
   isOpen,
   setIsOpen,
-  primaryButton,
   secondaryButton,
   title,
   isHeaderHidden,
@@ -65,7 +64,7 @@ const Modal = ({
     >
       {!isHeaderHidden && (
         <StyledBootstrapModal.Header closeButton style={{ borderBottom: 'none' }}>
-          {title && <StyledBootstrapModal.Title>{title}</StyledBootstrapModal.Title>}
+          {title && <StyledBootstrapModal.Title><strong>{title}</strong></StyledBootstrapModal.Title>}
         </StyledBootstrapModal.Header>
       )}
       <StyledBootstrapModal.Body>{children}</StyledBootstrapModal.Body>
@@ -85,7 +84,7 @@ const Modal = ({
             {secondaryButton.text}
           </Button>
         )}
-        <Button
+        {/* <Button
           variant="primary"
           style={{backgroundColor: "#103C6E"}}
           onClick={() => {
@@ -97,7 +96,7 @@ const Modal = ({
           color=''
         >
           {primaryButton?.text || 'OK'}
-        </Button>
+        </Button> */}
       </StyledBootstrapModal.Footer>
     </StyledBootstrapModal>
   );

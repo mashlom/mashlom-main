@@ -132,7 +132,7 @@ const Resus: React.FC = () => {
         <form>
           <div>
             <div className="row form-group">
-              <div className="col-auto fs-3">
+              <div className="col-auto fs-3" >
                 <h1>מינוני תרופות בעת החייאה</h1>
               </div>
               <div className="col-auto me-auto">

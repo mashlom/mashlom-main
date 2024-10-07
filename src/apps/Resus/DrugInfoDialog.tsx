@@ -34,19 +34,19 @@ const DrugInfoDialog: React.FC<DrugInfoDialogProps> = ({ isOpen, setIsOpen, drug
       primaryButton={{ text: 'סגור' }}
     >
       <div>
-        <p><strong>Dosage used:</strong> {drug.dose_per_kg} {drug.dose_unit}/kg</p>
-        {drug.dose_range && <p><strong>Dosage range:</strong> {drug.dose_range}</p>}
-        {drug.prepare_instructions && <p><strong>Dilution instructions:</strong> {drug.prepare_instructions}</p>}
-        {drug.maxDose && <p><strong>Max dose:</strong> {drug.maxDose} {drug.maxDoseUnit}</p>}
-        {drug.minDose && <p><strong>Min dose:</strong> {drug.minDose} {drug.minDoseUnit}</p>}
+        <div><strong>Dosage used:</strong> {drug.dose_per_kg} {drug.dose_unit}/kg</div>
+        {drug.dose_range && <div><strong>Dosage range:</strong> {drug.dose_range}</div>}
+        {drug.prepare_instructions && <div><strong>Dilution instructions:</strong> {drug.prepare_instructions}</div>}
+        {drug.maxDose && <div><strong>Max dose:</strong> {drug.maxDose} {drug.maxDoseUnit}</div>}
+        {drug.minDose && <div><strong>Min dose:</strong> {drug.minDose} {drug.minDoseUnit}</div>}
         {drug.concentration && (
-          <p>
+          <div>
             <strong>Concentration:</strong> {splitRatio(drug.concentration)[0]} {drug.dose_unit} per{' '}
             {splitRatio(drug.concentration)[1]} ml
-          </p>
+          </div>
         )}
         {drug.administrationInstructions && (
-          <p><strong>Administration:</strong> {drug.administrationInstructions}</p>
+          <div><strong>Administration:</strong> {drug.administrationInstructions}</div>
         )}
       </div>
     </Modal>
