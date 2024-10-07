@@ -1,383 +1,446 @@
 {
-   "sections": [
-      {
-         "name": "Resus Drugs",
-         "drugs": [
-            {
-               "name": "Adrenaline 1:10,000",
-               "howToGive": "מתן בפוש רק בהחייאה IV",
-               "dose_per_kg": 0.01,
-               "dose_unit": "mg",
-               "concentration": "1/10",
-               "maxDose": "1",
-               "maxDoseUnit": "mg",
-               "prepare_instructions": "To get Adrenaline 1mg/10ml (1:10,000) take 1 ml of Adrenaline 1mg/1ml and dilute it  with 9 ml of NACL 0.9%"
-            },
-            {
-               "name": "Adrenaline 1:10,000",
-               "howToGive": "ET",
-               "dose_per_kg": 0.1,
-               "dose_unit": "mg",
-               "concentration": "1/1",
-               "comment": "add 5 ml of NACL prior to administration"
-            },
-            {
-               "name": "Atropine 1:10,000",
-               "howToGive": "IV",
-               "dose_per_kg": 0.02,
-               "dose_unit": "mg",
-               "concentration": "1/10",
-               "maxDose": "1",
-               "maxDoseUnit": "mg",
-               "minDose": "0.1",
-               "minDoseUnit": "mg",
-               "prepare_instructions": "To get Atropine 1mg/10ml (1:10000) take 1 ml of Atropine 1mg/ml and dilute it  with 9 ml of NACL 0.9%"
-            },
-            {
-               "name": "Amiodarone",
-               "howToGive": "מתן בפוש רק בהחייאה IV",
-               "dose_per_kg": 5,
-               "dose_unit": "mg",
-               "concentration": "50/1",
-               "maxDose": "300",
-               "maxDoseUnit": "mg"
-            },
-            {
-               "name": "Lidocaine",
-               "howToGive": "מתן בפוש רק בהחייאה IV",
-               "dose_per_kg": 1,
-               "dose_unit": "mg",
-               "concentration": "10/1",
-               "administrationInstructions": "slow push over 2-4 min"
-            },
-            {
-               "name": "Magnesium Sulfate",
-               "howToGive": "מתן בפוש רק בהחייאה IV",
-               "dose_per_kg": 50,
-               "dose_range": "mg/kg(25-50)",
-               "dose_unit": "mg",
-               "concentration": "500/1",
-               "maxDose": "2000",
-               "maxDoseUnit": "mg",
-               "shouldDispalyConcentration": true
-            },
-            {
-               "name": "Calcium gluconate",
-               "howToGive": "מתן בפוש רק בהחייאה IV",
-               "dose_per_kg": 100,
-               "dose_range": "mg/kg(1ml/kg)",
-               "dose_unit": "mg",
-               "concentration": "100/1"
-            },
-            {
-               "name": "Sodium Bicarbonate",
-               "howToGive": "מתן בפוש רק בהחייאה IV",
-               "dose_per_kg": 1,
-               "dose_range": "meq/kg(1ml/kg)",
-               "dose_unit": "meq",
-               "concentration": "1/1"
-            },
-            {
-               "name": "Dextrose 10%",
-               "howToGive": "IV",
-               "dose_per_kg": 0.2,
-               "dose_range": "gr/kg(2ml/kg)",
-               "dose_unit": "gr",
-               "concentration": "10/100"
-            },
-            {
-               "name": "Dextrose 25%",
-               "howToGive": "IV",
-               "dose_per_kg": 0.2,
-               "dose_range": "gr/kg(0.8ml/kg)",
-               "dose_unit": "gr",
-               "concentration": "25/100",
-               "prepare_instructions": "The final volume in ml consists of half Dextrose 50% and half NACL 0.9%"
-            }
-         ]
-      },
-      {
-         "name": "Sedation & RSI",
-         "drugs": [
-            {
-               "name": "Ketamin 1mg/Kg",
-               "howToGive": "IV",
-               "dose_per_kg": 1,
-               "dose_range": "mg/kg(0.5-2)",
-               "dose_unit": "mg",
-               "concentration": "10/1"
-            },
-            {
-               "name": "Ketamin 1.5mg/Kg",
-               "howToGive": "IV",
-               "dose_per_kg": 1.5,
-               "dose_range": "mg/kg(0.5-2)",
-               "dose_unit": "mg",
-               "concentration": "10/1"
-            },
-            {
-               "name": "Propofol",
-               "howToGive": "IV",
-               "dose_per_kg": 1,
-               "dose_range": "mg/kg (0.5-3)",
-               "dose_unit": "mg",
-               "concentration": "10/1"
-            },
-            {
-               "name": "Etomidate",
-               "howToGive": "IV",
-               "dose_per_kg": 0.3,
-               "dose_range": "mg/kg(0.2-0.6)",
-               "dose_unit": "mg",
-               "concentration": "20/10",
-               "maxDose": "20",
-               "maxDoseUnit": "mg"
-            },
-            {
-               "name": "Fentanyl",
-               "howToGive": "IV",
-               "dose_per_kg": 1,
-               "dose_unit": "mcg",
-               "concentration": "50/1",
-               "maxDose": "100",
-               "maxDoseUnit": "mcg"
-            },
-            {
-               "name": "Midazolam",
-               "howToGive": "IV",
-               "dose_per_kg": 0.1,
-               "dose_unit": "mg",
-               "concentration": "1/1",
-               "maxDose": "10",
-               "maxDoseUnit": "mg",
-               "shouldDispalyConcentration": true
-            }
-         ]
-      },
-      {
-         "name": "Muscle relaxants",
-         "drugs": [
-            {
-               "name": "Suxamethonium (scoline)",
-               "howToGive": "IV",
-               "dose_per_kg": 1,
-               "dose_range": "mg/kg(1-2)",
-               "dose_unit": "mg",
-               "concentration": "10/1",
-               "maxDose": "150",
-               "maxDoseUnit": "mg"
-            },
-            {
-               "name": "Rocuronium",
-               "howToGive": "IV",
-               "dose_per_kg": 1,
-               "dose_range": "mg/kg(0.6-1.2)",
-               "dose_unit": "mg",
-               "concentration": "10/1"
-            }
-         ]
-      },
-      {
-         "name": "Anaphilaxis",
-         "drugs": [
-            {
-               "name": "Adrenaline 1:1000",
-               "howToGive": "IM",
-               "dose_per_kg": 0.01,
-               "dose_unit": "mg",
-               "concentration": "1/1",
-               "maxDose": "0.5",
-               "maxDoseUnit": "mg"
-            }
-         ]
-      },
-      {
-         "name": "Fluids",
-         "drugs": [
-            {
-               "name": "Fluid Bolus NACL 0.9%",
-               "howToGive": "IV",
-               "dose_per_kg": 20,
-               "dose_unit": "ml",
-               "concentration": "",
-               "maxDose": "1000",
-               "maxDoseUnit": "ml",
-               "type": "fluid"
-            }
-         ]
-      },
-      {
-         "name": "Others",
-         "drugs": [
-            {
-               "name": "Adenosine 1st",
-               "howToGive": "IV",
-               "dose_per_kg": 0.1,
-               "dose_unit": "mg",
-               "concentration": "3/1",
-               "maxDose": "6",
-               "maxDoseUnit": "mg"
-            },
-            {
-               "name": "Adenosine 2nd",
-               "howToGive": "IV",
-               "dose_per_kg": 0.2,
-               "dose_unit": "mg",
-               "concentration": "3/1",
-               "maxDose": "12",
-               "maxDoseUnit": "mg"
-            },
-            {
-               "name": "Hydrocortisone",
-               "howToGive": "IV",
-               "dose_per_kg": 4,
-               "dose_unit": "mg",
-               "concentration": "",
-               "maxDose": "100",
-               "maxDoseUnit": "mg",
-               "type": "mass"
-            }
-         ]
-      },
-      {
-         "name": "Convulsions",
-         "drugs": [
-            {
-               "name": "Midazolam",
-               "howToGive": "INTRANASAL",
-               "dose_per_kg": 0.5,
-               "dose_unit": "mg",
-               "concentration": "5/1",
-               "maxDose": "10",
-               "maxDoseUnit": "mg",
-               "shouldDispalyConcentration": true
-            },
-            {
-               "name": "Keppra",
-               "howToGive": "IV",
-               "dose_per_kg": 40,
-               "dose_range": "mg/kg(40-60)",
-               "dose_unit": "mg",
-               "concentration": "",
-               "maxDose": "4500",
-               "maxDoseUnit": "mg",
-               "type": "mass"
-            },
-            {
-               "name": "Phenytoin",
-               "howToGive": "IV",
-               "dose_per_kg": 20,
-               "dose_unit": "mg",
-               "concentration": "",
-               "maxDose": "1500",
-               "maxDoseUnit": "mg",
-               "type": "mass"
-            },
-            {
-               "name": "Phenobarbital",
-               "howToGive": "IV",
-               "dose_per_kg": 20,
-               "dose_unit": "mg",
-               "concentration": "",
-               "maxDose": "1000",
-               "maxDoseUnit": "mg",
-               "type": "mass"
-            },
-            {
-               "name": "Valproic acid",
-               "howToGive": "IV",
-               "dose_per_kg": 40,
-               "dose_range": "mg/kg(20-40)",
-               "dose_unit": "mg",
-               "concentration": "",
-               "maxDose": "5000",
-               "maxDoseUnit": "mg",
-               "type": "mass"
-            },
-            {
-               "name": "Midazolam",
-               "howToGive": "IV",
-               "dose_per_kg": 0.1,
-               "dose_unit": "mg",
-               "concentration": "1/1",
-               "maxDose": "10",
-               "maxDoseUnit": "mg",
-               "shouldDispalyConcentration": true
-            },
-            {
-               "name": "Midazolam",
-               "howToGive": "IM",
-               "dose_per_kg": 0.3,
-               "dose_unit": "mg",
-               "concentration": "1/1",
-               "maxDose": "10",
-               "maxDoseUnit": "mg",
-               "shouldDispalyConcentration": true
-            }
-         ]
-      },
-      {
-         "name": "Incresed ICP",
-         "drugs": [
-            {
-               "name": "Manitol 20%",
-               "howToGive": "IV",
-               "dose_per_kg": 1,
-               "dose_range": "gr/kg(0.5-1)",
-               "dose_unit": "gr",
-               "concentration": "1/5"
-            },
-            {
-               "name": "NACL 3%",
-               "howToGive": "IV",
-               "dose_per_kg": 5,
-               "dose_unit": "ml",
-               "concentration": "",
-               "type": "fluid"
-            }
-         ]
-      },
-      {
-         "name": "Antidotes",
-         "drugs": [
-            {
-               "name": "Naloxone",
-               "howToGive": "IV",
-               "dose_per_kg": 0.1,
-               "dose_range": "mg/kg",
-               "dose_unit": "mg",
-               "concentration": "0.4/1",
-               "maxDose": "2",
-               "maxDoseUnit": "mg",
-               "warnText": "up to 2 mg per dose up to 4 doses"
-            },
-            {
-               "name": "Flumazenil",
-               "howToGive": "IV",
-               "dose_per_kg": 0.01,
-               "dose_unit": "mg",
-               "concentration": "0.5/5",
-               "maxDose": "0.2",
-               "maxDoseUnit": "mg"
-            },
-            {
-               "name": "Sugammadex",
-               "howToGive": "IV",
-               "dose_per_kg": 16,
-               "dose_unit": "mg",
-               "concentration": "100/1"
-            },
-            {
-               "name": "Charcoal",
-               "howToGive": "PO",
-               "dose_per_kg": 1,
-               "dose_unit": "gr",
-               "dose_range": "gr/kg(0.5-1)",
-               "concentration": "50/250",
-               "maxDose": "100",
-               "maxDoseUnit": "gr"
-            }
-         ]
-      }
-   ]
+  "drugs": [
+    {
+      "id": "Adrenaline1:10,000_IV_0.01_mg",
+      "name": "Adrenaline 1:10,000",
+      "howToGive": "מתן בפוש רק בהחייאה IV",
+      "dose_per_kg": 0.01,
+      "dose_unit": "mg",
+      "concentration": "1/10",
+      "maxDose": "1",
+      "maxDoseUnit": "mg",
+      "prepare_instructions": "To get Adrenaline 1mg/10ml (1:10,000) take 1 ml of Adrenaline 1mg/1ml and dilute it  with 9 ml of NACL 0.9%"
+    },
+    {
+      "id": "Adrenaline1:10,000_ET_0.1_mg",
+      "name": "Adrenaline 1:10,000",
+      "howToGive": "ET",
+      "dose_per_kg": 0.1,
+      "dose_unit": "mg",
+      "concentration": "1/1",
+      "comment": "add 5 ml of NACL prior to administration"
+    },
+    {
+      "id": "Atropine1:10,000_IV_0.02_mg",
+      "name": "Atropine 1:10,000",
+      "howToGive": "IV",
+      "dose_per_kg": 0.02,
+      "dose_unit": "mg",
+      "concentration": "1/10",
+      "maxDose": "1",
+      "maxDoseUnit": "mg",
+      "minDose": "0.1",
+      "minDoseUnit": "mg",
+      "prepare_instructions": "To get Atropine 1mg/10ml (1:10000) take 1 ml of Atropine 1mg/ml and dilute it  with 9 ml of NACL 0.9%"
+    },
+    {
+      "id": "Amiodarone_IV_5_mg",
+      "name": "Amiodarone",
+      "howToGive": "מתן בפוש רק בהחייאה IV",
+      "dose_per_kg": 5,
+      "dose_unit": "mg",
+      "concentration": "50/1",
+      "maxDose": "300",
+      "maxDoseUnit": "mg"
+    },
+    {
+      "id": "Lidocaine_IV_1_mg",
+      "name": "Lidocaine",
+      "howToGive": "מתן בפוש רק בהחייאה IV",
+      "dose_per_kg": 1,
+      "dose_unit": "mg",
+      "concentration": "10/1",
+      "administrationInstructions": "slow push over 2-4 min"
+    },
+    {
+      "id": "MagnesiumSulfate_IV_50_mg",
+      "name": "Magnesium Sulfate",
+      "howToGive": "מתן בפוש רק בהחייאה IV",
+      "dose_per_kg": 50,
+      "dose_range": "mg/kg(25-50)",
+      "dose_unit": "mg",
+      "concentration": "500/1",
+      "maxDose": "2000",
+      "maxDoseUnit": "mg",
+      "shouldDispalyConcentration": true
+    },
+    {
+      "id": "Calciumgluconate_IV_100_mg",
+      "name": "Calcium gluconate",
+      "howToGive": "מתן בפוש רק בהחייאה IV",
+      "dose_per_kg": 100,
+      "dose_range": "mg/kg(1ml/kg)",
+      "dose_unit": "mg",
+      "concentration": "100/1"
+    },
+    {
+      "id": "SodiumBicarbonate_IV_1_meq",
+      "name": "Sodium Bicarbonate",
+      "howToGive": "מתן בפוש רק בהחייאה IV",
+      "dose_per_kg": 1,
+      "dose_range": "meq/kg(1ml/kg)",
+      "dose_unit": "meq",
+      "concentration": "1/1"
+    },
+    {
+      "id": "Dextrose10%_IV_0.2_gr",
+      "name": "Dextrose 10%",
+      "howToGive": "IV",
+      "dose_per_kg": 0.2,
+      "dose_range": "gr/kg(2ml/kg)",
+      "dose_unit": "gr",
+      "concentration": "10/100"
+    },
+    {
+      "id": "Dextrose25%_IV_0.2_gr",
+      "name": "Dextrose 25%",
+      "howToGive": "IV",
+      "dose_per_kg": 0.2,
+      "dose_range": "gr/kg(0.8ml/kg)",
+      "dose_unit": "gr",
+      "concentration": "25/100",
+      "prepare_instructions": "The final volume in ml consists of half Dextrose 50% and half NACL 0.9%"
+    },
+    {
+      "id": "Ketamin1mg/Kg_IV_1_mg",
+      "name": "Ketamin 1mg/Kg",
+      "howToGive": "IV",
+      "dose_per_kg": 1,
+      "dose_range": "mg/kg(0.5-2)",
+      "dose_unit": "mg",
+      "concentration": "10/1"
+    },
+    {
+      "id": "Ketamin1.5mg/Kg_IV_1.5_mg",
+      "name": "Ketamin 1.5mg/Kg",
+      "howToGive": "IV",
+      "dose_per_kg": 1.5,
+      "dose_range": "mg/kg(0.5-2)",
+      "dose_unit": "mg",
+      "concentration": "10/1"
+    },
+    {
+      "id": "Propofol_IV_1_mg",
+      "name": "Propofol",
+      "howToGive": "IV",
+      "dose_per_kg": 1,
+      "dose_range": "mg/kg (0.5-3)",
+      "dose_unit": "mg",
+      "concentration": "10/1"
+    },
+    {
+      "id": "Etomidate_IV_0.3_mg",
+      "name": "Etomidate",
+      "howToGive": "IV",
+      "dose_per_kg": 0.3,
+      "dose_range": "mg/kg(0.2-0.6)",
+      "dose_unit": "mg",
+      "concentration": "20/10",
+      "maxDose": "20",
+      "maxDoseUnit": "mg"
+    },
+    {
+      "id": "Fentanyl_IV_1_mcg",
+      "name": "Fentanyl",
+      "howToGive": "IV",
+      "dose_per_kg": 1,
+      "dose_unit": "mcg",
+      "concentration": "50/1",
+      "maxDose": "100",
+      "maxDoseUnit": "mcg"
+    },
+    {
+      "id": "Midazolam_IV_0.1_mg",
+      "name": "Midazolam",
+      "howToGive": "IV",
+      "dose_per_kg": 0.1,
+      "dose_unit": "mg",
+      "concentration": "1/1",
+      "maxDose": "10",
+      "maxDoseUnit": "mg",
+      "shouldDispalyConcentration": true
+    },
+    {
+      "id": "Suxamethonium(scoline)_IV_1_mg",
+      "name": "Suxamethonium (scoline)",
+      "howToGive": "IV",
+      "dose_per_kg": 1,
+      "dose_range": "mg/kg(1-2)",
+      "dose_unit": "mg",
+      "concentration": "10/1",
+      "maxDose": "150",
+      "maxDoseUnit": "mg"
+    },
+    {
+      "id": "Rocuronium_IV_1_mg",
+      "name": "Rocuronium",
+      "howToGive": "IV",
+      "dose_per_kg": 1,
+      "dose_range": "mg/kg(0.6-1.2)",
+      "dose_unit": "mg",
+      "concentration": "10/1"
+    },
+    {
+      "id": "Adrenaline1:1000_IM_0.01_mg",
+      "name": "Adrenaline 1:1000",
+      "howToGive": "IM",
+      "dose_per_kg": 0.01,
+      "dose_unit": "mg",
+      "concentration": "1/1",
+      "maxDose": "0.5",
+      "maxDoseUnit": "mg"
+    },
+    {
+      "id": "FluidBolusNACL0.9%_IV_20_ml",
+      "name": "Fluid Bolus NACL 0.9%",
+      "howToGive": "IV",
+      "dose_per_kg": 20,
+      "dose_unit": "ml",
+      "concentration": "",
+      "maxDose": "1000",
+      "maxDoseUnit": "ml",
+      "type": "fluid"
+    },
+    {
+      "id": "Adenosine1st_IV_0.1_mg",
+      "name": "Adenosine 1st",
+      "howToGive": "IV",
+      "dose_per_kg": 0.1,
+      "dose_unit": "mg",
+      "concentration": "3/1",
+      "maxDose": "6",
+      "maxDoseUnit": "mg"
+    },
+    {
+      "id": "Adenosine2nd_IV_0.2_mg",
+      "name": "Adenosine 2nd",
+      "howToGive": "IV",
+      "dose_per_kg": 0.2,
+      "dose_unit": "mg",
+      "concentration": "3/1",
+      "maxDose": "12",
+      "maxDoseUnit": "mg"
+    },
+    {
+      "id": "Hydrocortisone_IV_4_mg",
+      "name": "Hydrocortisone",
+      "howToGive": "IV",
+      "dose_per_kg": 4,
+      "dose_unit": "mg",
+      "concentration": "",
+      "maxDose": "100",
+      "maxDoseUnit": "mg",
+      "type": "mass"
+    },
+    {
+      "id": "Midazolam_INTRANASAL_0.5_mg",
+      "name": "Midazolam",
+      "howToGive": "INTRANASAL",
+      "dose_per_kg": 0.5,
+      "dose_unit": "mg",
+      "concentration": "5/1",
+      "maxDose": "10",
+      "maxDoseUnit": "mg",
+      "shouldDispalyConcentration": true
+    },
+    {
+      "id": "Keppra_IV_40_mg",
+      "name": "Keppra",
+      "howToGive": "IV",
+      "dose_per_kg": 40,
+      "dose_range": "mg/kg(40-60)",
+      "dose_unit": "mg",
+      "concentration": "",
+      "maxDose": "4500",
+      "maxDoseUnit": "mg",
+      "type": "mass"
+    },
+    {
+      "id": "Phenytoin_IV_20_mg",
+      "name": "Phenytoin",
+      "howToGive": "IV",
+      "dose_per_kg": 20,
+      "dose_unit": "mg",
+      "concentration": "",
+      "maxDose": "1500",
+      "maxDoseUnit": "mg",
+      "type": "mass"
+    },
+    {
+      "id": "Phenobarbital_IV_20_mg",
+      "name": "Phenobarbital",
+      "howToGive": "IV",
+      "dose_per_kg": 20,
+      "dose_unit": "mg",
+      "concentration": "",
+      "maxDose": "1000",
+      "maxDoseUnit": "mg",
+      "type": "mass"
+    },
+    {
+      "id": "Valproicacid_IV_40_mg",
+      "name": "Valproic acid",
+      "howToGive": "IV",
+      "dose_per_kg": 40,
+      "dose_range": "mg/kg(20-40)",
+      "dose_unit": "mg",
+      "concentration": "",
+      "maxDose": "5000",
+      "maxDoseUnit": "mg",
+      "type": "mass"
+    },
+    {
+      "id": "Midazolam_IM_0.3_mg",
+      "name": "Midazolam",
+      "howToGive": "IM",
+      "dose_per_kg": 0.3,
+      "dose_unit": "mg",
+      "concentration": "1/1",
+      "maxDose": "10",
+      "maxDoseUnit": "mg",
+      "shouldDispalyConcentration": true
+    },
+    {
+      "id": "Manitol20%_IV_1_gr",
+      "name": "Manitol 20%",
+      "howToGive": "IV",
+      "dose_per_kg": 1,
+      "dose_range": "gr/kg(0.5-1)",
+      "dose_unit": "gr",
+      "concentration": "1/5"
+    },
+    {
+      "id": "NACL3%_IV_5_ml",
+      "name": "NACL 3%",
+      "howToGive": "IV",
+      "dose_per_kg": 5,
+      "dose_unit": "ml",
+      "concentration": "",
+      "type": "fluid"
+    },
+    {
+      "id": "Naloxone_IV_0.1_mg",
+      "name": "Naloxone",
+      "howToGive": "IV",
+      "dose_per_kg": 0.1,
+      "dose_range": "mg/kg",
+      "dose_unit": "mg",
+      "concentration": "0.4/1",
+      "maxDose": "2",
+      "maxDoseUnit": "mg",
+      "warnText": "up to 2 mg per dose up to 4 doses"
+    },
+    {
+      "id": "Flumazenil_IV_0.01_mg",
+      "name": "Flumazenil",
+      "howToGive": "IV",
+      "dose_per_kg": 0.01,
+      "dose_unit": "mg",
+      "concentration": "0.5/5",
+      "maxDose": "0.2",
+      "maxDoseUnit": "mg"
+    },
+    {
+      "id": "Sugammadex_IV_16_mg",
+      "name": "Sugammadex",
+      "howToGive": "IV",
+      "dose_per_kg": 16,
+      "dose_unit": "mg",
+      "concentration": "100/1"
+    },
+    {
+      "id": "Charcoal_PO_1_gr",
+      "name": "Charcoal",
+      "howToGive": "PO",
+      "dose_per_kg": 1,
+      "dose_unit": "gr",
+      "dose_range": "gr/kg(0.5-1)",
+      "concentration": "50/250",
+      "maxDose": "100",
+      "maxDoseUnit": "gr"
+    }
+  ],
+  "sections": [
+    {
+      "name": "Resus Drugs",
+      "drugs": [
+        "Adrenaline1:10,000_IV_0.01_mg",
+        "Adrenaline1:10,000_ET_0.1_mg",
+        "Atropine1:10,000_IV_0.02_mg",
+        "Amiodarone_IV_5_mg",
+        "Lidocaine_IV_1_mg",
+        "MagnesiumSulfate_IV_50_mg",
+        "Calciumgluconate_IV_100_mg",
+        "SodiumBicarbonate_IV_1_meq",
+        "Dextrose10%_IV_0.2_gr",
+        "Dextrose25%_IV_0.2_gr"
+      ]
+    },
+    {
+      "name": "Sedation & RSI",
+      "drugs": [
+        "Ketamin1mg/Kg_IV_1_mg",
+        "Ketamin1.5mg/Kg_IV_1.5_mg",
+        "Propofol_IV_1_mg",
+        "Etomidate_IV_0.3_mg",
+        "Fentanyl_IV_1_mcg",
+        "Midazolam_IV_0.1_mg"
+      ]
+    },
+    {
+      "name": "Muscle relaxants",
+      "drugs": [
+        "Suxamethonium(scoline)_IV_1_mg",
+        "Rocuronium_IV_1_mg"
+      ]
+    },
+    {
+      "name": "Anaphilaxis",
+      "drugs": [
+        "Adrenaline1:1000_IM_0.01_mg"
+      ]
+    },
+    {
+      "name": "Fluids",
+      "drugs": [
+        "FluidBolusNACL0.9%_IV_20_ml"
+      ]
+    },
+    {
+      "name": "Others",
+      "drugs": [
+        "Adenosine1st_IV_0.1_mg",
+        "Adenosine2nd_IV_0.2_mg",
+        "Hydrocortisone_IV_4_mg"
+      ]
+    },
+    {
+      "name": "Convulsions",
+      "drugs": [
+        "Midazolam_INTRANASAL_0.5_mg",
+        "Keppra_IV_40_mg",
+        "Phenytoin_IV_20_mg",
+        "Phenobarbital_IV_20_mg",
+        "Valproicacid_IV_40_mg",
+        "Midazolam_IV_0.1_mg",
+        "Midazolam_IM_0.3_mg"
+      ]
+    },
+    {
+      "name": "Incresed ICP",
+      "drugs": [
+        "Manitol20%_IV_1_gr",
+        "NACL3%_IV_5_ml"
+      ]
+    },
+    {
+      "name": "Antidotes",
+      "drugs": [
+        "Naloxone_IV_0.1_mg",
+        "Flumazenil_IV_0.01_mg",
+        "Sugammadex_IV_16_mg",
+        "Charcoal_PO_1_gr"
+      ]
+    }
+  ]
 }

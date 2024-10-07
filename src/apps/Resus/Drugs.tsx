@@ -5,6 +5,7 @@ import DrugInfoDialog from './DrugInfoDialog';
 import drugsDataFile from './data/resus-drugs-definitions.json';
 
 interface Drug {
+  id: string;
   name: string;
   howToGive: string;
   dose_per_kg: number;
@@ -25,16 +26,17 @@ interface Drug {
 
 interface Section {
   name: string;
-  drugs: Drug[];
+  drugs: string[];
 }
 
 interface MedicationGuide {
+  drugs: Drug[];
   sections: Section[];
 }
 
 export interface DrugsProps {
-    weight: number
-  }
+  weight: number
+}
 
 const Drugs: React.FC<DrugsProps> = ({ weight }) => {
   const drugsData: MedicationGuide = drugsDataFile;
@@ -54,7 +56,6 @@ const Drugs: React.FC<DrugsProps> = ({ weight }) => {
         [index]: !prev[index]
       };
       
-      // Scroll to the section after state update
       if (newState[index]) {
         setTimeout(() => {
           sectionRefs.current[index]?.scrollIntoView({ behavior: 'smooth' });
@@ -80,7 +81,7 @@ const Drugs: React.FC<DrugsProps> = ({ weight }) => {
     return ratio.split('/').map(Number);
   };
 
-  const getAdministrationUnit = (drugDefinition: any) => {
+  const getAdministrationUnit = (drugDefinition: Drug) => {
     if (drugDefinition.type === 'mass') {
       return drugDefinition.dose_unit;
     } else {
@@ -88,22 +89,22 @@ const Drugs: React.FC<DrugsProps> = ({ weight }) => {
     }
   };
 
-  const getDoseByWeightWithMaxLimit = (drugDefinition: any) => {
+  const getDoseByWeightWithMaxLimit = (drugDefinition: Drug) => {
     let doseByWeight = drugDefinition.dose_per_kg * weight;
     if (drugDefinition.maxDose) {
-      doseByWeight = Math.min(drugDefinition.maxDose, doseByWeight);
+      doseByWeight = Math.min(Number(drugDefinition.maxDose), doseByWeight);
     }
     if (drugDefinition.minDose) {
-      doseByWeight = Math.max(drugDefinition.minDose, doseByWeight);
+      doseByWeight = Math.max(Number(drugDefinition.minDose), doseByWeight);
     }
     return doseByWeight;
   };
 
-  const getDoseByWeightWithMaxLimitFormatted = (drugDefinition: any) => {
+  const getDoseByWeightWithMaxLimitFormatted = (drugDefinition: Drug) => {
     return formatNumber(getDoseByWeightWithMaxLimit(drugDefinition));
   };
 
-  const calcAmountToAdminister = (drugDefinition: any) => {
+  const calcAmountToAdminister = (drugDefinition: Drug) => {
     let amount;
     if (drugDefinition.type === 'fluid' || drugDefinition.type === 'mass') {
       amount = getDoseByWeightWithMaxLimit(drugDefinition);
@@ -113,7 +114,7 @@ const Drugs: React.FC<DrugsProps> = ({ weight }) => {
     return formatNumber(amount);
   };
 
-  const calcVolume = (drugDefinition: any) => {
+  const calcVolume = (drugDefinition: Drug) => {
     const doseByWeight = getDoseByWeightWithMaxLimit(drugDefinition);
     const [numerator, denominator] = splitRatio(drugDefinition.concentration);
     const concentration = numerator / denominator;
@@ -138,56 +139,60 @@ const Drugs: React.FC<DrugsProps> = ({ weight }) => {
           {expandedSections[sectionIndex] && (
             <div id="collapseable-area-drugs" className="collapseable">
               <ul className="list-group custom-list-group">
-              {section.drugs.map((drug, drugIndex) => (                
-                <li key={drugIndex} className='list-group-item' style={{ display: 'flex', justifyContent: 'space-between', textAlign: 'left', color: 'var(--page-font-color)' }}>
-                  <div>
-                    {!drug.type ? (
-                      <>
-                        {drug.name}: <strong>{getDoseByWeightWithMaxLimitFormatted(drug)} {drug.dose_unit},</strong>{' '}
-                        <strong>{calcAmountToAdminister(drug)} {getAdministrationUnit(drug)}</strong> -{' '}
-                        <span className={drug.howToGive && drug.howToGive.trim() !== 'IV' ? 'bold-text' : ''}>
-                          {drug.howToGive}
-                        </span>
-                      </>
-                    ) : (
-                      <>
-                        {drug.name}: <strong>{calcAmountToAdminister(drug)} {getAdministrationUnit(drug)}</strong> -{' '}
-                        <span className={drug.howToGive && drug.howToGive.trim() !== 'IV' ? 'bold-text' : ''}>
-                          {drug.howToGive}
-                        </span>
-                      </>
-                    )}
-                    <br />
-                    Calculated dose: {drug.dose_per_kg} {drug.dose_unit}/kg
-                    {drug.shouldDispalyConcentration && (
-                      <>
+              {section.drugs.map((drugId, drugIndex) => {
+                const drug = drugsData.drugs.find(d => d.id === drugId);
+                if (!drug) return null;
+                return (
+                  <li key={drugIndex} className='list-group-item' style={{ display: 'flex', justifyContent: 'space-between', textAlign: 'left', color: 'var(--page-font-color)' }}>
+                    <div>
+                      {!drug.type ? (
+                        <>
+                          {drug.name}: <strong>{getDoseByWeightWithMaxLimitFormatted(drug)} {drug.dose_unit},</strong>{' '}
+                          <strong>{calcAmountToAdminister(drug)} {getAdministrationUnit(drug)}</strong> -{' '}
+                          <span className={drug.howToGive && drug.howToGive.trim() !== 'IV' ? 'bold-text' : ''}>
+                            {drug.howToGive}
+                          </span>
+                        </>
+                      ) : (
+                        <>
+                          {drug.name}: <strong>{calcAmountToAdminister(drug)} {getAdministrationUnit(drug)}</strong> -{' '}
+                          <span className={drug.howToGive && drug.howToGive.trim() !== 'IV' ? 'bold-text' : ''}>
+                            {drug.howToGive}
+                          </span>
+                        </>
+                      )}
+                      <br />
+                      Calculated dose: {drug.dose_per_kg} {drug.dose_unit}/kg
+                      {drug.shouldDispalyConcentration && (
+                        <>
+                          <br />
+                          Concentration: <strong>{splitRatio(drug.concentration)[0]} {drug.dose_unit} per {splitRatio(drug.concentration)[1]} ml</strong>
+                        </>
+                      )}
+                      {drug.comment && (
+                        <>
                         <br />
-                        Concentration: <strong>{splitRatio(drug.concentration)[0]} {drug.dose_unit} per {splitRatio(drug.concentration)[1]} ml</strong>
-                      </>
-                    )}
-                    {drug.comment && (
-                      <>
-                      <br />
-                      {drug.comment}
-                      </>
-                    )}
-                    {drug.warnText && (
-                      <>
-                      <br />
-                      <span style={{ color: 'red' }}><strong>{drug.warnText}</strong></span>
-                      </>
-                    )}
-                    {drug.maxDose && Number(drug.maxDose) === getDoseByWeightWithMaxLimit(drug) && (
-                      <>
-                      <br /><span style={{ color: 'red' }}><strong>Used max dose of {drug.maxDose} {drug.maxDoseUnit}</strong></span>
-                      </>
-                    )}
-                  </div>
-                  <div className="info-button" onClick={() => openDrugInfoDialog(drug)}>
-                      <FaCircleInfo style={{ marginLeft: '10px', cursor: 'pointer' }} />
-                  </div>
-                </li>
-              ))}              
+                        {drug.comment}
+                        </>
+                      )}
+                      {drug.warnText && (
+                        <>
+                        <br />
+                        <span style={{ color: 'red' }}><strong>{drug.warnText}</strong></span>
+                        </>
+                      )}
+                      {drug.maxDose && Number(drug.maxDose) === getDoseByWeightWithMaxLimit(drug) && (
+                        <>
+                        <br /><span style={{ color: 'red' }}><strong>Used max dose of {drug.maxDose} {drug.maxDoseUnit}</strong></span>
+                        </>
+                      )}
+                    </div>
+                    <div className="info-button" onClick={() => openDrugInfoDialog(drug)}>
+                        <FaCircleInfo style={{ marginLeft: '10px', cursor: 'pointer' }} />
+                    </div>
+                  </li>
+                );
+              })}              
               </ul>
             </div>
           )}
