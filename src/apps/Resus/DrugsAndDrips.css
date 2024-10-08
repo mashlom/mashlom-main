@@ -106,8 +106,6 @@
 .collapseable.ng-hide-remove {
   transition: all 0.5s ease-in-out;
   max-height: 1000px;
-  /* Adjust this value based on your content */
-  overflow: hidden;
 }
 
 .collapseable.ng-hide {
