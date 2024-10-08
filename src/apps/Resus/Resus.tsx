@@ -4,20 +4,11 @@ import './Resus.css';
 import '../AppStyle.css';
 import Meds from './Meds';
 import Protocols from './Protocols';
-import drugsDataFile from './data/resus-drugs-definitions.json';
 import airwaysDataFile from './data/airways.json';
 import Image from '../../components/Image';
 import { FaWeightScale } from 'react-icons/fa6';
 import FooterNav from './ResusFooterNav';
 import AirwaysAndDefibrillator from './AirwaysAndDefibrillator';
-
-
-interface DrugDefinition {
-  drug_name: string;
-  dosage: string;
-  medical_concentration: string;
-  max_dose: string;
-}
 
 interface AgeOption {
   label: string;
@@ -44,7 +35,6 @@ const Resus: React.FC = () => {
   useEffect(() => {
     const fetchData = () => {
       try {
-        createDrugDefinitions(drugsDataFile);
         setAirwaysData(airwaysDataFile);
         parseRawDataToEstimatedWeights(airwaysDataFile);
         createDropDownData(airwaysDataFile);
@@ -71,17 +61,6 @@ const Resus: React.FC = () => {
       setAirwaysForAge({} as AirwaysForAge);
     }
   }, [age, weight, estimatedWeightByAge, airwaysData]);
-
-  const createDrugDefinitions = (data: any): DrugDefinition[] => {
-    return data.sections.flatMap((category: any) => 
-      category.drugs.map((drug: any) => ({
-        drug_name: `${drug.name} ${drug.howToGive}`,
-        dosage: `${drug.dose_per_kg} ${drug.dose_unit}`,
-        medical_concentration: drug.concentration ? `${drug.concentration} ${drug.dose_unit}/ml` : "",
-        max_dose: drug.maxDose ? `${drug.maxDose} ${drug.maxDoseUnit}` : ""
-      }))
-    );
-  };
 
   const parseRawDataToEstimatedWeights = (data: any) => {
     const weightByAge: Record<string, { male: string; female: string }> = {};
