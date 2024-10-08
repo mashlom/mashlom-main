@@ -9,17 +9,10 @@ import airwaysDataFile from './data/airways.json';
 import Image from '../../components/Image';
 import { FaWeightScale } from 'react-icons/fa6';
 import FooterNav from './ResusFooterNav';
-import AirwaysAndDefibrillator from './AirwaysAndDefibrillator';
 
 interface AgeOption {
   label: string;
   value: string;
-}
-
-interface AirwaysForAge {
-  blade: string;
-  cuffedETT: string;
-  lma: string;
 }
 
 const Resus: React.FC = () => {    
@@ -27,8 +20,6 @@ const Resus: React.FC = () => {
   const [weight, setWeight] = useState<string>('');
   const [age, setAge] = useState<string>('');
   const [agesForDropDown, setAgesForDropDown] = useState<AgeOption[]>([]);
-  const [airwaysData, setAirwaysData] = useState<any>({}); // Consider creating a proper type for this
-  const [airwaysForAge, setAirwaysForAge] = useState<AirwaysForAge>({} as AirwaysForAge);
   const [estimatedWeightByAge, setEstimatedWeightByAge] = useState<Record<string, { male: string; female: string }>>({});
   const [estimatedMaleWeight, setEstimatedMaleWeight] = useState<string>('');
   const [estimatedFemaleWeight, setEstimatedFemaleWeight] = useState<string>('');
@@ -36,7 +27,6 @@ const Resus: React.FC = () => {
   useEffect(() => {
     const fetchData = () => {
       try {
-        setAirwaysData(airwaysDataFile);
         parseRawDataToEstimatedWeights(airwaysDataFile);
         createDropDownData(airwaysDataFile);
       } catch (error) {
@@ -51,17 +41,11 @@ const Resus: React.FC = () => {
     if (age && estimatedWeightByAge[age]) {
       setEstimatedMaleWeight(estimatedWeightByAge[age].male);
       setEstimatedFemaleWeight(estimatedWeightByAge[age].female);
-  
-      const currData = airwaysData.dataByAge.find((data: any) => data.age === age);
-      if (currData) {
-        setAirwaysForAge(currData);
-      }
     } else {
       setEstimatedMaleWeight('');
       setEstimatedFemaleWeight('');
-      setAirwaysForAge({} as AirwaysForAge);
     }
-  }, [age, weight, estimatedWeightByAge, airwaysData]);
+  }, [age, estimatedWeightByAge]);
 
   const parseRawDataToEstimatedWeights = (data: any) => {
     const weightByAge: Record<string, { male: string; female: string }> = {};
@@ -97,8 +81,6 @@ const Resus: React.FC = () => {
     }
     return false;
   };
-
-  const allValuesSatisfied = (): boolean => Boolean(weight && age);
 
   const resetAll = () => {
     setWeight('');
@@ -187,9 +169,6 @@ const Resus: React.FC = () => {
                 </div>
               )}
             </div>
-            {allValuesSatisfied() && (
-              <AirwaysAndDefibrillator airwaysForAge={airwaysForAge} weight={Number(weight)} />
-          )}
           </form>
           <Routes>
             <Route index element={<Navigate to="meds" replace />} />
