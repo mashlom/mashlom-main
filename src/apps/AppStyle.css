@@ -1,70 +1,132 @@
 .form-group {
-    margin-top: 20px;
+  margin-top: 20px;
 }
 
 .input-col {
-    max-width: 120px;
+  max-width: 120px;
 }
 
 .col-auto-text-cols {
-    min-width: 130px;
+  min-width: 130px;
 }
 
-.col-auto-buttons-cols {      
-    min-width: 130px;
+.col-auto-buttons-cols {
+  min-width: 130px;
 }
 
 
 .reset-button {
-    margin-left: 10px;
-    display: grid;
-    align-items: center;
-    justify-content: left;
-    height: calc(1.4rem + 1.5vw);
-    width: calc(1.4rem + 1.5vw);
-    cursor:pointer;
-    margin-right:10px;
-  }
+  margin-left: 10px;
+  display: grid;
+  align-items: center;
+  justify-content: left;
+  height: calc(1.4rem + 1.5vw);
+  width: calc(1.4rem + 1.5vw);
+  cursor: pointer;
+  margin-right: 10px;
+}
 
-  .group-container .form-group .form-check {
-    display: inline-block; /* Ensures form checks are displayed in line */
-    margin-right: 1rem; /* Adjust margin between form checks */
-  }
-  
-  .cards-container {
-      width: 100%; /* Set a width */
-      margin: 0 auto; /* Set margin to auto */
-      text-align: left;
-  }
-  
-  .form-group {
-      margin-top: 20px;
-  }
+.group-container .form-group .form-check {
+  display: inline-block;
+  /* Ensures form checks are displayed in line */
+  margin-right: 1rem;
+  /* Adjust margin between form checks */
+}
 
-  .back-button {
-    float: right;
-    margin: 5px;    
-    cursor: pointer;
-    box-shadow: 0 0 5px -1px rgba(0,0,0,0.2);
-    padding-right: 30px;
-    padding-left: 30px;
-    border-radius: 10px;
-    font-size: 30px;
-    color: var(--page-font-color);
-  }
-  .back-button:active {
-    box-shadow: 0 0 5px -1px rgba(0,0,0,0.6);
-  }
+.cards-container {
+  width: 100%;
+  /* Set a width */
+  margin: 0 auto;
+  /* Set margin to auto */
+  text-align: left;
+}
 
-  .back-button-img {
-    width: 30px;
-    height: 30px;
-  }
+.form-group {
+  margin-top: 20px;
+}
 
-  .circle {
-    display: inline-block;
-    width: 0.65em; /* Set the width and height to be the same as the font size */
-    height: 0.65em;
-    border-radius: 50%; /* Create a circle using border-radius */    
-    margin-left: 10px;
-  }
+.back-button {
+  float: right;
+  margin: 5px;
+  cursor: pointer;
+  box-shadow: 0 0 5px -1px rgba(0, 0, 0, 0.2);
+  padding-right: 30px;
+  padding-left: 30px;
+  border-radius: 10px;
+  font-size: 30px;
+  color: var(--page-font-color);
+}
+
+.back-button:active {
+  box-shadow: 0 0 5px -1px rgba(0, 0, 0, 0.6);
+}
+
+.back-button-img {
+  width: 30px;
+  height: 30px;
+}
+
+.circle {
+  display: inline-block;
+  width: 0.65em;
+  /* Set the width and height to be the same as the font size */
+  height: 0.65em;
+  border-radius: 50%;
+  /* Create a circle using border-radius */
+  margin-left: 10px;
+}
+
+.footer {
+  background-color: var(--footer-background);
+  border: 1px solid var(--border-color);
+  color: var(--footer-color);
+  text-align: center;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  height: 8dvh;
+  width: 100%;
+  max-width: 700px;
+  /* Set maximum width for the body */
+  min-height: 75px;
+  position: fixed;
+  bottom: 0;
+}
+
+.footer-container {
+  width: 100%;
+}
+
+.footer-menu {
+  display: flex;
+  align-items: center;
+}
+
+.footer-button {
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 10px;
+  min-width: 80px;
+  margin-right: 5px;
+  float: right;
+  border-radius: 10px;
+  border: 2px solid var(--border-color);
+  background-color: white;
+  cursor: pointer;
+  height: 100%;
+}
+
+.footer-button .icon {
+  font-size: 16px;
+}
+
+.footer-button .text {
+  font-size: 10px;
+  color: var(--page-font-color);
+}
+
+.bottom-menu-color {
+  color: var(--bottom-menu-color);
+}

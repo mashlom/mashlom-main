@@ -48,7 +48,10 @@ const routes: RouteObject[] = [
         path: ':hospital',
         children: [
           { index: true, element: <Hospital /> },
-          { path: ':app', element: <Hospital /> },
+          { 
+            path: ':app/*',
+            element: <Hospital />,
+          },
         ],
       },
       { path: '*', element: <NotFound /> },

@@ -141,8 +141,6 @@ const Drips: React.FC<DripsProps> = ({ weight }) => {
     return drip.dose_per_kg_per_min ? 'minute' : 'hour';
   };
 
-  if (!weight) return null;
-
   return (
     <div ref={dripsRef} style={{ direction: 'ltr', marginTop: '0px'}}>
       <h4 className="drugs-header" onClick={toggleDrips}>

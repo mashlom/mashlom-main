@@ -27,10 +27,6 @@ const appComponents: Record<
     type: 'iframe',
     urlPattern: 'https://mashlom.me/apps/pediatric/triage/?hospital=${hospital}',
   },
-  // [MashlomApps.RESUS]: {
-  //   type: 'iframe',
-  //   urlPattern: 'https://mashlom.me/apps/pediatric/resus/?hospital=${hospital}',
-  // },
   [MashlomApps.RESUS]: React.lazy(() => import('../apps/Resus/Resus.tsx')),
   // Add more apps here
 };
