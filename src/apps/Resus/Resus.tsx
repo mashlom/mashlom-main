@@ -3,7 +3,8 @@ import { Routes, Route, useParams, Navigate } from 'react-router-dom';
 import './Resus.css';
 import '../AppStyle.css';
 import Meds from './Meds';
-import Protocols from './Protocols';
+import Cpr from './Cpr';
+import EmergencyProtocols from './EmergencyProtocols';
 import airwaysDataFile from './data/airways.json';
 import Image from '../../components/Image';
 import { FaWeightScale } from 'react-icons/fa6';
@@ -193,7 +194,8 @@ const Resus: React.FC = () => {
           <Routes>
             <Route index element={<Navigate to="meds" replace />} />
             <Route path="meds" element={<Meds weight={Number(weight)} age={age} />} />
-            <Route path="protocols" element={<Protocols weight={Number(weight)} age={age} />} />
+            <Route path="protocols" element={<EmergencyProtocols weight={Number(weight)} age={age} />} />
+            <Route path="cpr" element={<Cpr weight={Number(weight)} age={age} />} />
           </Routes>          
         </div>
       </div>

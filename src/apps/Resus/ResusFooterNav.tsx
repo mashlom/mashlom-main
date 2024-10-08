@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faDatabase, faFileInvoice } from '@fortawesome/free-solid-svg-icons';
+import { faDatabase, faFileInvoice, faHeartPulse } from '@fortawesome/free-solid-svg-icons';
 
 interface FooterNavProps {
   hospital: string;
@@ -11,7 +11,7 @@ const FooterNav: React.FC<FooterNavProps> = ({ hospital }) => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const openPanel = (panel: 'meds' | 'protocols') => {
+  const openPanel = (panel: 'meds' | 'protocols' | 'cpr') => {
     navigate(`/${hospital}/resus/${panel}`);
   };
 
@@ -39,6 +39,15 @@ const FooterNav: React.FC<FooterNavProps> = ({ hospital }) => {
             <FontAwesomeIcon icon={faFileInvoice} />
           </div>
           <div className="text">פרוטוקולי חירום</div>
+        </button>
+        <button 
+          className={`footer-button ${isActive('cpr')}`} 
+          onClick={() => openPanel('cpr')}
+        >
+          <div className="bottom-menu-color">
+            <FontAwesomeIcon icon={faHeartPulse} />
+          </div>
+          <div className="text">החייאה</div>
         </button>
       </div>
     </footer>
