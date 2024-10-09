@@ -7,6 +7,7 @@ interface ImageProps {
   width?: string | number;
   height?: string | number;
   marginBottom?: string;
+  onClick?: () => void; // Add onClick prop
 }
 
 const getImageURL = (name: String) => {
@@ -20,6 +21,7 @@ const Image: React.FC<ImageProps> = ({
   width,
   height,
   marginBottom,
+  onClick, // Add onClick to the destructured props
 }) => {
   const [imgSrc, setImgSrc] = useState<string>(src);
 
@@ -47,7 +49,8 @@ const Image: React.FC<ImageProps> = ({
       className={className}
       src={imgSrc}
       alt={alt}
-      style={{ width, height, marginBottom }}
+      style={{ width, height, marginBottom, cursor: onClick ? 'pointer' : 'default' }}
+      onClick={onClick} // Add onClick handler
     />
   );
 };

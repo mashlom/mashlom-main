@@ -3,6 +3,7 @@ import './DrugsAndDrips.css';
 import { FaCircleInfo } from 'react-icons/fa6';
 import DrugInfoDialog from './DrugInfoDialog';
 import drugsDataFile from './data/resus-drugs-definitions.json';
+import { useResusContext } from './ResusContext';
 
 interface Drug {
   id: string;
@@ -34,11 +35,8 @@ interface MedicationGuide {
   sections: Section[];
 }
 
-export interface DrugsProps {
-  weight: number
-}
-
-const Drugs: React.FC<DrugsProps> = ({ weight }) => {
+const Drugs: React.FC = () => {
+  const { weight } = useResusContext();
   const drugsData: MedicationGuide = drugsDataFile;
   const [expandedSections, setExpandedSections] = useState<Record<number, boolean>>({});
   const [selectedDrug, setSelectedDrug] = useState<Drug | null>(null);

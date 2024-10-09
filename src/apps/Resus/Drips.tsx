@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { FaCircleInfo } from 'react-icons/fa6';
 import dripsData from './data/drips.json';
 import DripInfoDialog from './DripInfoDialog';
+import { useResusContext } from './ResusContext';
 
 interface Drip {
   id: string;
@@ -26,11 +27,8 @@ interface WeightDefinition {
   target_volume_ml_per_hour: number;
 }
 
-interface DripsProps {
-  weight: number;
-}
-
-const Drips: React.FC<DripsProps> = ({ weight }) => {
+const Drips: React.FC = () => {
+    const { weight } = useResusContext();
     const [dripsExpanded, setDripsExpanded] = useState(false);
     const [dripsDefinitions, setDripsDefinitions] = useState<Drip[]>([]);
     const [selectedDrip, setSelectedDrip] = useState<Drip | null>(null);

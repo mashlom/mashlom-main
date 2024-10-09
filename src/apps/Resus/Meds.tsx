@@ -1,18 +1,15 @@
 import React from 'react';
 import Drugs from './Drugs';
 import Drips from './Drips';
+import { useResusContext } from './ResusContext';
 
-interface MedsProps {
-  weight: number;
-  age: string;
-}
-
-const Meds: React.FC<MedsProps> = ({ weight }) => {
+const Meds: React.FC = () => {
+  const { weight } = useResusContext();
   if (!weight) return null;
   return (
     <div>
-      <Drugs weight={weight} />
-      <Drips weight={weight} />
+      <Drugs />
+      <Drips />
     </div>
   );
 };

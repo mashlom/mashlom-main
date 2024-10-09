@@ -6,14 +6,15 @@ interface AirwaysAndDefibrillatorProps {
     cuffedETT: string;
     lma: string;
   };
-  weight: number;
+  weight: number | null;
 }
 
 const AirwaysAndDefibrillator: React.FC<AirwaysAndDefibrillatorProps> = ({ airwaysForAge, weight }) => {
 
  const getDefi = (multiplier: number): number => {
-    return Math.min(multiplier * weight, 200);
-    };
+    return weight ? Math.min(multiplier * weight, 200) : 0;
+ };
+
   return (
     <div className="cards-container row row-cols-1 row-cols-md-1 g-4">
       <div className="col">

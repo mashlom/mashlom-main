@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import AirwaysAndDefibrillator from './AirwaysAndDefibrillator';
 import airwaysDataFile from './data/airways.json';
-
-interface CprProps {
-  weight: number;
-  age: string;
-}
+import { useResusContext } from './ResusContext';
 
 interface AirwaysForAge {
   blade: string;
@@ -13,7 +9,8 @@ interface AirwaysForAge {
   lma: string;
 }
 
-const Cpr: React.FC<CprProps> = ({ weight, age }) => {
+const Cpr: React.FC = () => {
+  const { age, weight } = useResusContext();
   const [airwaysData, setAirwaysData] = useState<any>({});
   const [airwaysForAge, setAirwaysForAge] = useState<AirwaysForAge>({} as AirwaysForAge);
 
@@ -22,8 +19,8 @@ const Cpr: React.FC<CprProps> = ({ weight, age }) => {
   }, []);
 
   useEffect(() => {
-    if (age && airwaysData.dataByAge) {
-      const currData = airwaysData.dataByAge.find((data: any) => data.age === age);
+    if (age !== null && airwaysData.dataByAge) {
+      const currData = airwaysData.dataByAge.find((data: any) => data.age === age.toString());
       if (currData) {
         setAirwaysForAge(currData);
       }
