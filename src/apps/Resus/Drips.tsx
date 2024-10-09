@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { FaCircleInfo } from 'react-icons/fa6';
-import dripsData from './data/drips.json';
+import drugsDefinitions from './data/resus-drugs-definitions.json';
 import DripInfoDialog from './DripInfoDialog';
 import { useResusContext } from './ResusContext';
 
@@ -36,7 +36,7 @@ const Drips: React.FC = () => {
     const dripsRef = useRef<HTMLDivElement>(null);
   
     useEffect(() => {
-      setDripsDefinitions(dripsData.drugs as Drip[]);
+      setDripsDefinitions(drugsDefinitions.drips as Drip[]);
     }, []);
 
     useEffect(() => {
