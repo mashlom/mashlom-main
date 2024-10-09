@@ -3,20 +3,27 @@ import { FaWeightScale } from 'react-icons/fa6';
 import Image from '../../components/Image';
 import { useResusContext } from './ResusContext';
 import airwaysDataFile from './data/airways.json';
+import emergencyProtocols from './data/emergency-protocols.json';
 import './ResusInputs.css';
 
 interface AgeOption {
   label: string;
   value: string;
 }
+interface ProtocolOption {
+  label: string;
+  value: string;
+}
 
 const ResusInputs: React.FC = () => {
-  const { age, weight, updateContext, resetContext } = useResusContext();
+  const { age, weight, updateContext, resetContext, protocol } = useResusContext();
   const [localAge, setLocalAge] = useState(age);
+  const [localProtocol, setLocalProtocol] = useState(protocol);
   const [localWeight, setLocalWeight] = useState(weight !== null ? weight.toString() : '');
   const [estimatedMaleWeight, setEstimatedMaleWeight] = useState<string>('');
   const [estimatedFemaleWeight, setEstimatedFemaleWeight] = useState<string>('');
   const [agesForDropDown, setAgesForDropDown] = useState<AgeOption[]>([]);
+  const [protocolsForDropDown, setprotocolsForDropDown] = useState<ProtocolOption[]>([]);
   const [estimatedWeightByAge, setEstimatedWeightByAge] = useState<Record<string, { male: string; female: string }>>({});
   const [isExpanded, setIsExpanded] = useState(age === '' || weight === null);
 
@@ -25,6 +32,7 @@ const ResusInputs: React.FC = () => {
       try {
         parseRawDataToEstimatedWeights(airwaysDataFile);
         createDropDownData(airwaysDataFile);
+        createProtocolsDropDown();
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -35,6 +43,7 @@ const ResusInputs: React.FC = () => {
 
   useEffect(() => {
     setLocalAge(age);
+    setLocalProtocol(protocol);
     setLocalWeight(weight !== null ? weight.toString() : '');
     setIsExpanded(age === '' || weight === null);
   }, [age, weight]);
@@ -63,6 +72,14 @@ const ResusInputs: React.FC = () => {
       value: item.age
     }));
     setAgesForDropDown(ages);
+  };
+  
+  const createProtocolsDropDown = () => {
+    const protocols = emergencyProtocols.emergencyProtocols[0].protocols.map((item: any) => ({
+      label: item.name,
+      value: item.id
+    }));
+    setprotocolsForDropDown(protocols);
   };
 
   const formatAge = (age: string): string => {
@@ -128,6 +145,25 @@ const ResusInputs: React.FC = () => {
       <div className={`resus-inputs-expanded ${isExpanded ? 'visible' : ''}`} style={{backgroundColor: "white"}}>
         <form style={{marginBottom:"15px"}}>
           <div className="container" style={{ textAlign: 'right' }}>
+          <div className="row form-group">
+              <div className="col-auto fs-4 col-auto-text-cols">
+                פרוטוקול
+              </div>
+              <div className="col input-col">
+                <select 
+                  className="form-control" 
+                  onChange={(e) => setLocalProtocol(e.target.value)} 
+                  value={localProtocol}
+                >
+                  <option value="">בחר פרוטוקול</option>
+                  {protocolsForDropDown.map((item, index) => (
+                    <option key={index} value={item.value}>
+                      {item.label}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </div>
             <div className="row form-group">
               <div className="col-auto fs-4 col-auto-text-cols">
                 גיל

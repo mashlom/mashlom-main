@@ -1,19 +1,31 @@
-import React from 'react';
+import airwaysData from './data/airways.json';
+import React, { useEffect, useState } from 'react';
+import { useResusContext } from './ResusContext';
 
-interface AirwaysAndDefibrillatorProps {
-  airwaysForAge: {
-    blade: string;
-    cuffedETT: string;
-    lma: string;
-  };
-  weight: number | null;
+interface AirwaysForAge {
+  blade: number;
+  cuffedETT: number;
+  lma: number;
 }
 
-const AirwaysAndDefibrillator: React.FC<AirwaysAndDefibrillatorProps> = ({ airwaysForAge, weight }) => {
-
+const AirwaysAndDefibrillator: React.FC = () => {
+  const { age, weight } = useResusContext();
+  const [airwaysForAge, setAirwaysForAge] = useState<AirwaysForAge>({} as AirwaysForAge);
+  
  const getDefi = (multiplier: number): number => {
     return weight ? Math.min(multiplier * weight, 200) : 0;
  };
+ 
+useEffect(() => {
+  if (age && airwaysData.dataByAge) {
+    const currData = airwaysData.dataByAge.find((data: any) => data.age === age);
+    if (currData) {
+      setAirwaysForAge(currData);
+    }
+  } else {
+    setAirwaysForAge({} as AirwaysForAge);
+  }
+}, [age, airwaysData]);
 
   return (
     <div className="cards-container row row-cols-1 row-cols-md-1 g-4">
