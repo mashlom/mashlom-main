@@ -360,6 +360,118 @@
       "maxDoseUnit": "gr"
     }
   ],
+  "drips": [
+    {
+      "id": "Adrenaline_DilutionInstructions_0.1_per_minute",
+      "name": "Adrenaline",
+      "howToGive": "IV",
+      "dose_unit": "mcg",
+      "allowed_dose_range": "0.05-1 mcg/kg/min",
+      "calc_type": "DilutionInstructions",
+      "default_dilution_volume_unit": "ml",
+      "default_dilution_volume_ml": 50,
+      "dose_per_kg_per_min": 0.1,
+      "definition_by_weights": [
+        {
+          "min_kg": 0,
+          "max_kg": 20,
+          "target_volume_ml_per_hour": 1
+        },
+        {
+          "min_kg": 20,
+          "max_kg": 60,
+          "target_volume_ml_per_hour": 2
+        },
+        {
+          "min_kg": 60,
+          "max_kg": 2000,
+          "target_volume_ml_per_hour": 4
+        }
+      ]
+    },
+    {
+      "id": "Noradrenline_DilutionInstructions_0.1_per_minute",
+      "name": "Noradrenline",
+      "howToGive": "IV",
+      "dose_unit": "mcg",
+      "allowed_dose_range": "0.05-1 mcg/kg/min",
+      "calc_type": "DilutionInstructions",
+      "default_dilution_volume_ml": 50,
+      "dose_per_kg_per_min": 0.1,
+      "definition_by_weights": [
+        {
+          "min_kg": 0,
+          "max_kg": 20,
+          "target_volume_ml_per_hour": 1
+        },
+        {
+          "min_kg": 20,
+          "max_kg": 60,
+          "target_volume_ml_per_hour": 2
+        },
+        {
+          "min_kg": 60,
+          "max_kg": 2000,
+          "target_volume_ml_per_hour": 4
+        }
+      ]
+    },
+    {
+      "id": "Dopamine_DilutionInstructions_5_per_minute",
+      "name": "Dopamine",
+      "howToGive": "IV",
+      "dose_per_kg_per_min": 5,
+      "dose_unit": "mcg",
+      "allowed_dose_range": "2-20 mcg/kg/min",
+      "default_dilution_volume_ml": 50,
+      "target_volume_ml_per_hour": 1,
+      "calc_type": "DilutionInstructions"
+    },
+    {
+      "id": "ProstaglandinE1_DilutionInstructions_0.05_per_minute",
+      "name": "Prostaglandin E1",
+      "howToGive": "IV",
+      "dose_per_kg_per_min": 0.05,
+      "dose_unit": "mcg",
+      "allowed_dose_range": "0.01-0.1 mcg/kg/min",
+      "default_dilution_volume_ml": 20,
+      "target_volume_ml_per_hour": 0.5,
+      "calc_type": "DilutionInstructions"
+    },
+    {
+      "id": "Morphine_DilutionInstructions_0.1_per_hour",
+      "name": "Morphine",
+      "howToGive": "IV",
+      "dose_per_kg_per_hour": 0.1,
+      "dose_unit": "mg",
+      "allowed_dose_range": "0.1-0.5 mg/kg/Hr",
+      "default_dilution_volume_ml": 50,
+      "target_volume_ml_per_hour": 5,
+      "calc_type": "DilutionInstructions"
+    },
+    {
+      "id": "Midazolam_DilutionInstructions_0.1_per_hour",
+      "name": "Midazolam",
+      "howToGive": "IV",
+      "dose_per_kg_per_hour": 0.1,
+      "dose_unit": "mg",
+      "allowed_dose_range": "0.1-0.4 mg/kg/Hr",
+      "default_dilution_volume_ml": 50,
+      "target_volume_ml_per_hour": 5,
+      "calc_type": "DilutionInstructions"
+    },
+    {
+      "id": "Propofol10%_InfusionSpeed_1_per_hour",
+      "name": "Propofol 10%",
+      "howToGive": "IV",
+      "dose_per_kg_per_hour": 1,
+      "dose_unit": "mg",
+      "allowed_dose_range": "1-4 mg/kg/Hr",
+      "existing_dilution_concentration": "10/1",
+      "existing_dilution_concentration_dose_unit": "mg",
+      "calc_type": "InfusionSpeed"
+    }
+  ],
   "sections": [
     {
       "name": "Resus Drugs",
@@ -440,6 +552,73 @@
         "Flumazenil_IV_0.01_mg",
         "Sugammadex_IV_16_mg",
         "Charcoal_PO_1_gr"
+      ]
+    }
+  ],
+  "protocols": [
+    {
+      "protocolId": "cardiac-arrest",
+      "drugs": [
+        "Adrenaline1:10,000_IV_0.01_mg",
+        "Adrenaline1:10,000_ET_0.1_mg",
+        "Amiodarone_IV_5_mg",
+        "Lidocaine_IV_1_mg",
+        "MagnesiumSulfate_IV_50_mg",
+        "Calciumgluconate_IV_100_mg",
+        "SodiumBicarbonate_IV_1_meq",
+        "Dextrose10%_IV_0.2_gr",
+        "Dextrose25%_IV_0.2_gr"
+      ],
+      "defi": [
+        {
+          "name": "defibrilation 1st",
+          "joulePerKg": 2
+        },
+        {
+          "name": "defibrilation 2st",
+          "joulePerKg": 4
+        },
+        {
+          "name": "defibrilation AFTER",
+          "joulePerKg": 10
+        }
+      ]
+    },
+    {
+      "name": "tachycardia",
+      "drugs": [
+        "Adenosine1st_IV_0.1_mg",
+        "Adenosine2nd_IV_0.2_mg"
+      ],
+      "defi": [
+        {
+          "name": "synchronized shock 1st",
+          "joulePerKg": 1
+        },
+        {
+          "name": "synchronized shock AFTER",
+          "joulePerKg": 2
+        }
+      ]
+    },
+    {
+      "name": "symptomatic-bradycardia",
+      "drugs": [
+        "Adrenaline1:10,000_IV_0.01_mg",
+        "Adrenaline1:10,000_ET_0.1_mg",
+        "Atropine1:10,000_IV_0.02_mg"
+      ]
+    },
+    {
+      "name": "septic-shock",
+      "drugs": [
+        "Hydrocortisone_IV_4_mg",
+        "FluidBolusNACL0.9%_IV_20_ml"
+      ],
+      "drips": [
+        "Adrenaline_DilutionInstructions_0.1_per_minute",
+        "Noradrenline_DilutionInstructions_0.1_per_minute",
+        "Dopamine_DilutionInstructions_5_per_minute"
       ]
     }
   ]
