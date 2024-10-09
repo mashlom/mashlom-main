@@ -19,8 +19,8 @@ const Cpr: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    if (age !== null && airwaysData.dataByAge) {
-      const currData = airwaysData.dataByAge.find((data: any) => data.age === age.toString());
+    if (age && airwaysData.dataByAge) {
+      const currData = airwaysData.dataByAge.find((data: any) => data.age === age);
       if (currData) {
         setAirwaysForAge(currData);
       }
@@ -31,7 +31,7 @@ const Cpr: React.FC = () => {
 
   return (
     <div>
-      {weight > 0 && age && (
+      {weight !== null && weight > 0 && age && (
         <AirwaysAndDefibrillator airwaysForAge={airwaysForAge} weight={weight} />
       )}
       {/* Add other CPR-related content here */}

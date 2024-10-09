@@ -2,13 +2,13 @@ import React, { createContext, useState, useContext, ReactNode, useEffect } from
 import { useNavigate, useLocation } from 'react-router-dom';
 
 interface ResusContextType {
-  age: number | null;
+  age: string;
   weight: number | null;
   protocol: string;
-  setAge: (age: number | null) => void;
+  setAge: (age: string) => void;
   setWeight: (weight: number | null) => void;
   setProtocol: (protocol: string) => void;
-  updateContext: (age: number | null, weight: number | null) => void;
+  updateContext: (age: string, weight: number | null) => void;
   resetContext: () => void;
 }
 
@@ -23,7 +23,7 @@ export const useResusContext = () => {
 };
 
 export const ResusProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [age, setAge] = useState<number | null>(null);
+  const [age, setAge] = useState<string>('');
   const [weight, setWeight] = useState<number | null>(null);
   const [protocol, setProtocol] = useState('');
 
@@ -35,21 +35,21 @@ export const ResusProvider: React.FC<{ children: ReactNode }> = ({ children }) =
     const ageParam = searchParams.get('age');
     const weightParam = searchParams.get('weight');
 
-    if (ageParam) setAge(Number(ageParam));
+    if (ageParam) setAge(ageParam);
     if (weightParam) setWeight(Number(weightParam));
   }, []);
 
-  const updateContext = (newAge: number | null, newWeight: number | null) => {
+  const updateContext = (newAge: string, newWeight: number | null) => {
     setAge(newAge);
     setWeight(newWeight);
     const searchParams = new URLSearchParams(location.search);
-    if (newAge !== null) searchParams.set('age', newAge.toString());
+    if (newAge) searchParams.set('age', newAge);
     if (newWeight !== null) searchParams.set('weight', newWeight.toString());
     navigate(`${location.pathname}?${searchParams.toString()}`, { replace: true });
   };
 
   const resetContext = () => {
-    setAge(null);
+    setAge('');
     setWeight(null);
     setProtocol('');
     navigate(location.pathname, { replace: true });

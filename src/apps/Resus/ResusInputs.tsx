@@ -13,12 +13,12 @@ interface AgeOption {
 const ResusInputs: React.FC = () => {
   const { age, weight, updateContext, resetContext } = useResusContext();
   const [localAge, setLocalAge] = useState(age);
-  const [localWeight, setLocalWeight] = useState(weight);
+  const [localWeight, setLocalWeight] = useState(weight !== null ? weight.toString() : '');
   const [estimatedMaleWeight, setEstimatedMaleWeight] = useState<string>('');
   const [estimatedFemaleWeight, setEstimatedFemaleWeight] = useState<string>('');
   const [agesForDropDown, setAgesForDropDown] = useState<AgeOption[]>([]);
   const [estimatedWeightByAge, setEstimatedWeightByAge] = useState<Record<string, { male: string; female: string }>>({});
-  const [isExpanded, setIsExpanded] = useState(!age || !weight);
+  const [isExpanded, setIsExpanded] = useState(age === '' || weight === null);
 
   useEffect(() => {
     const fetchData = () => {
@@ -35,8 +35,8 @@ const ResusInputs: React.FC = () => {
 
   useEffect(() => {
     setLocalAge(age);
-    setLocalWeight(weight);
-    setIsExpanded(!age || !weight);
+    setLocalWeight(weight !== null ? weight.toString() : '');
+    setIsExpanded(age === '' || weight === null);
   }, [age, weight]);
 
   useEffect(() => {
@@ -74,6 +74,11 @@ const ResusInputs: React.FC = () => {
     return age.replace("month", "חודשים").replace("year", "שנים");
   };
 
+  const getFormattedAge = (age: string): string => {
+    const option = agesForDropDown.find(opt => opt.value === age);
+    return option ? option.label : age;
+  };
+
   const applyMaleWeightRounded = () => setLocalWeight(Math.round(Number(estimatedMaleWeight)).toString());
   const applyFemaleWeightRounded = () => setLocalWeight(Math.round(Number(estimatedFemaleWeight)).toString());
 
@@ -92,7 +97,7 @@ const ResusInputs: React.FC = () => {
   };
 
   const handleUpdate = () => {
-    updateContext(localAge, localWeight);
+    updateContext(localAge, localWeight ? parseFloat(localWeight) : null);
     setIsExpanded(false);
   };
 
@@ -108,7 +113,7 @@ const ResusInputs: React.FC = () => {
     <div className="resus-inputs-container">
       <div className={`resus-inputs-collapsed ${!isExpanded ? 'visible' : ''}`}>
         <div className="collapsed-content">
-          <span style={{fontWeight: "bold"}}>גיל: {age}, משקל: {weight} ק"ג</span>
+          <span style={{fontWeight: "bold"}}>גיל: {getFormattedAge(age)}, משקל: {weight} ק"ג</span>
           <div className="collapsed-buttons">
             <a href="#" className="edit-button" onClick={(e) => { e.preventDefault(); setIsExpanded(true); }}>ערוך</a>
           </div>
@@ -128,7 +133,11 @@ const ResusInputs: React.FC = () => {
                 גיל
               </div>
               <div className="col input-col">
-                <select className="form-control" onChange={(e) => setLocalAge(e.target.value)} value={localAge}>
+                <select 
+                  className="form-control" 
+                  onChange={(e) => setLocalAge(e.target.value)} 
+                  value={localAge}
+                >
                   <option value="">בחר גיל</option>
                   {agesForDropDown.map((item, index) => (
                     <option key={index} value={item.value}>
@@ -142,16 +151,26 @@ const ResusInputs: React.FC = () => {
               {localAge && (
                 <>
                   <div style={{ cursor: 'pointer' }}>
-                  <FaWeightScale style={{ marginLeft: '10px' }} />
+                    <FaWeightScale style={{ marginLeft: '10px' }} />
                     משקל משוערך בנים: {estimatedMaleWeight} ק"ג
-                    <button type="button" className="btn btn-link ng-binding" onClick={applyMaleWeightRounded} style={{ paddingRight: '0.1rem' }}>
+                    <button 
+                      type="button" 
+                      className="btn btn-link ng-binding" 
+                      onClick={applyMaleWeightRounded} 
+                      style={{ paddingRight: '0.1rem' }}
+                    >
                       (הזן ערך מעוגל)
                     </button>
                   </div>
                   <div style={{ cursor: 'pointer', paddingTop: '10px' }}>
                     <FaWeightScale style={{ marginLeft: '10px' }} />
                     משקל משוערך בנות: {estimatedFemaleWeight} ק"ג
-                    <button type="button" className="btn btn-link ng-binding" onClick={applyFemaleWeightRounded} style={{ paddingRight: '0.1rem' }}>
+                    <button 
+                      type="button" 
+                      className="btn btn-link ng-binding" 
+                      onClick={applyFemaleWeightRounded} 
+                      style={{ paddingRight: '0.1rem' }}
+                    >
                       (הזן ערך מעוגל)
                     </button>
                   </div>

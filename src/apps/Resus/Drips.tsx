@@ -73,17 +73,18 @@ const Drips: React.FC = () => {
     };
   };
 
-  const calcDosePerHourPerWeight = (drugData: Drip, kg: number): number => {
+  const calcDosePerHourPerWeight = (drugData: Drip, kg: number | null): number => {
+    if (kg === null) return 0;
     let drug_per_hour = 0;
     if (drugData.dose_per_kg_per_min) {
-      drug_per_hour = drugData.dose_per_kg_per_min * 60;
+        drug_per_hour = drugData.dose_per_kg_per_min * 60;
     } else if (drugData.dose_per_kg_per_hour) {
-      drug_per_hour = drugData.dose_per_kg_per_hour;
+        drug_per_hour = drugData.dose_per_kg_per_hour;
     } else {
-      throw new Error("neither minute nor hour provided to drug " + drugData.name);
+        throw new Error("neither minute nor hour provided to drug " + drugData.name);
     }
     return drug_per_hour * kg;
-  };
+};
 
   const prettifyUnits = (dose: number, units: string): { dose: number; units: string } => {
     if (dose < 1000) {
@@ -110,13 +111,14 @@ const Drips: React.FC = () => {
   };
 
   const findDefinitionByWeight = (definition_by_weights: WeightDefinition[]): WeightDefinition => {
+    if (weight === null) return definition_by_weights[0]; // Return first definition if weight is null
     for (let range of definition_by_weights) {
-      if (weight >= range.min_kg && weight < range.max_kg) {
-        return range;
-      }
+        if (weight >= range.min_kg && weight < range.max_kg) {
+            return range;
+        }
     }
     throw new Error("Weight out of defined ranges");
-  };
+};
 
   const calcInfusionSpeed = (drip: Drip): string => {
     const dosePerKg = calcDosePerHourPerWeight(drip, weight);

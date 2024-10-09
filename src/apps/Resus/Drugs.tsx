@@ -88,6 +88,7 @@ const Drugs: React.FC = () => {
   };
 
   const getDoseByWeightWithMaxLimit = (drugDefinition: Drug) => {
+    if (weight === null) return 0;
     let doseByWeight = drugDefinition.dose_per_kg * weight;
     if (drugDefinition.maxDose) {
       doseByWeight = Math.min(Number(drugDefinition.maxDose), doseByWeight);
