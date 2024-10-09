@@ -585,7 +585,7 @@
       ]
     },
     {
-      "name": "tachycardia",
+      "protocolId": "tachycardia",
       "drugs": [
         "Adenosine1st_IV_0.1_mg",
         "Adenosine2nd_IV_0.2_mg"
@@ -602,7 +602,7 @@
       ]
     },
     {
-      "name": "symptomatic-bradycardia",
+      "protocolId": "symptomatic-bradycardia",
       "drugs": [
         "Adrenaline1:10,000_IV_0.01_mg",
         "Adrenaline1:10,000_ET_0.1_mg",
@@ -610,7 +610,7 @@
       ]
     },
     {
-      "name": "septic-shock",
+      "protocolId": "septic-shock",
       "drugs": [
         "Hydrocortisone_IV_4_mg",
         "FluidBolusNACL0.9%_IV_20_ml"

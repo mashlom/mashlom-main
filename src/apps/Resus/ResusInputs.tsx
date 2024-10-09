@@ -114,7 +114,7 @@ const ResusInputs: React.FC = () => {
   };
 
   const handleUpdate = () => {
-    updateContext(localAge, localWeight ? parseFloat(localWeight) : null);
+    updateContext(localAge, localWeight ? parseFloat(localWeight) : null, localProtocol);
     setIsExpanded(false);
   };
 
@@ -153,7 +153,7 @@ const ResusInputs: React.FC = () => {
                 <select 
                   className="form-control" 
                   onChange={(e) => setLocalProtocol(e.target.value)} 
-                  value={localProtocol}
+                  value={localProtocol || ""}
                 >
                   <option value="">בחר פרוטוקול</option>
                   {protocolsForDropDown.map((item, index) => (

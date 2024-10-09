@@ -15,7 +15,7 @@ interface Drip {
   allowed_dose_range: string;
   calc_type: string;
   default_dilution_volume_unit?: string;
-  default_dilution_volume_ml: number;
+  default_dilution_volume_ml?: number | null;
   dose_per_kg_per_min?: number;
   dose_per_kg_per_hour?: number;
   existing_dilution_concentration?: string;
@@ -42,7 +42,7 @@ const Drip: React.FC<DripProps> = ({ drip }) => {
 
   const calcDilutionPerKg = (drip: Drip) => {
     const dosePerHour = calcDosePerHourPerWeight(drip, weight);
-    const dose_to_add = (drip.default_dilution_volume_ml / getTargetVolumePerHour(drip)) * dosePerHour;
+    const dose_to_add = ((drip.default_dilution_volume_ml? drip.default_dilution_volume_ml : 0)  / getTargetVolumePerHour(drip)) * dosePerHour;
     const { dose: doseForDilution, units: unitsForDilution } = prettifyUnits(dose_to_add, drip.dose_unit);
     const { dose: doseBeforeDilution, units: unitsBeforeDilution } = prettifyUnits(dosePerHour, drip.dose_unit);
     return { 

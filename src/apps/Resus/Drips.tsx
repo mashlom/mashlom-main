@@ -10,7 +10,7 @@ interface Drip {
   allowed_dose_range: string;
   calc_type: string;
   default_dilution_volume_unit?: string;
-  default_dilution_volume_ml: number;
+  default_dilution_volume_ml?: number | null;
   dose_per_kg_per_min?: number;
   dose_per_kg_per_hour?: number;
   existing_dilution_concentration?: string;
