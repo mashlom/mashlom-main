@@ -1,0 +1,85 @@
+.resus-inputs-container {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .resus-inputs-collapsed,
+  .resus-inputs-expanded {
+    transition: max-height 0.8s ease-in-out, opacity 0.8s ease-in-out, padding 0.8s ease-in-out;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    padding: 0 10px;
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+  }
+  
+  .resus-inputs-collapsed.visible,
+  .resus-inputs-expanded.visible {
+    position: relative;
+    max-height: 1000px; /* Adjust this value based on your content */
+    opacity: 1;
+    padding: 10px;
+  }
+  
+  .resus-inputs-collapsed,
+  .resus-inputs-expanded {
+    background-color: #F5F5F5;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+  }
+  
+  .resus-inputs-collapsed {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .collapsed-content {
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .collapsed-content span {
+    margin-right: 10px;
+  }
+  
+  .collapsed-buttons {
+    display: flex;
+    align-items: center;
+  }
+  
+  .edit-button,
+  .clear-button {
+    margin-right: 15px;
+    text-decoration: none;
+    color: #007bff;
+  }
+  
+  .resus-reset-button {
+    cursor: pointer;
+    height: 1.5rem;
+    width: 1.5rem;
+  }
+  
+  .btn-update {
+    color: white;
+    background-color: #1FB5A3;
+    min-width: 100px;
+    border: none;
+  }
+  
+  .btn-update:hover {
+    background-color: #1A9E8E;
+  }
+  
+  .btn-update:disabled {
+    background-color: #B9EDE7;
+    color: #ffffff;
+  }

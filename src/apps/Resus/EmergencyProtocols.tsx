@@ -14,13 +14,7 @@ interface ProtocolSection {
   protocols: Protocol[];
 }
 
-interface EmergencyProtocolsProps {
-  weight: number;
-  age: string;
-}
-
-const EmergencyProtocols: React.FC<EmergencyProtocolsProps> = ({ weight, age }) => {
-  console.log(weight, age);
+const EmergencyProtocols: React.FC = () => {  
   const [emergencyProtocols, setEmergencyProtocols] = useState<ProtocolSection[]>([]);
 
   useEffect(() => {
