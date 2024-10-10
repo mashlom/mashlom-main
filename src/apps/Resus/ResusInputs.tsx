@@ -236,7 +236,7 @@ const ResusInputs: React.FC = () => {
                   type="text"
                   pattern="[0-9]*[.,]?[0-9]*"
                   maxLength={7}
-                  style={{ maxWidth: '90px' }}
+                  style={{ maxWidth: '230px' }}
                   className="form-control"
                   id="weight"
                   value={localWeight}
