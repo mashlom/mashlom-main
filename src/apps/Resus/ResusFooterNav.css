@@ -1,9 +1,27 @@
 .active {
     font-weight: bold !important;
-    background-color: #F5F5F5 !important;
+    background-color: #F5F5F5 !important;    
 }
 
 .active .text {
     font-weight: bold !important;
-    background-color: #F5F5F5 !important;
+    background-color: #F5F5F5 !important;    
+}
+
+@keyframes iconPulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.7); /* Adjust this value to control the maximum size */
+    }
+}
+
+.footer-button .bottom-menu-color {
+    display: inline-block; /* Ensures the animation only affects the icon */
+}
+
+.footer-button.active .bottom-menu-color {
+    animation: iconPulse 1.5s ease-in-out 1.5;
+    transform: scale(1.7);
 }
