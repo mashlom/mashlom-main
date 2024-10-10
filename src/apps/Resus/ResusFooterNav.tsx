@@ -12,7 +12,8 @@ const FooterNav: React.FC<FooterNavProps> = ({ hospital }) => {
   const location = useLocation();
 
   const openPanel = (panel: 'meds' | 'protocols' | 'cpr') => {
-    navigate(`/${hospital}/resus/${panel}`);
+    const currentSearchParams = new URLSearchParams(location.search);
+    navigate(`/${hospital}/resus/${panel}?${currentSearchParams.toString()}`);
   };
 
   const isActive = (panel: string) => {
