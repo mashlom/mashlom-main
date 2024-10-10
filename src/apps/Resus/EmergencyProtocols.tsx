@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import protocolsData from './data/emergency-protocols.json';
 import drugsDefinitions from './data/resus-drugs-definitions.json';
-import { Accordion } from 'react-bootstrap';
 import './EmergencyProtocols.css';
 import AirwaysAndDefibrillator from './AirwaysAndDefibrillator';
 import { useResusContext } from './ResusContext';
@@ -29,61 +27,62 @@ const EmergencyProtocols: React.FC = () => {
     }    
   }, [protocol]);
 
-  // Create an array of keys based on the number of sections in the JSON data
-  const allKeys = protocolsData.emergencyProtocols.map((_, index) => index.toString());
+  const hasDrugsOrDrips = protocolDrugs.length > 0 || protocolDrips.length > 0;
 
   return (
     <div>
-      <Accordion defaultActiveKey={allKeys} alwaysOpen>
-          <Accordion.Item eventKey="1">
-            <Accordion.Header>קבצים מצורפים</Accordion.Header>
-            <Accordion.Body>
-              <ul className="list-group">
-                  <li>
-                    <a 
-                      className="dropdown-item" 
-                      style={{ textAlign: 'start' }} 
-                      href="#"
-                      onClick={(e) => e.preventDefault()}
-                    >
-                      תרופה ראשונה
-                    </a>
-                  </li>
-                  <li>
-                    <a 
-                      className="dropdown-item" 
-                      style={{ textAlign: 'start' }} 
-                      href="#"
-                      onClick={(e) => e.preventDefault()}
-                    >
-                      תרופה שניה
-                    </a>
-                  </li>
-              </ul>
-            </Accordion.Body>
-          </Accordion.Item>
-          <Accordion.Item eventKey="2">
-            <Accordion.Header>תרופות</Accordion.Header>
-            <Accordion.Body>
-              <ul className="list-group" style={{direction:"ltr"}}>
-                {protocolDrugs.map((drugId) => {
-                  const drug = drugsDefinitions.drugs.find(d => d.id === drugId);
-                  return drug ? <Drug key={drug.id} drug={drug} /> : null;
-                })}
-                {protocolDrips.map((dripId) => {
-                  const drip = drugsDefinitions.drips.find(d => d.id === dripId);
-                  return drip ? <Drip key={drip.id} drip={drip} /> : null;
-                })}
-              </ul>
-            </Accordion.Body>
-          </Accordion.Item>
-          <Accordion.Item eventKey="3">
-            <Accordion.Header>Defibirilator</Accordion.Header>
-            <Accordion.Body>
-              <AirwaysAndDefibrillator />
-            </Accordion.Body>
-          </Accordion.Item>
-      </Accordion>
+      <div className="protocol-section">
+        <h2 className="protocol-header">קבצים מצורפים</h2>
+        <div className="protocol-body">
+          <ul className="list-group">
+            <li>
+              <a 
+                className="dropdown-item" 
+                style={{ textAlign: 'start' }} 
+                href="#"
+                onClick={(e) => e.preventDefault()}
+              >
+                תרופה ראשונה
+              </a>
+            </li>
+            <li>
+              <a 
+                className="dropdown-item" 
+                style={{ textAlign: 'start' }} 
+                href="#"
+                onClick={(e) => e.preventDefault()}
+              >
+                תרופה שניה
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      {hasDrugsOrDrips && (
+        <div className="protocol-section">
+          <h2 className="protocol-header">תרופות</h2>
+          <div className="protocol-body">
+            <ul className="list-group" style={{direction:"ltr"}}>
+              {protocolDrugs.map((drugId) => {
+                const drug = drugsDefinitions.drugs.find(d => d.id === drugId);
+                return drug ? <Drug key={drug.id} drug={drug} /> : null;
+              })}
+              {protocolDrips.map((dripId) => {
+                const drip = drugsDefinitions.drips.find(d => d.id === dripId);
+                return drip ? <Drip key={drip.id} drip={drip} /> : null;
+              })}
+            </ul>
+          </div>
+        </div>
+      )}
+
+      <div className="protocol-section">
+        <h2 className="protocol-header">Defibrillator</h2>
+        <div className="protocol-body">
+          <AirwaysAndDefibrillator />
+        </div>
+      </div>
     </div>
   );
 };
