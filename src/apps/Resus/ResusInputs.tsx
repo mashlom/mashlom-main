@@ -10,9 +10,11 @@ interface AgeOption {
   label: string;
   value: string;
 }
+
 interface ProtocolOption {
   label: string;
   value: string;
+  section: string;
 }
 
 const ResusInputs: React.FC = () => {
@@ -23,7 +25,7 @@ const ResusInputs: React.FC = () => {
   const [estimatedMaleWeight, setEstimatedMaleWeight] = useState<string>('');
   const [estimatedFemaleWeight, setEstimatedFemaleWeight] = useState<string>('');
   const [agesForDropDown, setAgesForDropDown] = useState<AgeOption[]>([]);
-  const [protocolsForDropDown, setprotocolsForDropDown] = useState<ProtocolOption[]>([]);
+  const [protocolsForDropDown, setProtocolsForDropDown] = useState<ProtocolOption[]>([]);
   const [estimatedWeightByAge, setEstimatedWeightByAge] = useState<Record<string, { male: string; female: string }>>({});
   const [isExpanded, setIsExpanded] = useState(age === '' || weight === null);
 
@@ -46,7 +48,7 @@ const ResusInputs: React.FC = () => {
     setLocalProtocol(protocol);
     setLocalWeight(weight !== null ? weight.toString() : '');
     setIsExpanded(age === '' || weight === null);
-  }, [age, weight]);
+  }, [age, weight, protocol]);
 
   useEffect(() => {
     if (localAge && estimatedWeightByAge[localAge]) {
@@ -75,11 +77,18 @@ const ResusInputs: React.FC = () => {
   };
   
   const createProtocolsDropDown = () => {
-    const protocols = emergencyProtocols.emergencyProtocols[0].protocols.map((item: any) => ({
-      label: item.name,
-      value: item.id
-    }));
-    setprotocolsForDropDown(protocols);
+    const protocols: ProtocolOption[] = [];
+    emergencyProtocols.emergencyProtocols.forEach(section => {
+      protocols.push({ label: section.section, value: '', section: section.section });
+      section.protocols.forEach(protocol => {
+        protocols.push({
+          label: protocol.name,
+          value: protocol.id,
+          section: section.section
+        });
+      });
+    });
+    setProtocolsForDropDown(protocols);
   };
 
   const formatAge = (age: string): string => {
@@ -150,16 +159,21 @@ const ResusInputs: React.FC = () => {
                 פרוטוקול
               </div>
               <div className="col input-col">
-                <select 
+              <select 
                   className="form-control" 
                   onChange={(e) => setLocalProtocol(e.target.value)} 
                   value={localProtocol || ""}
                 >
-                  <option value="">בחר פרוטוקול</option>
+                  <option value="" disabled>בחר פרוטוקול</option>
                   {protocolsForDropDown.map((item, index) => (
-                    <option key={index} value={item.value}>
-                      {item.label}
-                    </option>
+                    item.value === '' ? (
+                      <optgroup key={index} label={item.label}>
+                      </optgroup>
+                    ) : (
+                      <option key={index} value={item.value}>
+                        {item.label}
+                      </option>
+                    )
                   ))}
                 </select>
               </div>
