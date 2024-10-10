@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { FaWeightScale } from 'react-icons/fa6';
+import { useNavigate, useLocation } from 'react-router-dom';
 import Image from '../../components/Image';
 import { useResusContext } from './ResusContext';
 import airwaysDataFile from './data/airways.json';
@@ -27,7 +28,12 @@ const ResusInputs: React.FC = () => {
   const [agesForDropDown, setAgesForDropDown] = useState<AgeOption[]>([]);
   const [protocolsForDropDown, setProtocolsForDropDown] = useState<ProtocolOption[]>([]);
   const [estimatedWeightByAge, setEstimatedWeightByAge] = useState<Record<string, { male: string; female: string }>>({});
-  const [isExpanded, setIsExpanded] = useState(age === '' || weight === null);
+  
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const isProtocolsPage = location.pathname.includes('/resus/protocols');
+  const [isExpanded, setIsExpanded] = useState(age === '' || weight === null || (isProtocolsPage && !protocol));
 
   useEffect(() => {
     const fetchData = () => {
@@ -47,8 +53,8 @@ const ResusInputs: React.FC = () => {
     setLocalAge(age);
     setLocalProtocol(protocol);
     setLocalWeight(weight !== null ? weight.toString() : '');
-    setIsExpanded(age === '' || weight === null);
-  }, [age, weight, protocol]);
+    setIsExpanded(age === '' || weight === null || (isProtocolsPage && !protocol));
+  }, [age, weight, protocol, isProtocolsPage]);
 
   useEffect(() => {
     if (localAge && estimatedWeightByAge[localAge]) {
@@ -125,6 +131,15 @@ const ResusInputs: React.FC = () => {
   const handleUpdate = () => {
     updateContext(localAge, localWeight ? parseFloat(localWeight) : null, localProtocol);
     setIsExpanded(false);
+
+    const currentPath = location.pathname;
+    const queryParams = new URLSearchParams(location.search).toString();
+
+    if (localProtocol && !currentPath.includes('/resus/protocols')) {
+      navigate(`./protocols?${queryParams}`);
+    } else if (!localProtocol && !currentPath.includes('/resus/meds')) {
+      navigate(`./meds?${queryParams}`);
+    }
   };
 
   const handleReset = () => {
@@ -164,7 +179,7 @@ const ResusInputs: React.FC = () => {
                   onChange={(e) => setLocalProtocol(e.target.value)} 
                   value={localProtocol || ""}
                 >
-                  <option value="" disabled>בחר פרוטוקול</option>
+                  <option value="">- לא נבחר פרוטוקול -</option>
                   {protocolsForDropDown.map((item, index) => (
                     item.value === '' ? (
                       <optgroup key={index} label={item.label}>

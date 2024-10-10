@@ -2,6 +2,7 @@ import React from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDatabase, faFileInvoice, faHeartPulse } from '@fortawesome/free-solid-svg-icons';
+import './ResusFooterNav.css'
 
 interface FooterNavProps {
   hospital: string;

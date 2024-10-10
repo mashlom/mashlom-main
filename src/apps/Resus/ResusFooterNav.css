@@ -1,0 +1,9 @@
+.active {
+    font-weight: bold !important;
+    background-color: #F5F5F5 !important;
+}
+
+.active .text {
+    font-weight: bold !important;
+    background-color: #F5F5F5 !important;
+}

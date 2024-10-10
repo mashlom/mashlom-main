@@ -14,6 +14,10 @@ const ResusContent: React.FC = () => {
   const { protocol } = useResusContext();
   
   const headerText = useMemo(() => {
+    const currentPath = location.pathname;
+    if (currentPath.includes('/resus/meds')) {
+      return "מינוני תרופות";
+    }
     if (!protocol) {
       return "מערכת חדר הלם";
     }
