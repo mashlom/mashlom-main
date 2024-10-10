@@ -32,7 +32,7 @@ useEffect(() => {
       <div className="col" style={{ padding: "0px"}}>
         <div className="card">
           <div className="card-body row">
-            <div className="col-md-6" >
+            <div className="col-md-6" style={{marginBottom: "10px"}} >
               <h5 className="card-title" style={{ fontWeight: 'bold' }}>Airways</h5>
               <ul className="list-group" style={{ backgroundColor: '#B9EDE7', borderRadius: '10px', padding: '15px', marginRight: "15px", lineHeight: '1rem' }}>
                 <span className="defi-data">Laryngiscope blade: {airwaysForAge.blade}</span><br />
