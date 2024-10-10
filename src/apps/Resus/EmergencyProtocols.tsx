@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import drugsDefinitions from './data/resus-drugs-definitions.json';
 import emergencyProtocols from './data/emergency-protocols.json';
 import './EmergencyProtocols.css';
@@ -12,16 +13,23 @@ import Drip from './Drip';
 const EmergencyProtocols: React.FC = () => {  
   const [protocolDrugs, setProtocolDrugs] = useState<string[]>([]);
   const [protocolDrips, setProtocolDrips] = useState<string[]>([]);
-  const { protocol } = useResusContext();
+  const { protocol, weight } = useResusContext();
   const [algorithmFile, setAlgorithmFile] = useState<string>('');
   const [protocolFile, setProtocolFile] = useState<string>('');
+  const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
-    if (!protocol) {
-      setProtocolDrugs([]);
-      setProtocolDrips([]);
+    // if (!protocol && weight) {
+    //   const queryParams = new URLSearchParams(location.search).toString();
+    //   navigate(`../meds${queryParams ? `?${queryParams}` : ''}`);
+    //   return;
+    // }
+
+    if (!weight || !protocol) {
       return;
     }
+
     const selectedProtocol = drugsDefinitions.protocols.find(p => p.protocolId === protocol);
     if (selectedProtocol) {
       setProtocolDrugs(selectedProtocol.drugs || []);
@@ -30,6 +38,7 @@ const EmergencyProtocols: React.FC = () => {
       setProtocolDrugs([]);
       setProtocolDrips([]);
     }
+
     const foundProtocol = emergencyProtocols.emergencyProtocols
         .flatMap(section => section.protocols)
         .find(p => p.id === protocol);
@@ -41,7 +50,11 @@ const EmergencyProtocols: React.FC = () => {
       setAlgorithmFile('');
       setProtocolFile('');
     }
-  }, [protocol]);
+  }, [protocol, weight, navigate, location.search]);
+
+  if (!protocol || !weight) {
+    return null;
+  }
 
   const hasDrugsOrDrips = protocolDrugs.length > 0 || protocolDrips.length > 0;
 
@@ -51,7 +64,7 @@ const EmergencyProtocols: React.FC = () => {
         <h2 className="protocol-header">קבצים מצורפים</h2>
         <div className="protocol-body">
           <div className="pdf-links">
-          <a href={`https://mashlom.me/apps/pediatric/resus/pdfs/${algorithmFile}`} target="_blank" rel="noopener noreferrer" className="pdf-link">
+            <a href={`https://mashlom.me/apps/pediatric/resus/pdfs/${algorithmFile}`} target="_blank" rel="noopener noreferrer" className="pdf-link">
               <FaDiagramProject style={{fontSize: "3rem", color: "#1FB5A3"}}/>
               <span>תרשים זרימה</span>
             </a>

@@ -20,7 +20,7 @@ const Resus: React.FC = () => {
             <h1>מינוני תרופות בעת החייאה</h1>
             <ResusInputs />
             <Routes>
-              <Route index element={<Navigate to="meds" replace />} />
+              <Route index element={<Navigate to="protocols" replace />} />
               <Route path="meds" element={<Meds />} />
               <Route path="protocols" element={<EmergencyProtocols />} />
               <Route path="cpr" element={<Cpr />} />
