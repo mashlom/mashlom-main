@@ -28,17 +28,17 @@
   .dropdown-item {
     font-weight: bold;
   }
-
-.buttons-wrapper {
+  
+  .buttons-wrapper {
     display: flex;
     flex-direction: column;
     gap: 2rem;
-    display: flex;
     justify-content: center;
     align-items: center;
     padding: 20px;
-}
-.button {
+  }
+  
+  .button {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -49,27 +49,31 @@
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
     text-decoration: none;
     transition: box-shadow 0.3s ease, border 0.3s ease;
-}
-.button:hover {
+  }
+  
+  .button:hover {
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
     border-color: #d1d5db;
-}
-.icon {
+  }
+  
+  .icon {
     width: 3rem;
     height: 3rem;
     margin-bottom: 0.5rem;
-}
-.text {
+  }
+  
+  .text {
     font-size: 1.125rem;
     font-weight: 600;
     color: var(--bs-heading-color);
-}
-@media (min-width: 640px) {
+  }
+  
+  @media (min-width: 640px) {
     .buttons-wrapper {
-        flex-direction: row;
+      flex-direction: row;
     }
-}
-    
+  }
+  
   .accordion-button:not(.collapsed) {    
     box-shadow: none !important;
   }
@@ -83,3 +87,39 @@
     border-color: rgba(0,0,0,.125) !important;
   }
   
+  /* New styles for PDF links with Font Awesome icons */
+  .pdf-links {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+  }
+  
+  .pdf-link:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+  }
+  
+  .pdf-link i {
+    font-size: 80px;
+    margin-bottom: 0.5rem;
+  }
+
+  .pdf-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    padding: 1rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    width: 150px; /* Add this line */
+  }
+  
+  .pdf-link span {
+    font-weight: bold;
+    color: #103C6E;
+    text-align: center; /* Add this line */
+    width: 100%; /* Add this line */
+  }

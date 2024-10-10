@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import drugsDefinitions from './data/resus-drugs-definitions.json';
+import emergencyProtocols from './data/emergency-protocols.json';
 import './EmergencyProtocols.css';
 import AirwaysAndDefibrillator from './AirwaysAndDefibrillator';
 import { useResusContext } from './ResusContext';
+import { FaFilePdf } from 'react-icons/fa6';
+import { FaDiagramProject } from 'react-icons/fa6';
 import Drug from './Drug';
 import Drip from './Drip';
 
@@ -10,6 +13,8 @@ const EmergencyProtocols: React.FC = () => {
   const [protocolDrugs, setProtocolDrugs] = useState<string[]>([]);
   const [protocolDrips, setProtocolDrips] = useState<string[]>([]);
   const { protocol } = useResusContext();
+  const [algorithmFile, setAlgorithmFile] = useState<string>('');
+  const [protocolFile, setProtocolFile] = useState<string>('');
 
   useEffect(() => {
     if (!protocol) {
@@ -24,7 +29,18 @@ const EmergencyProtocols: React.FC = () => {
     } else {
       setProtocolDrugs([]);
       setProtocolDrips([]);
-    }    
+    }
+    const foundProtocol = emergencyProtocols.emergencyProtocols
+        .flatMap(section => section.protocols)
+        .find(p => p.id === protocol);
+
+    if (foundProtocol) {
+      setAlgorithmFile(foundProtocol.algorithmFile);
+      setProtocolFile(foundProtocol.protocolFile);
+    } else {
+      setAlgorithmFile('');
+      setProtocolFile('');
+    }
   }, [protocol]);
 
   const hasDrugsOrDrips = protocolDrugs.length > 0 || protocolDrips.length > 0;
@@ -34,28 +50,16 @@ const EmergencyProtocols: React.FC = () => {
       <div className="protocol-section">
         <h2 className="protocol-header">קבצים מצורפים</h2>
         <div className="protocol-body">
-          <ul className="list-group">
-            <li>
-              <a 
-                className="dropdown-item" 
-                style={{ textAlign: 'start' }} 
-                href="#"
-                onClick={(e) => e.preventDefault()}
-              >
-                תרופה ראשונה
-              </a>
-            </li>
-            <li>
-              <a 
-                className="dropdown-item" 
-                style={{ textAlign: 'start' }} 
-                href="#"
-                onClick={(e) => e.preventDefault()}
-              >
-                תרופה שניה
-              </a>
-            </li>
-          </ul>
+          <div className="pdf-links">
+          <a href={`https://mashlom.me/apps/pediatric/resus/pdfs/${algorithmFile}`} target="_blank" rel="noopener noreferrer" className="pdf-link">
+              <FaDiagramProject style={{fontSize: "3rem", color: "#1FB5A3"}}/>
+              <span>תרשים זרימה</span>
+            </a>
+            <a href={`https://mashlom.me/apps/pediatric/resus/pdfs/${protocolFile}`} target="_blank" rel="noopener noreferrer" className="pdf-link">
+              <FaFilePdf style={{fontSize: "3rem", color: "#1FB5A3"}} />
+              <span>פרוטוקול</span>
+            </a>
+          </div>
         </div>
       </div>
 
