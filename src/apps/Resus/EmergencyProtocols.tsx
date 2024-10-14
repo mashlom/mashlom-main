@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import drugsDefinitions from './data/resus-drugs-definitions.json';
 import emergencyProtocols from './data/emergency-protocols.json';
 import './EmergencyProtocols.css';
-import AirwaysAndDefibrillator from './AirwaysAndDefibrillator';
+import Defibrillator from './Defibrillator';
 import { useResusContext } from './ResusContext';
 import { FaFilePdf } from 'react-icons/fa6';
 import { FaDiagramProject } from 'react-icons/fa6';
@@ -13,6 +13,7 @@ import Drip from './Drip';
 const EmergencyProtocols: React.FC = () => {  
   const [protocolDrugs, setProtocolDrugs] = useState<string[]>([]);
   const [protocolDrips, setProtocolDrips] = useState<string[]>([]);
+  const [defiConfigs, setDefiConfigs] = useState<any[]>([]);
   const { protocol, weight } = useResusContext();
   const [algorithmFile, setAlgorithmFile] = useState<string>('');
   const [protocolFile, setProtocolFile] = useState<string>('');
@@ -20,12 +21,6 @@ const EmergencyProtocols: React.FC = () => {
   const location = useLocation();
 
   useEffect(() => {
-    // if (!protocol && weight) {
-    //   const queryParams = new URLSearchParams(location.search).toString();
-    //   navigate(`../meds${queryParams ? `?${queryParams}` : ''}`);
-    //   return;
-    // }
-
     if (!weight || !protocol) {
       return;
     }
@@ -34,9 +29,11 @@ const EmergencyProtocols: React.FC = () => {
     if (selectedProtocol) {
       setProtocolDrugs(selectedProtocol.drugs || []);
       setProtocolDrips(selectedProtocol.drips || []);
+      setDefiConfigs(selectedProtocol.defi || []);
     } else {
       setProtocolDrugs([]);
       setProtocolDrips([]);
+      setDefiConfigs([]);
     }
 
     const foundProtocol = emergencyProtocols.emergencyProtocols
@@ -94,12 +91,14 @@ const EmergencyProtocols: React.FC = () => {
         </div>
       )}
 
-      <div className="protocol-section">
-        <h2 className="protocol-header">Defibrillator</h2>
-        <div className="protocol-body">
-          <AirwaysAndDefibrillator />
+      {defiConfigs.length > 0 && (
+        <div className="protocol-section">
+          <h2 className="protocol-header">Defibrillator (מַפְעֵם)</h2>
+          <div className="protocol-body">
+            <Defibrillator configs={defiConfigs} />
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };
