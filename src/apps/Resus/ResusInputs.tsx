@@ -18,6 +18,13 @@ interface ProtocolOption {
   section: string;
 }
 
+export interface ProtocolData {
+  name: string;
+  id: string;
+  algorithmFile?: string;
+  protocolFile?: string;
+};
+
 const ResusInputs: React.FC = () => {
   const { age, weight, updateContext, resetContext, protocol } = useResusContext();
   const [localAge, setLocalAge] = useState(age);
@@ -86,12 +93,15 @@ const ResusInputs: React.FC = () => {
     const protocols: ProtocolOption[] = [];
     emergencyProtocols.emergencyProtocols.forEach(section => {
       protocols.push({ label: section.section, value: '', section: section.section });
-      section.protocols.forEach(protocol => {
-        protocols.push({
-          label: protocol.name,
-          value: protocol.id,
-          section: section.section
-        });
+      section.protocols.forEach(p => {
+        const protocol = p as ProtocolData;
+        if (protocol.algorithmFile || protocol.protocolFile){
+          protocols.push({
+            label: protocol.name,
+            value: protocol.id,
+            section: section.section
+          });
+        }
       });
     });
     setProtocolsForDropDown(protocols);

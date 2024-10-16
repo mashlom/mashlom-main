@@ -7,7 +7,7 @@ app.controller("ProtocolsController", ['$scope', '$rootScope', '$timeout', '$htt
     protocolsCtrl.currentProtocol;
     protocolsCtrl.view = 'PROTOCOLS_INDEX'; // values: PROTOCOLS_INDEX, PROTOCOL
     function init() {
-        $http.get('./data/emergency-protocols.json').then(function (response) {
+        $http.get('./data/deprecated-emergency-protocols.json').then(function (response) {
             protocolsCtrl.emergencyProtocols = response.data.emergencyProtocols;
             console.log(JSON.stringify(ctrl.emergencyProtocols));
         });

@@ -1,193 +1,149 @@
 {
     "emergencyProtocols": [
         {
-            "section": "PALS / Trauma",
+            "section": "PALS / טראומה",
             "protocols": [
                 {
                     "name": "דום לבבי (cardiac arrest)",
-                    "algorithmFile": "shavatz-algorithm.pdf",
-                    "protocolFile": "shavatz.pdf",
-                    "id": "cardiac-arrest"
+                    "id": "cardiac-arrest",
+                    "algorithmFile": "cardiac_arrest_algorithm.pdf"
                 },
                 {
                     "name": "טכיקרדיה",
-                    "algorithmFile": "shavatz-algorithm.pdf",
-                    "protocolFile": "shavatz.pdf",
-                    "id": "tachycardia"
+                    "id": "tachycardia",
+                    "algorithmFile": "tachycardia_algorithm.pdf"
                 },
                 {
                     "name": "ברדיקרדיה סימפטומטית",
-                    "algorithmFile": "shavatz-algorithm.pdf",
-                    "protocolFile": "shavatz.pdf",
-                    "id": "symptomatic-bradycardia"
+                    "id": "symptomatic-bradycardia",
+                    "algorithmFile":"bradycardia_algorithm.pdf"
                 },
                 {
                     "name": "Massive blood transfusion",
-                    "algorithmFile": "shavatz-algorithm.pdf",
-                    "protocolFile": "shavatz.pdf",
                     "id": "massive-blood-transfusion"
                 }
             ]
         },
         {
-            "section": "Electrolytes",
+            "section": "אלקטרוליטים",
             "protocols": [
                 {
                     "name": "היפוקלצמיה",
-                    "algorithmFile": "shavatz-algorithm.pdf",
-                    "protocolFile": "shavatz.pdf",
                     "id": "hypocalcemia"
                 },
                 {
                     "name": "היפרקלמיה",
-                    "algorithmFile": "shavatz-algorithm.pdf",
-                    "protocolFile": "shavatz.pdf",
                     "id": "hyperkalemia"
                 },
                 {
                     "name": "היפוקלמיה",
-                    "algorithmFile": "shavatz-algorithm.pdf",
-                    "protocolFile": "shavatz.pdf",
                     "id": "hypokalemia"
                 },
                 {
                     "name": "היפונתרמיה",
-                    "algorithmFile": "shavatz-algorithm.pdf",
-                    "protocolFile": "shavatz.pdf",
                     "id": "hyponatremia"
                 }
             ]
         },
         {
-            "section": "Metabolic / Endocrine / Nephrologic",
+            "section": "מטבולי / אנדוקריני / נפרולוגי",
             "protocols": [
                 {
                     "name": "היפוגליקמיה",
-                    "algorithmFile": "shavatz-algorithm.pdf",
-                    "protocolFile": "shavatz.pdf",
                     "id": "hypoglycemia"
                 },
                 {
                     "name": "DKA",
-                    "algorithmFile": "shavatz-algorithm.pdf",
-                    "protocolFile": "shavatz.pdf",
                     "id": "dka"
                 },
                 {
                     "name": "היפראמונימיה",
-                    "algorithmFile": "shavatz-algorithm.pdf",
-                    "protocolFile": "shavatz.pdf",
                     "id": "hyperammonemia"
                 },
                 {
                     "name": "יל\"ד",
-                    "algorithmFile": "shavatz-algorithm.pdf",
-                    "protocolFile": "shavatz.pdf",
                     "id": "hypertension"
                 }
             ]
         },
         {
-            "section": "Respiratory / Allergic",
+            "section": "נשימתי / אלרגי",
             "protocols": [
                 {
                     "name": "אסטמה",
-                    "algorithmFile": "shavatz-algorithm.pdf",
-                    "protocolFile": "shavatz.pdf",
                     "id": "asthma"
                 },
                 {
                     "name": "סטרידור",
-                    "algorithmFile": "shavatz-algorithm.pdf",
-                    "protocolFile": "shavatz.pdf",
                     "id": "stridor"
                 },
                 {
                     "name": "שאיפת גוף זר",
-                    "algorithmFile": "shavatz-algorithm.pdf",
-                    "protocolFile": "shavatz.pdf",
                     "id": "foreign-body-aspiration"
                 },
                 {
                     "name": "אנגיואדמה",
-                    "algorithmFile": "shavatz-algorithm.pdf",
-                    "protocolFile": "shavatz.pdf",
+                    "algorithmFile": "angioedema_algorithm.pdf",
+                    "protocolFile": "angioedema_protocol.pdf",
                     "id": "angioedema"
                 },
                 {
                     "name": "אנפילקסיס",
-                    "algorithmFile": "shavatz-algorithm.pdf",
-                    "protocolFile": "shavatz.pdf",
                     "id": "anaphylaxis"
                 }
             ]
         },
         {
-            "section": "Poisonings and Environmental Emergencies",
+            "section": "הרעלות ומצבי חירום סביבתיים",
             "protocols": [
                 {
                     "name": "הכשת נחש",
-                    "algorithmFile": "shavatz-algorithm.pdf",
-                    "protocolFile": "shavatz.pdf",
                     "id": "snake-bite"
                 },
                 {
                     "name": "עקיצת עקרב",
-                    "algorithmFile": "shavatz-algorithm.pdf",
-                    "protocolFile": "shavatz.pdf",
                     "id": "scorpion-sting"
                 },
                 {
                     "name": "טביעה",
-                    "algorithmFile": "shavatz-algorithm.pdf",
-                    "protocolFile": "shavatz.pdf",
                     "id": "drowning"
                 },
                 {
                     "name": "הרעלת אקמול",
-                    "algorithmFile": "shavatz-algorithm.pdf",
-                    "protocolFile": "shavatz.pdf",
                     "id": "acetaminophen-poisoning"
                 }
             ]
         },
         {
-            "section": "Psychiatric / Neurological",
+            "section": "פסיכיאטרי / נוירולוגי",
             "protocols": [
                 {
                     "name": "סטטוס אפילפטיקוס",
-                    "algorithmFile": "shavatz-algorithm.pdf",
-                    "protocolFile": "shavatz.pdf",
                     "id": "status-epilepticus"
                 },
                 {
                     "name": "אגיטציה ופסיכוזה חדשה",
-                    "algorithmFile": "shavatz-algorithm.pdf",
-                    "protocolFile": "shavatz.pdf",
                     "id": "agitation-and-new-onset-psychosis"
                 },
                 {
                     "name": "שבץ מוחי",
-                    "algorithmFile": "shavatz-algorithm.pdf",
-                    "protocolFile": "shavatz.pdf",
+                    "algorithmFile": "stroke_algorithm.pdf",
+                    "protocolFile": "stroke_protocol.pdf",
                     "id": "stroke"
                 }
             ]
         },
         {
-            "section": "Infectious",
+            "section": "זיהומי",
             "protocols": [
                 {
                     "name": "חום ונויטרופניה",
-                    "algorithmFile": "shavatz-algorithm.pdf",
-                    "protocolFile": "shavatz.pdf",
                     "id": "fever-and-neutropenia"
                 },
                 {
                     "name": "שוק ספטי",
-                    "algorithmFile": "shavatz-algorithm.pdf",
-                    "protocolFile": "shavatz.pdf",
-                    "id": "septic-shock"
+                    "id": "septic-shock",
+                    "algorithmFile":"septic_shock_algorithm.pdf"
                 }
             ]
         }

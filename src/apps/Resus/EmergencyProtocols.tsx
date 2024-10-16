@@ -9,6 +9,7 @@ import { FaFilePdf } from 'react-icons/fa6';
 import { FaDiagramProject } from 'react-icons/fa6';
 import Drug from './Drug';
 import Drip from './Drip';
+import { ProtocolData } from './ResusInputs';
 
 const EmergencyProtocols: React.FC = () => {  
   const [protocolDrugs, setProtocolDrugs] = useState<string[]>([]);
@@ -38,11 +39,11 @@ const EmergencyProtocols: React.FC = () => {
 
     const foundProtocol = emergencyProtocols.emergencyProtocols
         .flatMap(section => section.protocols)
-        .find(p => p.id === protocol);
+        .find(p => p.id === protocol) as ProtocolData;
 
     if (foundProtocol) {
-      setAlgorithmFile(foundProtocol.algorithmFile);
-      setProtocolFile(foundProtocol.protocolFile);
+      setAlgorithmFile(foundProtocol.algorithmFile || '');
+      setProtocolFile(foundProtocol.protocolFile || '');
     } else {
       setAlgorithmFile('');
       setProtocolFile('');
@@ -61,14 +62,18 @@ const EmergencyProtocols: React.FC = () => {
         <h2 className="protocol-header">קבצים מצורפים</h2>
         <div className="protocol-body">
           <div className="pdf-links">
-            <a href={`https://mashlom.me/apps/pediatric/resus/pdfs/${algorithmFile}`} target="_blank" rel="noopener noreferrer" className="pdf-link">
+          {algorithmFile && (
+            <a href={`../src/assets/emek/protocols/${algorithmFile}`} target="_blank" rel="noopener noreferrer" className="pdf-link">
               <FaDiagramProject style={{fontSize: "3rem", color: "#1FB5A3"}}/>
-              <span>תרשים זרימה</span>
+              <span>אלגוריתם</span>
             </a>
-            <a href={`https://mashlom.me/apps/pediatric/resus/pdfs/${protocolFile}`} target="_blank" rel="noopener noreferrer" className="pdf-link">
+          )}
+          {protocolFile && (
+            <a href={`../src/assets/emek/protocols/${protocolFile}`} target="_blank" rel="noopener noreferrer" className="pdf-link">
               <FaFilePdf style={{fontSize: "3rem", color: "#1FB5A3"}} />
               <span>פרוטוקול</span>
             </a>
+          )}
           </div>
         </div>
       </div>
