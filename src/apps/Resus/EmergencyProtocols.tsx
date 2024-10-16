@@ -63,13 +63,13 @@ const EmergencyProtocols: React.FC = () => {
         <div className="protocol-body">
           <div className="pdf-links">
           {algorithmFile && (
-            <a href={`../src/assets/emek/protocols/${algorithmFile}`} target="_blank" rel="noopener noreferrer" className="pdf-link">
+            <a href={`/assets/emek/protocols/${algorithmFile}`} target="_blank" rel="noopener noreferrer" className="pdf-link">
               <FaDiagramProject style={{fontSize: "3rem", color: "#1FB5A3"}}/>
               <span>אלגוריתם</span>
             </a>
           )}
           {protocolFile && (
-            <a href={`../src/assets/emek/protocols/${protocolFile}`} target="_blank" rel="noopener noreferrer" className="pdf-link">
+            <a href={`/assets/emek/protocols/${protocolFile}`} target="_blank" rel="noopener noreferrer" className="pdf-link">
               <FaFilePdf style={{fontSize: "3rem", color: "#1FB5A3"}} />
               <span>פרוטוקול</span>
             </a>
