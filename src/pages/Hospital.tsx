@@ -15,6 +15,7 @@ const appComponents: Record<
   | { type: 'iframe'; urlPattern: string }
 > = {
   [MashlomApps.DEMO]: React.lazy(() => import('../apps/Demo/index.tsx')),
+  [MashlomApps.CorrectedAge]: React.lazy(() => import('../apps/CorrectedAge/index.tsx')),
   [MashlomApps.EOS]: {
     type: 'iframe',
     urlPattern: 'https://mashlom.me/apps/pediatric/eos/?hospital=${hospital}',

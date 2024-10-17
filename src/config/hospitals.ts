@@ -23,6 +23,7 @@ export const hospitals: Record<string, HospitalConfig> = {
         apps:[
           MashlomApps.PHOTOTHERAPY,
           MashlomApps.EOS,
+          MashlomApps.CorrectedAge,
         ]
       },
       {

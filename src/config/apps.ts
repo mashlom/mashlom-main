@@ -7,7 +7,8 @@ export const MashlomApps = {
   TRIAGE: 'triage',
   PHOTOTHERAPY: 'phototherapy',
   RESUS: 'resus',
-  CPR: 'cpr'
+  CPR: 'cpr',
+  CorrectedAge: 'correctedAge',
 } as const;
 
 export type MashlomAppType = typeof MashlomApps[keyof typeof MashlomApps];
@@ -98,6 +99,19 @@ export const AppsConfigList: Record<MashlomAppType, AppConfig> = {
       url: "https://mashlom.me/#/apps/cpr",
       description: "החייאה",
       keywords: "רופאים, מחשבונים, רפואת ילדים, החייאה, resus"
+    }
+  },
+  [MashlomApps.CorrectedAge]: {
+    title: 'גיל מתוקן',
+    icon: 'faBalanceScale',
+    credit: 'אסותא אשדוד',
+    inDevelopment: true,
+    seo: {
+      tabTitle: "גיל מתוקן - מחלקת ילדים",
+      title: 'גיל מתוקן, חטיבת ילדים',
+      url: "https://mashlom.me/#/apps/cpr/corrected-age",
+      description: "מחשבון גיל מתוקן",
+      keywords: "רופאים, מחשבונים, רפואת ילדים, גיל מתוקן, corrected age"
     }
   },
 };
