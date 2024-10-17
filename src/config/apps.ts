@@ -6,7 +6,8 @@ export const MashlomApps = {
   DEMO: 'demo',
   TRIAGE: 'triage',
   PHOTOTHERAPY: 'phototherapy',
-  RESUS: 'resus'
+  RESUS: 'resus',
+  CPR: 'cpr'
 } as const;
 
 export type MashlomAppType = typeof MashlomApps[keyof typeof MashlomApps];
@@ -84,6 +85,19 @@ export const AppsConfigList: Record<MashlomAppType, AppConfig> = {
       url: "https://mashlom.me/#/apps/resus",
       description: "מחשבון תרופות החייאה",
       keywords: "רופאים, מחשבונים, רפואת ילדים, תרופות החייאה, resus"
+    }
+  },
+  [MashlomApps.CPR]: {
+    title: 'החייאה',
+    icon: 'faHeartPulse',
+    credit: 'העמק',
+    inDevelopment: true,
+    seo: {
+      tabTitle: "החייאה - מלרד ילדים",
+      title: 'החייאה, מלר"ד ילדים',
+      url: "https://mashlom.me/#/apps/cpr",
+      description: "החייאה",
+      keywords: "רופאים, מחשבונים, רפואת ילדים, החייאה, resus"
     }
   },
 };

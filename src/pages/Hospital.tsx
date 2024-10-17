@@ -28,6 +28,7 @@ const appComponents: Record<
     urlPattern: 'https://mashlom.me/apps/pediatric/triage/?hospital=${hospital}',
   },
   [MashlomApps.RESUS]: React.lazy(() => import('../apps/Resus/Resus.tsx')),
+  [MashlomApps.CPR]: React.lazy(() => import('../apps/Cpr/Cpr.tsx')),
   // Add more apps here
 };
 

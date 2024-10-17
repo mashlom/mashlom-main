@@ -28,6 +28,7 @@ export const hospitals: Record<string, HospitalConfig> = {
       {
         name: 'מלר"ד ילדים',
         apps:[
+          MashlomApps.CPR,
           MashlomApps.TRIAGE,
           MashlomApps.RESUS
         ]
@@ -81,6 +82,7 @@ export const hospitals: Record<string, HospitalConfig> = {
         name: 'מלר"ד ילדים',
         apps:[
           MashlomApps.RESUS,
+          MashlomApps.CPR,
           MashlomApps.TRIAGE,
           MashlomApps.PHOTOTHERAPY,
         ]

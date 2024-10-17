@@ -3,7 +3,6 @@ import { Routes, Route, useParams, Navigate } from 'react-router-dom';
 import './Resus.css';
 import '../AppStyle.css';
 import Meds from './Meds';
-import Cpr from './Cpr';
 import EmergencyProtocols from './EmergencyProtocols';
 import FooterNav from './ResusFooterNav';
 import ResusInputs from './ResusInputs';
@@ -38,7 +37,6 @@ const ResusContent: React.FC = () => {
             <Route index element={<Navigate to="protocols" replace />} />
             <Route path="meds" element={<Meds />} />
             <Route path="protocols" element={<EmergencyProtocols />} />
-            <Route path="cpr" element={<Cpr />} />
           </Routes>          
         </div>
       </div>
