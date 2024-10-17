@@ -1,0 +1,36 @@
+.log-header {
+    color: white;
+    background-color: #103C6E;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: 1rem;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.toggle-icon {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.section-name {
+    text-align: center;
+    flex-grow: 1;
+}
+
+.list-group {
+    padding: 0px;
+}
+
+.list-group-item {
+    border: none;
+    border-bottom: 1px solid #6585a0;
+    border-radius: 0;
+    /* Remove rounded corners */
+}

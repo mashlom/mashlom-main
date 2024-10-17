@@ -1,101 +1,145 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, createContext, useContext, ReactNode } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrash, faEdit, faPlus } from '@fortawesome/free-solid-svg-icons';
+import EntryDialog from './EntryDialog';
+import './CPRLog.css';
 
-interface PatientDetails {
-  name: string;
-  age: number;
-  [key: string]: any; // Allow for additional fields
-}
-
-interface Action {
-  type: 'patientDetails' | 'action';
+export interface LogEntry {
+  id: string;
   timestamp: string;
-  details?: PatientDetails;
-  action?: string;
+  text: string;
+  type: 'patientDetails' | 'medication' | 'action';
 }
 
-interface CPRLog {
+export interface CPRLog {
   patientId: string;
-  actions: Action[];
+  entries: LogEntry[];
 }
 
-// Custom hook to manage CPR logs
-const useCPRLogs = () => {
-  const [logs, setLogs] = useState<CPRLog[]>([]);
+interface CPRLogContextType {
+  log: CPRLog;
+  addEntry: (entry: Omit<LogEntry, 'id'>) => void;
+  updateEntry: (id: string, updatedEntry: Partial<LogEntry>) => void;
+  deleteEntry: (id: string) => void;
+}
 
+const CPRLogContext = createContext<CPRLogContextType | undefined>(undefined);
+
+export const CPRLogProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+  const [log, setLog] = useState<CPRLog>({ patientId: '', entries: [] });
   useEffect(() => {
-    // Load logs from localStorage on component mount
-    const storedLogs = localStorage.getItem('cprLogs');
-    if (storedLogs) {
-      setLogs(JSON.parse(storedLogs));
+    const storedLog = localStorage.getItem('cprLog');
+    if (storedLog) {
+      setLog(JSON.parse(storedLog));
     }
   }, []);
 
   useEffect(() => {
-    // Save logs to localStorage whenever they change
-    localStorage.setItem('cprLogs', JSON.stringify(logs));
-  }, [logs]);
+    localStorage.setItem('cprLog', JSON.stringify(log));
+  }, [log]);
 
-  const addLog = (patientId: string, log: Omit<Action, 'timestamp'>) => {
-    setLogs(prevLogs => {
-      const existingLogIndex = prevLogs.findIndex(l => l.patientId === patientId);
-      const timestamp = new Date().toLocaleString('he-IL', { timeZone: 'Asia/Jerusalem' });
-      const newLog: Action = { ...log, timestamp };
-
-      if (existingLogIndex !== -1) {
-        // Update existing log
-        const updatedLogs = [...prevLogs];
-        updatedLogs[existingLogIndex] = {
-          ...updatedLogs[existingLogIndex],
-          actions: [...updatedLogs[existingLogIndex].actions, newLog]
-        };
-        return updatedLogs.slice(-5); // Keep only the last 5 logs (LRU)
-      } else {
-        // Add new log
-        return [...prevLogs, { patientId, actions: [newLog] }].slice(-5); // Keep only the last 5 logs (LRU)
-      }
-    });
+  const addEntry = (entry: Omit<LogEntry, 'id'>) => {
+    const newEntry = { ...entry, id: Date.now().toString() };
+    setLog(prevLog => ({
+      ...prevLog,
+      entries: [...prevLog.entries, newEntry]
+    }));
   };
 
-  return { logs, addLog };
+  const updateEntry = (id: string, updatedEntry: Partial<LogEntry>) => {
+    setLog(prevLog => ({
+      ...prevLog,
+      entries: prevLog.entries.map(entry =>
+        entry.id === id ? { ...entry, ...updatedEntry } : entry
+      )
+    }));
+  };
+
+  const deleteEntry = (id: string) => {
+    setLog(prevLog => ({
+      ...prevLog,
+      entries: prevLog.entries.filter(entry => entry.id !== id)
+    }));
+  };
+
+  return (
+    <CPRLogContext.Provider value={{ log, addEntry, updateEntry, deleteEntry }}>
+      {children}
+    </CPRLogContext.Provider>
+  );
+};
+
+export const useCPRLog = () => {
+  const context = useContext(CPRLogContext);
+  if (context === undefined) {
+    throw new Error('useCPRLog must be used within a CPRLogProvider');
+  }
+  return context;
 };
 
 const CPRLogComponent: React.FC = () => {
-  const { logs, addLog } = useCPRLogs();
+  const { log, addEntry, updateEntry, deleteEntry } = useCPRLog();
+  const [dialogEntry, setDialogEntry] = useState<LogEntry | null>(null);
 
-  const setPatientDetails = (patientId: string, details: PatientDetails) => {
-    addLog(patientId, { type: 'patientDetails', details });
-  };
-
-  const addAction = (patientId: string, action: string) => {
-    addLog(patientId, { type: 'action', action });
-  };
-  console.log(addAction, setPatientDetails);
+  const renderEntries = (type: LogEntry['type']) => (
+    <ul>
+      {log.entries
+        .filter(entry => entry.type === type)
+        .map(entry => (
+          <li key={entry.id}>
+            {entry.timestamp && <span>{new Date(entry.timestamp).toLocaleString('he-IL')}: </span>}
+            <span>{entry.text}</span>
+            <button onClick={() => setDialogEntry(entry)}>
+              <FontAwesomeIcon icon={faEdit} />
+            </button>
+            <button onClick={() => deleteEntry(entry.id)}>
+              <FontAwesomeIcon icon={faTrash} />
+            </button>
+          </li>
+        ))}
+    </ul>
+  );
 
   return (
     <div className="cpr-log-component">
-      <h2 className="text-xl font-bold mb-4">CPR Log and Audit</h2>
-      {logs.map((log, index) => (
-        <div key={index} className="mb-4 p-4 border rounded">
-          <h3 className="text-lg font-semibold">Patient ID: {log.patientId}</h3>
-          <ul className="list-disc pl-5">
-            {log.actions.map((action, actionIndex) => (
-              <li key={actionIndex} className="mb-2">
-                <span className="font-medium">{action.timestamp}</span>:{' '}
-                {action.type === 'patientDetails' ? (
-                  <span>Patient Details Updated: {JSON.stringify(action.details)}</span>
-                ) : (
-                  <span>Action: {action.action}</span>
-                )}
-              </li>
-            ))}
-          </ul>
-        </div>
-      ))}
-      <div className="mt-4">
-        <p className="text-sm text-gray-600">
-          Note: This component stores up to 5 CPR processes in local storage.
-        </p>
-      </div>
+      <section>
+        <h3 className="section-header">פרטי המטופל</h3>
+        {renderEntries('patientDetails')}
+        <button onClick={() => setDialogEntry({ id: '', timestamp: '', text: '', type: 'patientDetails' })}>
+          <FontAwesomeIcon icon={faPlus} /> הוסף
+        </button>
+      </section>
+
+      <section>
+        <h3 className="section-header">תרופות שניתנו</h3>
+        {renderEntries('medication')}
+        <button onClick={() => setDialogEntry({ id: '', timestamp: '', text: '', type: 'medication' })}>
+          <FontAwesomeIcon icon={faPlus} /> הוסף
+        </button>
+      </section>
+
+      <section>
+        <h3 className="section-header">פעולות שנעשו</h3>
+        {renderEntries('action')}
+        <button onClick={() => setDialogEntry({ id: '', timestamp: '', text: '', type: 'action' })}>
+          <FontAwesomeIcon icon={faPlus} /> הוסף
+        </button>
+      </section>
+
+      {dialogEntry && (
+        <EntryDialog
+          entry={dialogEntry.id ? dialogEntry : undefined}
+          onSave={(entry) => {
+            if (dialogEntry.id) {
+              updateEntry(dialogEntry.id, entry);
+            } else {
+              addEntry(entry);
+            }
+            setDialogEntry(null);
+          }}
+          onClose={() => setDialogEntry(null)}
+        />
+      )}
     </div>
   );
 };

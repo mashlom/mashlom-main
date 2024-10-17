@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faVolumeLow, faRepeat } from '@fortawesome/free-solid-svg-icons';
 import Metronome from './Metronome';
 import { useNotification } from './Notifications';
+import { useCPRLog } from './CPRLog';
 
 interface CprManagerProps {
   // Add any props if needed
@@ -11,10 +12,11 @@ interface CprManagerProps {
 const CprManager: React.FC<CprManagerProps> = () => {
   const [isRunning, setIsRunning] = useState(false);
   const [elapsedTime, setElapsedTime] = useState(0);
-  const [countdownTime, setCountdownTime] = useState(20); // 2 minutes in seconds
+  const [countdownTime, setCountdownTime] = useState(20);
   const [isSoundOn, setIsSoundOn] = useState(true);
   const notificationShownRef = useRef(false);
   const { showNotification } = useNotification();
+  const { addEntry } = useCPRLog();
 
   const showTimerNotification = useCallback(() => {
     if (!notificationShownRef.current) {
@@ -26,15 +28,19 @@ const CprManager: React.FC<CprManagerProps> = () => {
           { 
             text: "בוצע", 
             onClick: () => {
-              setCountdownTime(20); // Reset timer to 30 seconds
+              setCountdownTime(20);
               notificationShownRef.current = false;
+              addEntry({
+                timestamp: new Date().toISOString(),
+                text: "הוחלפו המעסים",
+                type: 'action'
+              });
             }
           }
         ],
-        // audio: "/sounds/notification.mp3" // Optional: Add a sound for the notification
       });
     }
-  }, [showNotification]);
+  }, [showNotification, addEntry]);
 
   useEffect(() => {
     let interval: NodeJS.Timeout;
@@ -68,12 +74,29 @@ const CprManager: React.FC<CprManagerProps> = () => {
   const startCpr = () => {
     setIsRunning(true);
     notificationShownRef.current = false;
+    addEntry({
+      timestamp: new Date().toISOString(),
+      text: "החייאה התחילה",
+      type: 'action'
+    });
   };
-
+  
   const endCpr = (reason: 'ROSC' | 'DEATH') => {
     setIsRunning(false);
     notificationShownRef.current = false;
-    // Handle end of CPR (e.g., log the reason, show a summary, etc.)
+    if (reason === 'ROSC') {
+      addEntry({
+        timestamp: new Date().toISOString(),
+        text: "ההחיאה הסתיימה בהצלחה",
+        type: 'action'
+      });
+    } else {
+      addEntry({
+        timestamp: new Date().toISOString(),
+        text: "נקבע מות המטופל",
+        type: 'action'
+      });
+    }
     console.log(`CPR ended: ${reason}`);
   };
 
@@ -85,7 +108,7 @@ const CprManager: React.FC<CprManagerProps> = () => {
       border: '1px solid #ccc',
       borderRadius: '5px',
       padding: '20px',
-      boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1);'
+      boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)'
     }}>
       {/* Right: Clocks and Timers */}
       <div style={{ padding: '20px' }}>
