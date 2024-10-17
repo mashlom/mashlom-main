@@ -1,0 +1,8 @@
+.selection-view .btn:hover .hover-effect {
+    width: 150%;
+    height: 150%;
+    opacity: 0.3;
+  }
+  .selection-view .btn:hover {
+    transform: scale(1.05);
+  }
