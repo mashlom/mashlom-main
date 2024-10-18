@@ -1,39 +1,72 @@
 .cpr-log-component {
-    direction: rtl;
-  }
-  
-  .section-header {
-    text-align: right;
-    margin-bottom: 10px;
-  }
-  
-  ul {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  li {
-    margin-bottom: 10px;
-  }
-  
-  button {
-    margin-right: 5px;
-  }
-  
-  .dialog-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .dialog {
-    background-color: white;
-    padding: 20px;
-    border-radius: 5px;
-  }
+  direction: rtl;
+}
+
+.cpr-log-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.cpr-log-table th,
+.cpr-log-table td {
+  border: 1px solid #DFE2E6;
+  padding: 8px;
+}
+
+.cpr-log-table thead {
+  background-color: white;
+}
+
+.cpr-log-table .table-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cpr-log-table .table-header button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2em;
+  color: #1FB5A3;
+}
+
+.cpr-log-table tbody tr.odd {
+  background-color: #F5F5F5;
+}
+
+.cpr-log-table tbody tr.even {
+  background-color: white;
+}
+
+.cpr-log-table .timestamp {
+  width: 100px;
+  text-align: center;
+}
+
+.cpr-log-table .entry-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cpr-log-table .entry-actions {
+  display: flex;
+  gap: 5px;
+}
+
+.cpr-log-table .entry-actions button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #1FB5A3;
+}
+
+.important-icon {
+  width: 16px;
+  height: 16px;
+  vertical-align: middle;
+  color: var(--page-font-color) !important;
+  margin-left: 7px;
+}

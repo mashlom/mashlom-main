@@ -33,7 +33,8 @@ const CprManager: React.FC<CprManagerProps> = () => {
               addEntry({
                 timestamp: new Date().toISOString(),
                 text: "הוחלפו המעסים",
-                type: 'action'
+                type: 'action',
+                isImportant: false
               });
             }
           }
@@ -77,7 +78,8 @@ const CprManager: React.FC<CprManagerProps> = () => {
     addEntry({
       timestamp: new Date().toISOString(),
       text: "החייאה התחילה",
-      type: 'action'
+      type: 'action',
+      isImportant: true
     });
   };
   
@@ -88,13 +90,15 @@ const CprManager: React.FC<CprManagerProps> = () => {
       addEntry({
         timestamp: new Date().toISOString(),
         text: "ההחיאה הסתיימה בהצלחה",
-        type: 'action'
+        type: 'action',
+        isImportant: true
       });
     } else {
       addEntry({
         timestamp: new Date().toISOString(),
         text: "נקבע מות המטופל",
-        type: 'action'
+        type: 'action',
+        isImportant: true
       });
     }
     console.log(`CPR ended: ${reason}`);

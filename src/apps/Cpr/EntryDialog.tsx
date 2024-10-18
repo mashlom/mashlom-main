@@ -11,9 +11,10 @@ const EntryDialog: React.FC<EntryDialogProps> = ({ entry, onSave, onClose }) => 
   const [timestamp, setTimestamp] = useState(entry?.timestamp || new Date().toISOString());
   const [text, setText] = useState(entry?.text || '');
   const [type, setType] = useState<LogEntry['type']>(entry?.type || 'action');
+  const [isImportant, setIsImportant] = useState(entry?.isImportant || false);
 
   const handleSave = () => {
-    onSave({ timestamp, text, type });
+    onSave({ timestamp, text, type, isImportant });
     onClose();
   };
 
@@ -39,6 +40,14 @@ const EntryDialog: React.FC<EntryDialogProps> = ({ entry, onSave, onClose }) => 
           <option value="medication">תרופות שניתנו</option>
           <option value="action">פעולות שנעשו</option>
         </select>
+        <label>
+          <input
+            type="checkbox"
+            checked={isImportant}
+            onChange={(e) => setIsImportant(e.target.checked)}
+          />
+          סמן כחשוב
+        </label>
         <button onClick={handleSave}>שמור</button>
         <button onClick={onClose}>ביטול</button>
       </div>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect, createContext, useContext, ReactNode } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrash, faEdit, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faTrash, faEdit, faCirclePlus } from '@fortawesome/free-solid-svg-icons';
+import Image from '../../components/Image';
 import EntryDialog from './EntryDialog';
 import './CPRLog.css';
 
@@ -9,6 +10,7 @@ export interface LogEntry {
   timestamp: string;
   text: string;
   type: 'patientDetails' | 'medication' | 'action';
+  isImportant: boolean;
 }
 
 export interface CPRLog {
@@ -27,6 +29,7 @@ const CPRLogContext = createContext<CPRLogContextType | undefined>(undefined);
 
 export const CPRLogProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [log, setLog] = useState<CPRLog>({ patientId: '', entries: [] });
+
   useEffect(() => {
     const storedLog = localStorage.getItem('cprLog');
     if (storedLog) {
@@ -81,50 +84,60 @@ const CPRLogComponent: React.FC = () => {
   const { log, addEntry, updateEntry, deleteEntry } = useCPRLog();
   const [dialogEntry, setDialogEntry] = useState<LogEntry | null>(null);
 
-  const renderEntries = (type: LogEntry['type']) => (
-    <ul>
-      {log.entries
-        .filter(entry => entry.type === type)
-        .map(entry => (
-          <li key={entry.id}>
-            {entry.timestamp && <span>{new Date(entry.timestamp).toLocaleString('he-IL')}: </span>}
-            <span>{entry.text}</span>
-            <button onClick={() => setDialogEntry(entry)}>
-              <FontAwesomeIcon icon={faEdit} />
-            </button>
-            <button onClick={() => deleteEntry(entry.id)}>
-              <FontAwesomeIcon icon={faTrash} />
-            </button>
-          </li>
-        ))}
-    </ul>
-  );
+  const formatTime = (timestamp: string) => {
+    const date = new Date(timestamp);
+    return date.toLocaleTimeString('he-IL', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+  };
+
+  const renderTable = (type: LogEntry['type'], title: string) => {
+    const entries = log.entries.filter(entry => entry.type === type);
+
+    return (
+      <table className="cpr-log-table">
+        <thead>
+          <tr>
+            <th colSpan={2}>
+              <div className="table-header">
+                <span>{title}</span>
+                <button onClick={() => setDialogEntry({ id: '', timestamp: '', text: '', type, isImportant: false })}>
+                  <FontAwesomeIcon icon={faCirclePlus} />
+                </button>
+              </div>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {entries.map((entry, index) => (
+            <tr key={entry.id} className={index % 2 === 0 ? 'even' : 'odd'}>
+              <td className="timestamp">{formatTime(entry.timestamp)}</td>
+              <td>
+                <div className="entry-content">
+                  <span>
+                    {entry.isImportant && <Image src="bullets/star.svg" alt="Important" className="important-icon" />}
+                    {entry.text}
+                  </span>
+                  <div className="entry-actions">
+                    <button onClick={() => setDialogEntry(entry)}>
+                      <FontAwesomeIcon icon={faEdit} />
+                    </button>
+                    <button onClick={() => deleteEntry(entry.id)}>
+                      <FontAwesomeIcon icon={faTrash} />
+                    </button>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    );
+  };
 
   return (
     <div className="cpr-log-component">
-      <section>
-        <h3 className="section-header">פרטי המטופל</h3>
-        {renderEntries('patientDetails')}
-        <button onClick={() => setDialogEntry({ id: '', timestamp: '', text: '', type: 'patientDetails' })}>
-          <FontAwesomeIcon icon={faPlus} /> הוסף
-        </button>
-      </section>
-
-      <section>
-        <h3 className="section-header">תרופות שניתנו</h3>
-        {renderEntries('medication')}
-        <button onClick={() => setDialogEntry({ id: '', timestamp: '', text: '', type: 'medication' })}>
-          <FontAwesomeIcon icon={faPlus} /> הוסף
-        </button>
-      </section>
-
-      <section>
-        <h3 className="section-header">פעולות שנעשו</h3>
-        {renderEntries('action')}
-        <button onClick={() => setDialogEntry({ id: '', timestamp: '', text: '', type: 'action' })}>
-          <FontAwesomeIcon icon={faPlus} /> הוסף
-        </button>
-      </section>
+      {renderTable('patientDetails', 'פרטי המטופל')}
+      {renderTable('medication', 'תרופות שניתנו')}
+      {renderTable('action', 'פעולות שנעשו')}
 
       {dialogEntry && (
         <EntryDialog
