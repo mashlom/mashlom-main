@@ -9,6 +9,13 @@ import ResusInputs from './ResusInputs';
 import { ResusProvider, useResusContext } from './ResusContext';
 import emergencyProtocols from './data/emergency-protocols.json';
 
+interface ProtocolData {
+  id: string;
+  name: string;
+  algorithmFile?: string;
+  protocolFile?: string;
+}
+
 const ResusContent: React.FC = () => {
   const { protocol } = useResusContext();
   
@@ -21,7 +28,8 @@ const ResusContent: React.FC = () => {
       return "מערכת חדר הלם";
     }
     
-    const allProtocols = emergencyProtocols.emergencyProtocols.flatMap(section => section.protocols);
+    const allProtocols = (emergencyProtocols.emergencyProtocols as { protocols: ProtocolData[] }[])
+      .flatMap(section => section.protocols);
     const selectedProtocol = allProtocols.find(p => p.id === protocol);
     
     return selectedProtocol ? `טיפול ב${selectedProtocol.name}` : "מערכת חדר הלם";

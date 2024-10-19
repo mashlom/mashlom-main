@@ -9,7 +9,13 @@ import { FaFilePdf } from 'react-icons/fa6';
 import { FaDiagramProject } from 'react-icons/fa6';
 import Drug from './Drug';
 import Drip from './Drip';
-import { ProtocolData } from './ResusInputs';
+
+interface ProtocolData {
+  id: string;
+  name: string;
+  algorithmFile?: string;
+  protocolFile?: string;
+}
 
 const EmergencyProtocols: React.FC = () => {  
   const [protocolDrugs, setProtocolDrugs] = useState<string[]>([]);
@@ -37,9 +43,9 @@ const EmergencyProtocols: React.FC = () => {
       setDefiConfigs([]);
     }
 
-    const foundProtocol = emergencyProtocols.emergencyProtocols
-        .flatMap(section => section.protocols)
-        .find(p => p.id === protocol) as ProtocolData;
+    const foundProtocol = (emergencyProtocols.emergencyProtocols as { protocols: ProtocolData[] }[])
+      .flatMap(section => section.protocols)
+      .find(p => p.id === protocol);
 
     if (foundProtocol) {
       setAlgorithmFile(foundProtocol.algorithmFile || '');
