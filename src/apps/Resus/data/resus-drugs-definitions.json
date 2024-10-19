@@ -12,13 +12,13 @@
       "prepare_instructions": "To get Adrenaline 1mg/10ml (1:10,000) take 1 ml of Adrenaline 1mg/1ml and dilute it  with 9 ml of NACL 0.9%"
     },
     {
-      "id": "Adrenaline1:10,000_ET_0.1_mg",
-      "name": "Adrenaline 1:10,000",
+      "id": "Adrenaline1:1000_ET_0.1_mg",
+      "name": "Adrenaline 1:1000",
       "howToGive": "ET",
       "dose_per_kg": 0.1,
       "dose_unit": "mg",
       "concentration": "1/1",
-      "comment": "add 5 ml of NACL prior to administration"
+      "comment": "Add the dosage to a 5 ml saline, injected through the endotracheal tube, and perform 5 ventilation with the Ambu bag"
     },
     {
       "id": "Atropine1:10,000_IV_0.02_mg",
@@ -477,7 +477,7 @@
       "name": "Resus Drugs",
       "drugs": [
         "Adrenaline1:10,000_IV_0.01_mg",
-        "Adrenaline1:10,000_ET_0.1_mg",
+        "Adrenaline1:1000_ET_0.1_mg",
         "Atropine1:10,000_IV_0.02_mg",
         "Amiodarone_IV_5_mg",
         "Lidocaine_IV_1_mg",
@@ -560,7 +560,7 @@
       "protocolId": "cardiac-arrest",
       "drugs": [
         "Adrenaline1:10,000_IV_0.01_mg",
-        "Adrenaline1:10,000_ET_0.1_mg",
+        "Adrenaline1:1000_ET_0.1_mg",
         "Amiodarone_IV_5_mg",
         "Lidocaine_IV_1_mg",
         "MagnesiumSulfate_IV_50_mg",
@@ -605,7 +605,7 @@
       "protocolId": "symptomatic-bradycardia",
       "drugs": [
         "Adrenaline1:10,000_IV_0.01_mg",
-        "Adrenaline1:10,000_ET_0.1_mg",
+        "Adrenaline1:1000_ET_0.1_mg",
         "Atropine1:10,000_IV_0.02_mg"
       ]
     },
