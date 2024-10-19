@@ -54,7 +54,9 @@
                 },
                 {
                     "name": "DKA",
-                    "id": "dka"
+                    "id": "dka",
+                    "protocolFile":"dka_protocol.pdf",
+                    "algorithmFile":"dka_algorithm.pdf"
                 },
                 {
                     "name": "היפראמונימיה",
@@ -71,7 +73,9 @@
             "protocols": [
                 {
                     "name": "אסטמה",
-                    "id": "asthma"
+                    "id": "asthma",
+                    "protocolFile":"asthma_protocol.pdf",
+                    "algorithmFile":"asthma_algorithm.pdf"
                 },
                 {
                     "name": "סטרידור",
@@ -79,7 +83,9 @@
                 },
                 {
                     "name": "שאיפת גוף זר",
-                    "id": "foreign-body-aspiration"
+                    "id": "foreign-body-aspiration",
+                    "protocolFile":"foreign_body_aspiration_protocol.pdf",
+                    "algorithmFile":"foreign_body_aspiration_algorithm.pdf"
                 },
                 {
                     "name": "אנגיואדמה",
@@ -98,15 +104,21 @@
             "protocols": [
                 {
                     "name": "הכשת נחש",
-                    "id": "snake-bite"
+                    "id": "snake-bite",
+                    "algorithmFile": "snake_bite_algorithm.pdf",
+                    "protocolFile": "snake_bite_protocol.pdf"
                 },
                 {
                     "name": "עקיצת עקרב",
-                    "id": "scorpion-sting"
+                    "id": "scorpion-sting",
+                    "algorithmFile": "scorpion_sting_algorithm.pdf",
+                    "protocolFile": "scorpion_sting_protocol.pdf"
                 },
                 {
                     "name": "טביעה",
-                    "id": "drowning"
+                    "id": "drowning",
+                    "protocolFile":"drowning_protocol.pdf",
+                    "algorithmFile":"drowning_algorithm.pdf"
                 },
                 {
                     "name": "הרעלת אקמול",
@@ -119,7 +131,9 @@
             "protocols": [
                 {
                     "name": "סטטוס אפילפטיקוס",
-                    "id": "status-epilepticus"
+                    "id": "status-epilepticus",
+                    "protocolFile":"status_epilepticus_protocol.pdf",
+                    "algorithmFile":"status_epilepticus_algorithm.pdf"
                 },
                 {
                     "name": "אגיטציה ופסיכוזה חדשה",
@@ -138,7 +152,9 @@
             "protocols": [
                 {
                     "name": "חום ונויטרופניה",
-                    "id": "fever-and-neutropenia"
+                    "id": "fever-and-neutropenia",
+                    "algorithmFile":"fever_neutropenia_algorithm.pdf",
+                    "protocolFile":"fever_neutropenia_protocol.pdf"
                 },
                 {
                     "name": "שוק ספטי",
