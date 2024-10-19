@@ -19,8 +19,9 @@
                     "algorithmFile":"bradycardia_algorithm.pdf"
                 },
                 {
-                    "name": "Massive blood transfusion",
-                    "id": "massive-blood-transfusion"
+                    "name": "Massive Blood Transfusion",
+                    "id": "massive-blood-transfusion",
+                    "protocolFile":"massive_blood_transfusion_protocol.pdf"
                 }
             ]
         },
@@ -64,7 +65,9 @@
                 },
                 {
                     "name": "יל\"ד",
-                    "id": "hypertension"
+                    "id": "hypertension",
+                    "protocolFile":"hypertension_protocol.pdf",
+                    "algorithmFile":"hypertension_algorithm.pdf"
                 }
             ]
         },
@@ -79,7 +82,9 @@
                 },
                 {
                     "name": "סטרידור",
-                    "id": "stridor"
+                    "id": "stridor",
+                    "protocolFile":"stridor_protocol.pdf",
+                    "algorithmFile":"stridor_algorithm.pdf"
                 },
                 {
                     "name": "שאיפת גוף זר",
