@@ -3,14 +3,16 @@ import { NotificationProvider } from './Notifications';
 import { CPRLogProvider } from './CPRLog';
 import CprManager from './CprManager';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFileLines, faHeartPulse } from '@fortawesome/free-solid-svg-icons';
+import { faFileLines, faHeartPulse, faSection } from '@fortawesome/free-solid-svg-icons';
 import CPRLogComponent from './CPRLog';
 import VitalSigns from './VitalSigns';
+import MedicalProcedures from './MedicalProcedures';
 import './Cpr.css';
 
 const CprContent: React.FC = () => {
   const [logExpanded, setLogExpanded] = useState(false);
   const [vitalSignsExpanded, setVitalSignsExpanded] = useState(false);
+  const [proceduresExpanded, setProceduresExpanded] = useState(false);
 
   const toggleLog = () => {
     setLogExpanded(!logExpanded);
@@ -18,6 +20,10 @@ const CprContent: React.FC = () => {
 
   const toggleVitalSigns = () => {
     setVitalSignsExpanded(!vitalSignsExpanded);
+  };
+
+  const toggleProcedures = () => {
+    setProceduresExpanded(!proceduresExpanded);
   };
 
   return (
@@ -36,6 +42,18 @@ const CprContent: React.FC = () => {
           </div>
         )}
         
+        <h4 className="section-header" onClick={toggleProcedures}>
+          <span className="toggle-icon">
+            {proceduresExpanded ? '-' : '+'}
+          </span>
+          <span className="section-name"><FontAwesomeIcon icon={faSection} /> LINE / זונדה / קטטר</span>
+        </h4>
+        {proceduresExpanded && (
+          <div id="collapseable-area-procedures" className={`collapseable ${proceduresExpanded ? 'expanded' : ''}`}>
+            <MedicalProcedures />
+          </div>
+        )}
+
         <h4 className="section-header" onClick={toggleLog}>
           <span className="toggle-icon">
             {logExpanded ? '-' : '+'}
