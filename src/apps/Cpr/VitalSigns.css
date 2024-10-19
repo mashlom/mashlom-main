@@ -1,0 +1,89 @@
+.vital-signs {
+    margin-bottom: 20px;
+    direction: rtl;
+  }
+  
+  .vital-signs form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 20px;
+    justify-content: flex-start;
+  }
+  
+  .vital-signs .input-group {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    width: calc(50% - 10px);
+  }
+  
+  .vital-signs label {
+    font-weight: bold;
+    margin-left: 10px;
+    text-align: right;
+    white-space: nowrap;
+  }
+  
+  .vital-signs input {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 50%;
+    text-align: right;
+  }
+  
+  .vital-signs .button-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .vital-signs button {
+    padding: 10px 20px;
+    background-color: #1FB5A3;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .vital-signs button:hover {
+    background-color: #1a9c8c;
+  }
+  
+  .vital-signs-history {
+    margin-top: 20px;
+  }
+  
+  .vital-signs-entry {
+    background-color: #f5f5f5;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .vital-signs-entry .timestamp {
+    margin-bottom: 10px;
+  }
+  
+  .vital-signs-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  
+  .vital-signs-entry p {
+    margin: 5px 0;
+    text-align: right;
+  }
+  
+  @media (max-width: 768px) {
+    .vital-signs-grid {
+      grid-template-columns: 1fr;
+    }
+  }
