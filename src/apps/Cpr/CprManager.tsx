@@ -4,6 +4,7 @@ import { faVolumeLow, faRepeat } from '@fortawesome/free-solid-svg-icons';
 import Metronome from './Metronome';
 import { useNotification } from './Notifications';
 import { useCPRLog } from './CPRLog';
+import Modal, { ModalDirectionOptions } from '../../components/Modal';
 
 interface CprManagerProps {
   // Add any props if needed
@@ -14,6 +15,8 @@ const CprManager: React.FC<CprManagerProps> = () => {
   const [elapsedTime, setElapsedTime] = useState(0);
   const [countdownTime, setCountdownTime] = useState(20);
   const [isSoundOn, setIsSoundOn] = useState(true);
+  const [showDeathModal, setShowDeathModal] = useState(false);
+  const [deathTime, setDeathTime] = useState('');
   const notificationShownRef = useRef(false);
   const { showNotification } = useNotification();
   const { addEntry } = useCPRLog();
@@ -104,6 +107,29 @@ const CprManager: React.FC<CprManagerProps> = () => {
     console.log(`CPR ended: ${reason}`);
   };
 
+  const handleDeathButtonClick = () => {
+    const currentTime = new Date().toLocaleTimeString('he-IL', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+    setDeathTime(currentTime);
+    setShowDeathModal(true);
+  };
+
+  const handleConfirmDeath = () => {
+    setIsRunning(false);
+    notificationShownRef.current = false;
+    addEntry({
+      timestamp: new Date().toISOString(),
+      text: "נקבע מות המטופל",
+      type: 'action',
+      isImportant: true
+    });
+    showNotification({
+      icon: faRepeat,
+      text: `נקבע מות המטופל לשעה ${deathTime}. נא לא לשכוח ECG ו- POCUS`,
+      buttons: [{ text: "הבנתי", onClick: () => {} }],
+    });
+    setShowDeathModal(false);
+  };
+
   return (
     <div style={{ 
       display: 'flex', 
@@ -160,7 +186,7 @@ const CprManager: React.FC<CprManagerProps> = () => {
               ROSC
             </button>
             <button
-              onClick={() => endCpr('DEATH')}
+              onClick={handleDeathButtonClick}
               style={{
                 width: '120px',
                 height: '60px',
@@ -194,6 +220,23 @@ const CprManager: React.FC<CprManagerProps> = () => {
 
       {/* Metronome */}
       <Metronome isPlaying={isRunning && isSoundOn} bpm={100} />
+
+      <Modal
+        isOpen={showDeathModal}
+        setIsOpen={setShowDeathModal}
+        title="אישור קביעת מוות"
+        secondaryButton={{
+          text: "ביטול",
+          onClick: () => setShowDeathModal(false),
+        }}
+        primaryButton={{
+          text: "אישור",
+          onClick: handleConfirmDeath,
+        }}
+        direction={ModalDirectionOptions.RTL}
+      >
+        <p>שעת המוות נקבעה ל {deathTime}</p>
+      </Modal>
 
       <style>{`
         .switch {
