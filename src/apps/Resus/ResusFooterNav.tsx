@@ -59,6 +59,7 @@ const FooterNav: React.FC<FooterNavProps> = ({ hospital }) => {
             key="cpr"
             className="footer-button"
             onClick={() => openCpr()}
+            style={{display: 'none'}}
           >
             <div className="bottom-menu-color">
               <FontAwesomeIcon 
