@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { NotificationProvider } from './Notifications';
 import { CPRLogProvider } from './CPRLog';
 import CprManager from './CprManager';
@@ -8,6 +8,7 @@ import CPRLogComponent from './CPRLog';
 import VitalSigns from './VitalSigns';
 import MedicalProcedures from './MedicalProcedures';
 import ABCDEFProcedures from './ABCDEFProcedures';
+import ReminderBox from './ReminderBox';
 import './Cpr.css';
 
 const CprContent: React.FC = () => {
@@ -15,11 +16,33 @@ const CprContent: React.FC = () => {
   const [vitalSignsExpanded, setVitalSignsExpanded] = useState(false);
   const [proceduresExpanded, setProceduresExpanded] = useState(false);
   const [abcdefExpanded, setABCDEFExpanded] = useState(false);
+  const [showReminder, setShowReminder] = useState(false);
+  const [reminderShown, setReminderShown] = useState(false);
 
   const toggleLog = () => setLogExpanded(!logExpanded);
   const toggleVitalSigns = () => setVitalSignsExpanded(!vitalSignsExpanded);
   const toggleProcedures = () => setProceduresExpanded(!proceduresExpanded);
-  const toggleABCDEF = () => setABCDEFExpanded(!abcdefExpanded);
+  const toggleABCDEF = () => {
+    setABCDEFExpanded(!abcdefExpanded);
+    if (!abcdefExpanded) {
+      setReminderShown(false);
+    }
+  };
+
+  const handleCloseReminder = useCallback(() => {
+    setShowReminder(false);
+  }, []);
+
+  useEffect(() => {
+    let timer: NodeJS.Timeout;
+    if (abcdefExpanded && !reminderShown) {
+      timer = setTimeout(() => {
+        setShowReminder(true);
+        setReminderShown(true);
+      }, 3000);
+    }
+    return () => clearTimeout(timer);
+  }, [abcdefExpanded, reminderShown]);
 
   return (
     <>
@@ -65,6 +88,7 @@ const CprContent: React.FC = () => {
           </div>
         )}
       </div>
+      {showReminder && <ReminderBox onClose={handleCloseReminder} />}
     </>
   );
 };

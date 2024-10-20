@@ -1,0 +1,70 @@
+.reminder-box {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 300px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    z-index: 1000;
+  }
+  
+  .reminder-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .reminder-header h3 {
+    margin: 0;
+    font-size: 1.2rem;
+  }
+  
+  .reminder-header button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+  }
+  
+  .reminder-content {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .reminder-content li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+  }
+  
+  .reminder-content .icon {
+    width: 20px;
+    text-align: center;
+    margin-left: 10px;
+  }
+  
+  .reminder-content .text {
+    flex-grow: 1;
+  }
+  
+  .reminder-box.vibrate {
+    animation: vibrate 0.5s ease-in-out infinite;
+  }
+  
+  @keyframes vibrate {
+    0%, 100% {
+      transform: translate(-50%, 0);
+    }
+    25% {
+      transform: translate(-51%, 0);
+    }
+    75% {
+      transform: translate(-49%, 0);
+    }
+  }
