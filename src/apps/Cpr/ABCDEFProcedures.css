@@ -1,0 +1,64 @@
+.abcdef-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    justify-content: center;
+    padding: 1rem;
+  }
+  
+  .card {
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .bg-highlighted {
+    background-color: #FCEDD0;
+  }
+  
+  .bg-white {
+    background-color: white;
+  }
+  
+  .card-header {
+    padding: 1rem;
+    text-align: center;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  
+  .card-header h3 {
+    margin: 0;
+    font-size: 1.2rem;
+  }
+  
+  .card-header .letter {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-right: 0.25rem;
+  }
+  
+  .card-content {
+    padding: 1rem;
+    text-align: right;
+  }
+  
+  .card-content ul {
+    list-style-type: disc;
+    padding-right: 1.5rem;
+    margin: 0;
+  }
+  
+  .card-content li {
+    margin-bottom: 0.5rem;
+  }
+  
+  .card-content li.bold {
+    font-weight: bold;
+  }
+  
+  @media (max-width: 768px) {
+    .abcdef-grid {
+      grid-template-columns: 1fr;
+    }
+  }

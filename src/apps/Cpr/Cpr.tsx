@@ -3,37 +3,30 @@ import { NotificationProvider } from './Notifications';
 import { CPRLogProvider } from './CPRLog';
 import CprManager from './CprManager';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFileLines, faHeartPulse, faSection } from '@fortawesome/free-solid-svg-icons';
+import { faFileLines, faHeartPulse, faSection, faListCheck } from '@fortawesome/free-solid-svg-icons';
 import CPRLogComponent from './CPRLog';
 import VitalSigns from './VitalSigns';
 import MedicalProcedures from './MedicalProcedures';
+import ABCDEFProcedures from './ABCDEFProcedures';
 import './Cpr.css';
 
 const CprContent: React.FC = () => {
   const [logExpanded, setLogExpanded] = useState(false);
   const [vitalSignsExpanded, setVitalSignsExpanded] = useState(false);
   const [proceduresExpanded, setProceduresExpanded] = useState(false);
+  const [abcdefExpanded, setABCDEFExpanded] = useState(false);
 
-  const toggleLog = () => {
-    setLogExpanded(!logExpanded);
-  };
-
-  const toggleVitalSigns = () => {
-    setVitalSignsExpanded(!vitalSignsExpanded);
-  };
-
-  const toggleProcedures = () => {
-    setProceduresExpanded(!proceduresExpanded);
-  };
+  const toggleLog = () => setLogExpanded(!logExpanded);
+  const toggleVitalSigns = () => setVitalSignsExpanded(!vitalSignsExpanded);
+  const toggleProcedures = () => setProceduresExpanded(!proceduresExpanded);
+  const toggleABCDEF = () => setABCDEFExpanded(!abcdefExpanded);
 
   return (
     <>
       <CprManager />
       <div style={{ direction: 'rtl', marginTop: '20px' }}>
         <h4 className="section-header" onClick={toggleVitalSigns}>
-          <span className="toggle-icon">
-            {vitalSignsExpanded ? '-' : '+'}
-          </span>
+          <span className="toggle-icon">{vitalSignsExpanded ? '-' : '+'}</span>
           <span className="section-name"><FontAwesomeIcon icon={faHeartPulse} /> מדדים</span>
         </h4>
         {vitalSignsExpanded && (
@@ -43,9 +36,7 @@ const CprContent: React.FC = () => {
         )}
         
         <h4 className="section-header" onClick={toggleProcedures}>
-          <span className="toggle-icon">
-            {proceduresExpanded ? '-' : '+'}
-          </span>
+          <span className="toggle-icon">{proceduresExpanded ? '-' : '+'}</span>
           <span className="section-name"><FontAwesomeIcon icon={faSection} /> LINE / זונדה / קטטר</span>
         </h4>
         {proceduresExpanded && (
@@ -54,10 +45,18 @@ const CprContent: React.FC = () => {
           </div>
         )}
 
+        <h4 className="section-header" onClick={toggleABCDEF}>
+          <span className="toggle-icon">{abcdefExpanded ? '-' : '+'}</span>
+          <span className="section-name"><FontAwesomeIcon icon={faListCheck} /> ABCDEF </span>
+        </h4>
+        {abcdefExpanded && (
+          <div id="collapseable-area-abcdef" className={`collapseable ${abcdefExpanded ? 'expanded' : ''}`}>
+            <ABCDEFProcedures />
+          </div>
+        )}
+
         <h4 className="section-header" onClick={toggleLog}>
-          <span className="toggle-icon">
-            {logExpanded ? '-' : '+'}
-          </span>
+          <span className="toggle-icon">{logExpanded ? '-' : '+'}</span>
           <span className="section-name"><FontAwesomeIcon icon={faFileLines} /> יומן</span>
         </h4>      
         {logExpanded && (
