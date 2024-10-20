@@ -44,11 +44,13 @@ const StyledModalHeader = styled(BootstrapModal.Header)`
   align-items: center;
   justify-content: space-between;
   border-bottom: none;
+  background-color: #B9EDE7;
 `;
 
-const StyledModalTitle = styled(BootstrapModal.Title)`
+const StyledModalTitle = styled(BootstrapModal.Title)<{ $direction: string }>`
   flex-grow: 1;
-  text-align: right;
+  font-size: 1rem;
+  text-align: ${props => props.$direction === 'ltr' ? 'left' : 'right'};
 `;
 
 const CloseButton = styled.button`
@@ -91,7 +93,7 @@ const Modal: React.FC<ModalProps> = ({
       {!isHeaderHidden && (
         <StyledModalHeader>
           <CloseButton onClick={handleClose}>&times;</CloseButton>
-          {title && <StyledModalTitle><strong>{title}</strong></StyledModalTitle>}
+          {title && <StyledModalTitle $direction={direction}><strong>{title}</strong></StyledModalTitle>}
         </StyledModalHeader>
       )}
       <StyledBootstrapModal.Body>{children}</StyledBootstrapModal.Body>

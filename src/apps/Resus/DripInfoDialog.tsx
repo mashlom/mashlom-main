@@ -1,5 +1,5 @@
 import React from 'react';
-import Modal from '../../components/Modal'; // Adjust this import path as needed
+import Modal, {ModalDirectionOptions} from '../../components/Modal'; // Adjust this import path as needed
 
 interface Drip {
   name: string;
@@ -31,6 +31,7 @@ const DripInfoDialog: React.FC<DripInfoDialogProps> = ({ isOpen, setIsOpen, drip
       setIsOpen={setIsOpen}
       title={`${drip.name} Drips`}
       primaryButton={{ text: 'סגור' }}
+      direction={ModalDirectionOptions.LTR}
     >
       <div>
         <div><strong>Initial rate:</strong> {getDripRate(drip)} {drip.dose_unit}/kg/{getTimeUnitString(drip)}</div>

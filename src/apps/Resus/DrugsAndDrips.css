@@ -70,19 +70,6 @@
   border-bottom: none;
 }
 
-.modal-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #B9EDE7;
-}
-
-.modal-title {
-  flex-grow: 1;
-  text-align: left;
-  font-size: 1rem;
-}
-
 .btn-close {
   margin-left: auto;
   position: absolute;

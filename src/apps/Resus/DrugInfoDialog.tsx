@@ -1,5 +1,5 @@
 import React from 'react';
-import Modal from '../../components/Modal'; // Adjust this import path as needed
+import Modal, {ModalDirectionOptions} from '../../components/Modal'; // Adjust this import path as needed
 
 interface Drug {
   name: string;
@@ -32,6 +32,7 @@ const DrugInfoDialog: React.FC<DrugInfoDialogProps> = ({ isOpen, setIsOpen, drug
       setIsOpen={setIsOpen}
       title={drug.name}
       primaryButton={{ text: 'סגור' }}
+      direction={ModalDirectionOptions.LTR}
     >
       <div>
         <div><strong>Dosage used:</strong> {drug.dose_per_kg} {drug.dose_unit}/kg</div>
