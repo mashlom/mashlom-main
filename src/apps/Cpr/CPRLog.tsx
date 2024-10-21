@@ -82,7 +82,7 @@ export const useCPRLog = () => {
 
 const CPRLogComponent: React.FC = () => {
   const { log, addEntry, updateEntry, deleteEntry } = useCPRLog();
-  const [dialogEntry, setDialogEntry] = useState<LogEntry | null>(null);
+  const [dialogEntry, setDialogEntry] = useState<(LogEntry & { type: LogEntry['type'] }) | null>(null);
 
   const formatTime = (timestamp: string) => {
     const date = new Date(timestamp);
@@ -117,7 +117,7 @@ const CPRLogComponent: React.FC = () => {
                     {entry.text}
                   </span>
                   <div className="entry-actions">
-                    <button onClick={() => setDialogEntry(entry)}>
+                    <button onClick={() => setDialogEntry({...entry, type})}>
                       <FontAwesomeIcon icon={faEdit} />
                     </button>
                     <button onClick={() => deleteEntry(entry.id)}>
@@ -142,11 +142,12 @@ const CPRLogComponent: React.FC = () => {
       {dialogEntry && (
         <EntryDialog
           entry={dialogEntry.id ? dialogEntry : undefined}
+          type={dialogEntry.type}
           onSave={(entry) => {
             if (dialogEntry.id) {
-              updateEntry(dialogEntry.id, entry);
+              updateEntry(dialogEntry.id, {...entry, type: dialogEntry.type});
             } else {
-              addEntry(entry);
+              addEntry({...entry, type: dialogEntry.type});
             }
             setDialogEntry(null);
           }}
