@@ -1,8 +1,6 @@
 .abcdef-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
-    justify-content: center;
     padding: 1rem;
   }
   
@@ -13,11 +11,11 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
   
-  .bg-highlighted {
+  .card.highlighted {
     background-color: #FCEDD0;
   }
   
-  .bg-white {
+  .card.white {
     background-color: white;
   }
   
@@ -57,8 +55,16 @@
     font-weight: bold;
   }
   
-  @media (max-width: 768px) {
+  /* Mobile layout */
+  @media (max-width: 767px) {
     .abcdef-grid {
       grid-template-columns: 1fr;
+    }
+  }
+  
+  /* Desktop layout */
+  @media (min-width: 768px) {
+    .abcdef-grid {
+      grid-template-columns: repeat(2, 1fr);
     }
   }

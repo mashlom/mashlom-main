@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './ABCDEFProcedures.css';
 
 const procedures = [
@@ -59,10 +59,32 @@ const procedures = [
 ];
 
 const ABCDEFProcedures: React.FC = () => {
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const isHighlighted = (letter: string, index: number) => {
+    if (isMobile) {
+      return index % 2 === 0;
+    } else {
+      return ['A', 'D', 'E'].includes(letter);
+    }
+  };
+
   return (
     <div className="abcdef-grid">
-      {procedures.map((proc) => (
-        <div key={proc.letter} className={`card ${['A', 'D', 'E'].includes(proc.letter) ? 'bg-highlighted' : 'bg-white'}`}>
+      {procedures.map((proc, index) => (
+        <div 
+          key={proc.letter} 
+          className={`card ${isHighlighted(proc.letter, index) ? 'highlighted' : 'white'}`}
+        >
           <div className="card-header">
             <h3>
               <span className="letter">{proc.letter}</span>{proc.title.slice(1)}
