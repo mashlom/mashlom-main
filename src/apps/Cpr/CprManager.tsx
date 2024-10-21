@@ -137,11 +137,11 @@ const CprManager: React.FC<CprManagerProps> = () => {
       direction: 'rtl',
       border: '1px solid #ccc',
       borderRadius: '5px',
-      padding: '20px',
+      padding: '15px',
       boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)'
     }}>
       {/* Right: Clocks and Timers */}
-      <div style={{ padding: '20px' }}>
+      <div style={{ padding: 'auto' }}>
         <div style={{ fontSize: '24px', marginBottom: '10px' }}>
           {formatTime(elapsedTime)}
         </div>
