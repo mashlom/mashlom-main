@@ -7,6 +7,7 @@ import Footer from '../components/Footer.tsx';
 import IframeWrapper from '../components/IframeWrapper.tsx';
 import Header from '../components/Header.tsx';
 import SEO from '../components/SEO.tsx';
+import TermsOfService from '../components/TermsOfService';
 
 // Map of possible app components
 const appComponents: Record<
@@ -106,6 +107,7 @@ const Hospital: React.FC = () => {
         return (
           <Suspense fallback={<div>Loading...</div>}>
             <Header credit={AppsConfigList[app].credit} hospitalName={hospital} />
+            <TermsOfService hebrewName={hospitalConfig.name} />
             <SEO {...appSeo}/>
             <LazyComponent hospital={hospital} />
           </Suspense>
@@ -118,6 +120,7 @@ const Hospital: React.FC = () => {
   return (
     <div>
       <Header credit="" hospitalName={hospital} />
+      <TermsOfService hebrewName={hospitalConfig.name} />
       <SEO
         tabTitle='מה שלומי - כלי עזר לצוותי רפואה'
         title="מה שלומי - כלי עזר לצוותי רפואה"

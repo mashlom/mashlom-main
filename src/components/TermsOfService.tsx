@@ -2,16 +2,11 @@ import React, { useState, useEffect } from 'react';
 import Modal from './Modal'; // Adjust the import path as needed
 import { ButtonAlignmentOptions, ModalDirectionOptions } from './Modal'; // Import these if they're not in the same file
 
-interface HospitalConfig {
-  logo: string;
+interface TermsOfServiceProps {
   hebrewName: string;
 }
 
-interface TermsOfServiceProps {
-  hospitalConfig: HospitalConfig;
-}
-
-const TermsOfService: React.FC<TermsOfServiceProps> = ({ hospitalConfig }) => {
+const TermsOfService: React.FC<TermsOfServiceProps> = ({ hebrewName }) => {
   const [showTerms, setShowTerms] = useState(false);
 
   useEffect(() => {
@@ -30,10 +25,10 @@ const TermsOfService: React.FC<TermsOfServiceProps> = ({ hospitalConfig }) => {
   };
 
   const perHospitalPhrasing = () => {
-    if (!hospitalConfig.hebrewName) {
+    if (!hebrewName) {
       return '';
     }
-    return `בבית החולים ${hospitalConfig.hebrewName}`;
+    return `בבית החולים ${hebrewName}`;
   };
 
   return (
