@@ -24,11 +24,11 @@ const appComponents: Record<
     type: 'iframe',
     urlPattern: 'https://mashlom.me/apps/pediatric/phototherapy/?hospital=${hospital}',
   },
-  // [MashlomApps.TRIAGE]: {
-  //   type: 'iframe',
-  //   urlPattern: 'https://mashlom.me/apps/pediatric/triage/?hospital=${hospital}',
-  // },
-  [MashlomApps.TRIAGE]: React.lazy(() => import('../apps/Triage/index-copy4.tsx')),
+  [MashlomApps.TRIAGE]: {
+    type: 'iframe',
+    urlPattern: 'https://mashlom.me/apps/pediatric/triage/?hospital=${hospital}',
+  },
+  // [MashlomApps.TRIAGE]: React.lazy(() => import('../apps/Triage/index-copy4.tsx')),
   [MashlomApps.RESUS]: React.lazy(() => import('../apps/Resus/Resus.tsx')),
   [MashlomApps.CPR]: React.lazy(() => import('../apps/Cpr/Cpr.tsx')),
   // Add more apps here
