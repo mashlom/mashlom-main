@@ -1,7 +1,6 @@
 import React from 'react';
 import { Document, Page, Text, View, StyleSheet, Font, pdf, Image } from '@react-pdf/renderer';
 import { LogEntry } from './CPRLog';
-import path from 'path';
 
 // Register Hebrew font
 Font.register({
@@ -28,7 +27,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 20,
     height: 30,
-  },
+  },  
   headerText: {
     textAlign: 'right',
     fontSize: 12,
@@ -48,6 +47,10 @@ const styles = StyleSheet.create({
     maxHeight: 30,
     marginLeft: 10,
     objectFit: 'contain',
+  },
+  appLogo: {
+    maxHeight: 30,
+    objectFit: 'contain'
   },
   container: {
     flex: 1,
@@ -144,7 +147,7 @@ const CPRLogPDFDocument: React.FC<CPRLogPDFProps> = ({ entries, hospital }) => {
       year: 'numeric',
       hour: '2-digit',
       minute: '2-digit',
-    }).replace(',', '');  // Remove comma between date and time
+    }).replace(',', '');
   };
 
   const hospitalLogoPath = `../../assets/${hospital}/logo.png`;
@@ -178,8 +181,11 @@ const CPRLogPDFDocument: React.FC<CPRLogPDFProps> = ({ entries, hospital }) => {
           </Text>
           <Text style={styles.headerTitle}>החייאה</Text>
           <View style={styles.headerLogos}>
-            <Image src={hospitalLogoPath} style={styles.logo} />
-            <Image src={appLogoPath} style={styles.logo} />
+            {hospital !== 'apps' && <Image src={hospitalLogoPath} style={styles.logo} />}
+            <Image 
+              src={appLogoPath} 
+              style={hospital === 'apps' ? styles.appLogo : styles.logo} 
+            />
           </View>
         </View>
 
@@ -233,7 +239,7 @@ const ExportButton: React.FC<CPRLogPDFProps> = ({ entries, hospital }) => {
         display: 'block',
         margin: '20px auto',
         padding: '10px 20px',
-        backgroundColor: '#007bff',
+        backgroundColor: '#1FB5A3',
         color: 'white',
         border: 'none',
         borderRadius: '4px',

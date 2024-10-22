@@ -1,4 +1,5 @@
 import React, { useState, useEffect, createContext, useContext, ReactNode } from 'react';
+import { useParams } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faEdit, faCirclePlus } from '@fortawesome/free-solid-svg-icons';
 import Image from '../../components/Image';
@@ -84,6 +85,9 @@ export const useCPRLog = () => {
 const CPRLogComponent: React.FC = () => {
   const { log, addEntry, updateEntry, deleteEntry } = useCPRLog();
   const [dialogEntry, setDialogEntry] = useState<(LogEntry & { type: LogEntry['type'] }) | null>(null);
+  const { hospital } = useParams<{
+    hospital: string;
+  }>();
 
   const formatTime = (timestamp: string) => {
     const date = new Date(timestamp);
@@ -140,7 +144,7 @@ const CPRLogComponent: React.FC = () => {
       {renderTable('medication', 'תרופות שניתנו')}
       {renderTable('action', 'פעולות שנעשו')}
 
-      <ExportButton entries={log.entries} hospital="emek" />
+      <ExportButton entries={log.entries} hospital={hospital ? hospital: "apps"} />
 
       {dialogEntry && (
         <EntryDialog
