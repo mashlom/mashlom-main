@@ -5,7 +5,16 @@ import { LogEntry } from './CPRLog';
 // Register Hebrew font
 Font.register({
   family: 'Noto',
-  src: '/fonts/noto/NotoSansHebrew-VariableFont_wdth,wght.ttf'
+  fonts: [
+    {
+      src: '/fonts/noto/static/NotoSansHebrew-Regular.ttf',
+      fontWeight: 400,
+    },
+    {
+      src: '/fonts/noto/static/NotoSansHebrew-Bold.ttf',
+      fontWeight: 700,
+    },
+  ]
 });
 
 interface CPRLogPDFProps {
