@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faEdit, faCirclePlus } from '@fortawesome/free-solid-svg-icons';
 import Image from '../../components/Image';
 import EntryDialog from './EntryDialog';
+import ExportButton from './CPRLogPDF';
 import './CPRLog.css';
 
 export interface LogEntry {
@@ -138,6 +139,8 @@ const CPRLogComponent: React.FC = () => {
       {renderTable('patientDetails', 'פרטי המטופל')}
       {renderTable('medication', 'תרופות שניתנו')}
       {renderTable('action', 'פעולות שנעשו')}
+
+      <ExportButton entries={log.entries} hospital="emek" />
 
       {dialogEntry && (
         <EntryDialog
