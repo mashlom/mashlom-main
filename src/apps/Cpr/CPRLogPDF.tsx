@@ -5,7 +5,7 @@ import { LogEntry } from './CPRLog';
 // Register Hebrew font
 Font.register({
   family: 'Noto',
-  src: '/fonts/NotoSansHebrew-VariableFont_wdth,wght.ttf'
+  src: '/fonts/noto/NotoSansHebrew-VariableFont_wdth,wght.ttf'
 });
 
 interface CPRLogPDFProps {
@@ -158,7 +158,7 @@ const CPRLogPDFDocument: React.FC<CPRLogPDFProps> = ({ entries, hospital }) => {
     
     return (
       <View style={styles.table}>
-        {typeEntries.map((entry, index) => (
+        {typeEntries.map((entry) => (
           <View key={entry.id} style={styles.tableRow}>
             <View style={styles.timeCell}>
               <Text style={styles.text}>{formatTime(entry.timestamp)}</Text>
