@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { FaWeightScale } from 'react-icons/fa6';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import Image from '../../components/Image';
 import { useResusContext } from './ResusContext';
 import airwaysDataFile from './data/airways.json';
@@ -35,12 +35,36 @@ const ResusInputs: React.FC = () => {
   const [agesForDropDown, setAgesForDropDown] = useState<AgeOption[]>([]);
   const [protocolsForDropDown, setProtocolsForDropDown] = useState<ProtocolOption[]>([]);
   const [estimatedWeightByAge, setEstimatedWeightByAge] = useState<Record<string, { male: string; female: string }>>({});
+  const [hasAttemptedSubmit, setHasAttemptedSubmit] = useState(false);
   
-  const navigate = useNavigate();
   const location = useLocation();
+  const currentPath = location.pathname;
 
-  const isProtocolsPage = location.pathname.includes('/resus/protocols');
+  const isProtocolsPage = currentPath.includes('/resus/protocols');
+  const isMedsPage = currentPath.includes('/resus/meds');
+  const isCprPage = currentPath.includes('/resus/cpr');
+  
   const [isExpanded, setIsExpanded] = useState(age === '' || weight === null || (isProtocolsPage && !protocol));
+
+  const getMandatoryFields = () => {
+    if (isProtocolsPage) return { weight: true, age: true, protocol: true };
+    if (isMedsPage) return { weight: true, age: false, protocol: false };
+    if (isCprPage) return { weight: true, age: true, protocol: false };
+    return { weight: false, age: false, protocol: false };
+  };
+
+  const mandatoryFields = getMandatoryFields();
+
+  const isFieldInvalid = (field: 'weight' | 'age' | 'protocol') => {
+    if (!mandatoryFields[field]) return false;
+    if (!hasAttemptedSubmit) return false;
+
+    switch (field) {
+      case 'weight': return !localWeight;
+      case 'age': return !localAge;
+      case 'protocol': return !localProtocol;
+    }
+  };
 
   useEffect(() => {
     const fetchData = () => {
@@ -139,26 +163,25 @@ const ResusInputs: React.FC = () => {
   };
 
   const handleUpdate = () => {
-    updateContext(localAge, localWeight ? parseFloat(localWeight) : null, localProtocol);
-    setIsExpanded(false);
+    setHasAttemptedSubmit(true);
+    
+    const isMissingMandatoryFields = 
+      (mandatoryFields.weight && !localWeight) ||
+      (mandatoryFields.age && !localAge) ||
+      (mandatoryFields.protocol && !localProtocol);
 
-    const currentPath = location.pathname;
-    const queryParams = new URLSearchParams(location.search).toString();
-
-    if (localProtocol && !currentPath.includes('/resus/protocols')) {
-      navigate(`./protocols?${queryParams}`);
-    } else if (!localProtocol && !currentPath.includes('/resus/meds')) {
-      navigate(`./meds?${queryParams}`);
+    if (!isMissingMandatoryFields) {
+      updateContext(localAge, localWeight ? parseFloat(localWeight) : null, localProtocol);
+      setIsExpanded(false);
+      setHasAttemptedSubmit(false);
     }
   };
 
   const handleReset = () => {
     resetContext();
     setIsExpanded(true);
+    setHasAttemptedSubmit(false);
   };
-
-  const isUpdateDisabled = !localAge || !localWeight;
-  const isClearDisabled = !localAge && !localWeight;
 
   return (
     <div className="resus-inputs-container">
@@ -179,13 +202,13 @@ const ResusInputs: React.FC = () => {
       <div className={`resus-inputs-expanded ${isExpanded ? 'visible' : ''}`} style={{backgroundColor: "white"}}>
         <form style={{marginBottom:"15px"}}>
           <div className="container" style={{ textAlign: 'right' }}>
-          <div className="row form-group">
+            <div className="row form-group">
               <div className="col-auto fs-4 col-auto-text-cols">
                 פרוטוקול
               </div>
               <div className="col input-col">
-              <select 
-                  className="form-control" 
+                <select 
+                  className={`form-control ${isFieldInvalid('protocol') ? 'border-danger' : ''}`}
                   onChange={(e) => setLocalProtocol(e.target.value)} 
                   value={localProtocol || ""}
                 >
@@ -209,7 +232,7 @@ const ResusInputs: React.FC = () => {
               </div>
               <div className="col input-col">
                 <select 
-                  className="form-control" 
+                  className={`form-control ${isFieldInvalid('age') ? 'border-danger' : ''}`}
                   onChange={(e) => setLocalAge(e.target.value)} 
                   value={localAge}
                 >
@@ -222,8 +245,7 @@ const ResusInputs: React.FC = () => {
                 </select>
               </div>
             </div>
-            <div className="row form-group">
-              {localAge && (
+            {localAge && (<div className="row form-group">              
                 <>
                   <div style={{ cursor: 'pointer' }}>
                     <FaWeightScale style={{ marginLeft: '10px' }} />
@@ -250,8 +272,7 @@ const ResusInputs: React.FC = () => {
                     </button>
                   </div>
                 </>
-              )}
-            </div>
+            </div>)}
             <div className="row form-group">
               <div className="col-auto fs-4 col-auto-text-cols">
                 משקל (ק"ג)
@@ -262,7 +283,7 @@ const ResusInputs: React.FC = () => {
                   pattern="[0-9]*[.,]?[0-9]*"
                   maxLength={7}
                   style={{ maxWidth: '230px' }}
-                  className="form-control"
+                  className={`form-control ${isFieldInvalid('weight') ? 'border-danger' : ''}`}
                   id="weight"
                   value={localWeight}
                   onChange={handleWeightChange}
@@ -281,7 +302,6 @@ const ResusInputs: React.FC = () => {
                   className="btn btn-update"
                   style={{marginLeft: "15px"}}
                   onClick={handleUpdate}
-                  disabled={isUpdateDisabled}
                 >
                   עדכן
                 </button>
@@ -289,12 +309,22 @@ const ResusInputs: React.FC = () => {
                   type="button"
                   className="btn btn-update"
                   onClick={handleReset}
-                  disabled={isClearDisabled}
                 >
                   נקה
                 </button>
               </div>
             </div>
+            {hasAttemptedSubmit && (
+              mandatoryFields.weight && !localWeight ||
+              mandatoryFields.age && !localAge ||
+              mandatoryFields.protocol && !localProtocol
+            ) && (
+              <div className="row form-group">
+                <div className="col text-center">
+                  <span style={{ color: 'red' }}>נא מלא את שדות החובה</span>
+                </div>
+              </div>
+            )}
           </div>
         </form>
       </div>

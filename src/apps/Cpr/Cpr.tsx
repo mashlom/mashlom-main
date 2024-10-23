@@ -9,6 +9,7 @@ import VitalSigns from './VitalSigns';
 import MedicalProcedures from './MedicalProcedures';
 import ABCDEFProcedures from './ABCDEFProcedures';
 import ReminderBox from './ReminderBox';
+import ResusInputs from '../Resus/ResusInputs';
 import './Cpr.css';
 
 const CprContent: React.FC = () => {
@@ -47,7 +48,8 @@ const CprContent: React.FC = () => {
   return (
     <>
       <CprManager />
-      <div style={{ direction: 'rtl', marginTop: '20px' }}>
+      <ResusInputs />
+      <div style={{ direction: 'rtl'}}>
         <h4 className="section-header" onClick={toggleVitalSigns}>
           <span className="toggle-icon">{vitalSignsExpanded ? '-' : '+'}</span>
           <span className="section-name"><FontAwesomeIcon icon={faHeartPulse} /> מדדים</span>
