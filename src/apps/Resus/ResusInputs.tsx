@@ -23,9 +23,13 @@ export interface ProtocolData {
   id: string;
   algorithmFile?: string;
   protocolFile?: string;
-};
+}
 
-const ResusInputs: React.FC = () => {
+interface ResusInputsProps {
+  onSubmit?: (age: string, weight: number | null, protocol: string) => void;
+}
+
+const ResusInputs: React.FC<ResusInputsProps> = ({ onSubmit }) => {
   const { age, weight, updateContext, resetContext, protocol } = useResusContext();
   const [localAge, setLocalAge] = useState(age);
   const [localProtocol, setLocalProtocol] = useState(protocol);
@@ -171,7 +175,11 @@ const ResusInputs: React.FC = () => {
       (mandatoryFields.protocol && !localProtocol);
 
     if (!isMissingMandatoryFields) {
-      updateContext(localAge, localWeight ? parseFloat(localWeight) : null, localProtocol);
+      const weightValue = localWeight ? parseFloat(localWeight) : null;
+      updateContext(localAge, weightValue, localProtocol);
+      if (onSubmit) {
+        onSubmit(localAge, weightValue, localProtocol);
+      }
       setIsExpanded(false);
       setHasAttemptedSubmit(false);
     }
