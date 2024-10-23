@@ -18,14 +18,9 @@ const FooterNav: React.FC<FooterNavProps> = ({ hospital }) => {
     setActivePanel(panel || null);
   }, [location]);
 
-  const openPanel = (panel: 'meds' | 'protocols') => {
+  const openPanel = (panel: 'meds' | 'protocols' | 'cpr') => {
     const currentSearchParams = new URLSearchParams(location.search);
     navigate(`/${hospital}/resus/${panel}?${currentSearchParams.toString()}`);
-  };
-
-  const openCpr = () => {
-    const currentSearchParams = new URLSearchParams(location.search);
-    navigate(`/${hospital}/cpr?${currentSearchParams.toString()}`);
   };
 
   const isActive = (panel: string) => {
@@ -35,11 +30,11 @@ const FooterNav: React.FC<FooterNavProps> = ({ hospital }) => {
   return (
     <footer className="text-center text-white footer">
       <div className="footer-container">
-        {['meds', 'protocols'].map((panel) => (
+        {['meds', 'protocols', 'cpr'].map((panel) => (
           <button 
             key={panel}
             className={`footer-button ${isActive(panel)}`} 
-            onClick={() => openPanel(panel as 'meds' | 'protocols')}
+            onClick={() => openPanel(panel as 'meds' | 'protocols' | 'cpr')}
           >
             <div className="bottom-menu-color">
               <FontAwesomeIcon 
@@ -51,25 +46,12 @@ const FooterNav: React.FC<FooterNavProps> = ({ hospital }) => {
               />
             </div>
             <div className="text">
-              {panel === 'meds' ? 'תרופות' :'פרוטוקולי חירום'}
+              {panel === 'meds' ? 'תרופות' :
+               panel === 'protocols' ? 'פרוטוקולי חירום' :
+               'החייאה'}
             </div>
           </button>
         ))}
-        <button 
-            key="cpr"
-            className="footer-button"
-            onClick={() => openCpr()}            
-          >
-            <div className="bottom-menu-color">
-              <FontAwesomeIcon 
-                icon={
-                  faHeartPulse
-                } 
-              />
-            </div>
-            <div className="text">'החייאה'
-            </div>
-          </button>
       </div>
     </footer>
   );

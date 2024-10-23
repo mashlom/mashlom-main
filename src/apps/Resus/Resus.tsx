@@ -6,6 +6,7 @@ import Meds from './Meds';
 import EmergencyProtocols from './EmergencyProtocols';
 import FooterNav from './ResusFooterNav';
 import ResusInputs from './ResusInputs';
+import Cpr from '../Cpr/Cpr';
 import { ResusProvider, useResusContext } from './ResusContext';
 import emergencyProtocols from './data/emergency-protocols.json';
 
@@ -57,7 +58,10 @@ const Resus: React.FC = () => {
 
   return (
     <ResusProvider>
-      <ResusContent />
+      <Routes>        
+        <Route path="cpr" element={<Cpr />} />
+        <Route path="/*" element={<ResusContent />} />
+      </Routes>
       <FooterNav hospital={hospital || ''} />
     </ResusProvider>
   );

@@ -7,7 +7,7 @@ export const MashlomApps = {
   TRIAGE: 'triage',
   PHOTOTHERAPY: 'phototherapy',
   RESUS: 'resus',
-  CPR: 'cpr',
+  CPR: 'resus/cpr',
   CorrectedAge: 'correctedAge',
 } as const;
 
