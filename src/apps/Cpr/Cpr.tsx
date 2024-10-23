@@ -3,27 +3,46 @@ import { NotificationProvider } from './Notifications';
 import { CPRLogProvider, useCPRLog } from './CPRLog';
 import CprManager from './CprManager';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFileLines, faHeartPulse, faSection, faListCheck } from '@fortawesome/free-solid-svg-icons';
+import { faFileLines, faHeartPulse, faSection, faListCheck, faLungs } from '@fortawesome/free-solid-svg-icons';
 import CPRLogComponent from './CPRLog';
 import VitalSigns from './VitalSigns';
 import MedicalProcedures from './MedicalProcedures';
 import ABCDEFProcedures from './ABCDEFProcedures';
+import Airways from './Airways';
 import ReminderBox from './ReminderBox';
 import ResusInputs from '../Resus/ResusInputs';
 import emergencyProtocols from '../Resus/data/emergency-protocols.json';
 import './Cpr.css';
+
+interface Protocol {
+  name: string;
+  id: string;
+  algorithmFile?: string;
+  protocolFile?: string;
+}
+
+interface ProtocolSection {
+  section: string;
+  protocols: Protocol[];
+}
+
+interface EmergencyProtocols {
+  emergencyProtocols: ProtocolSection[];
+}
 
 const CprContent: React.FC = () => {
   const [logExpanded, setLogExpanded] = useState(false);
   const [vitalSignsExpanded, setVitalSignsExpanded] = useState(false);
   const [proceduresExpanded, setProceduresExpanded] = useState(false);
   const [abcdefExpanded, setABCDEFExpanded] = useState(false);
+  const [airwaysExpanded, setAirwaysExpanded] = useState(false);
   const [showReminder, setShowReminder] = useState(false);
   const [reminderShown, setReminderShown] = useState(false);
 
   const toggleLog = () => setLogExpanded(!logExpanded);
   const toggleVitalSigns = () => setVitalSignsExpanded(!vitalSignsExpanded);
   const toggleProcedures = () => setProceduresExpanded(!proceduresExpanded);
+  const toggleAirways = () => setAirwaysExpanded(!airwaysExpanded);
   const toggleABCDEF = () => {
     setABCDEFExpanded(!abcdefExpanded);
     if (!abcdefExpanded) {
@@ -69,9 +88,11 @@ const CprContent: React.FC = () => {
         isImportant: false
       });
     }
+
+    // Automatically expand the airways section
+    setAirwaysExpanded(true);
   };
 
-  // Utility function to get the formatted age
   const getFormattedAge = (age: string): string => {
     if (age === "0 month") return "בן יומו";
     if (age === "1 month") return "חודש";
@@ -81,12 +102,10 @@ const CprContent: React.FC = () => {
     return age.replace("month", "חודשים").replace("year", "שנים");
   };
 
-  // Utility function to get the protocol name
   const getProtocolName = (protocolId: string): string => {
-    // Find the protocol name from the emergencyProtocols data
-    const protocol = emergencyProtocols.emergencyProtocols
-      .flatMap(section => section.protocols)
-      .find(p => p.id === protocolId);
+    const protocol = (emergencyProtocols as EmergencyProtocols).emergencyProtocols
+      .flatMap((section): Protocol[] => section.protocols)
+      .find((p): p is Protocol => p.id === protocolId);
     return protocol ? protocol.name : protocolId;
   };
 
@@ -95,6 +114,16 @@ const CprContent: React.FC = () => {
       <CprManager />
       <ResusInputs onSubmit={handleResusInputsSubmit} />
       <div style={{ direction: 'rtl'}}>
+        <h4 className="section-header" onClick={toggleAirways}>
+          <span className="toggle-icon">{airwaysExpanded ? '-' : '+'}</span>
+          <span className="section-name"><FontAwesomeIcon icon={faLungs} /> נתיב אוויר</span>
+        </h4>
+        {airwaysExpanded && (
+          <div id="collapseable-area-airways" className={`collapseable ${airwaysExpanded ? 'expanded' : ''}`}>
+            <Airways />
+          </div>
+        )}
+
         <h4 className="section-header" onClick={toggleVitalSigns}>
           <span className="toggle-icon">{vitalSignsExpanded ? '-' : '+'}</span>
           <span className="section-name"><FontAwesomeIcon icon={faHeartPulse} /> מדדים</span>

@@ -176,9 +176,9 @@ const ResusInputs: React.FC<ResusInputsProps> = ({ onSubmit }) => {
 
     if (!isMissingMandatoryFields) {
       const weightValue = localWeight ? parseFloat(localWeight) : null;
-      updateContext(localAge, weightValue, localProtocol);
+      updateContext(localAge, weightValue, localProtocol || '');
       if (onSubmit) {
-        onSubmit(localAge, weightValue, localProtocol);
+        onSubmit(localAge, weightValue, localProtocol || '');
       }
       setIsExpanded(false);
       setHasAttemptedSubmit(false);

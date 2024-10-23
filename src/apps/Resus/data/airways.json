@@ -3,6 +3,7 @@
         {
             "age": "0 month",
             "cuffedETT": 3,
+            "ETT": 3.5,
             "blade": 0,
             "lma": 1,
             "estimatedMaleWeight": 3.4,
@@ -11,6 +12,7 @@
         {
             "age": "1 month",
             "cuffedETT": 3,
+            "ETT": 3.5,
             "blade": 1,
             "lma": 1,
             "estimatedMaleWeight": 4.5,
@@ -19,6 +21,7 @@
         {
             "age": "2 month",
             "cuffedETT": 3,
+            "ETT": 3.5,
             "blade": 1,
             "lma": 1,
             "estimatedMaleWeight": 5.5,
@@ -27,6 +30,7 @@
         {
             "age": "3 month",
             "cuffedETT": 3,
+            "ETT": 3.5,
             "blade": 1,
             "lma": 1.5,
             "estimatedMaleWeight": 6.4,
@@ -35,6 +39,7 @@
         {
             "age": "4 month",
             "cuffedETT": 3,
+            "ETT": 3.5,
             "blade": 1,
             "lma": 1.5,
             "estimatedMaleWeight": 7,
@@ -43,6 +48,7 @@
         {
             "age": "5 month",
             "cuffedETT": 3.5,
+            "ETT": 4,
             "blade": 1,
             "lma": 1.5,
             "estimatedMaleWeight": 7.5,
@@ -51,6 +57,7 @@
         {
             "age": "6 month",
             "cuffedETT": 3.5,
+            "ETT": 4,
             "blade": 1,
             "lma": 1.5,
             "estimatedMaleWeight": 7.8,
@@ -59,6 +66,7 @@
         {
             "age": "7 month",
             "cuffedETT": 3.5,
+            "ETT": 4,
             "blade": 1,
             "lma": 1.5,
             "estimatedMaleWeight": 8.2,
@@ -67,6 +75,7 @@
         {
             "age": "8 month",
             "cuffedETT": 3.5,
+            "ETT": 4,
             "blade": 1,
             "lma": 1.5,
             "estimatedMaleWeight": 8.6,
@@ -75,6 +84,7 @@
         {
             "age": "9 month",
             "cuffedETT": 3.5,
+            "ETT": 4,
             "blade": 1,
             "lma": 1.5,
             "estimatedMaleWeight": 8.9,
@@ -83,6 +93,7 @@
         {
             "age": "10 month",
             "cuffedETT": 3.5,
+            "ETT": 4,
             "blade": 1,
             "lma": 1.5,
             "estimatedMaleWeight": 9.2,
@@ -91,6 +102,7 @@
         {
             "age": "11 month",
             "cuffedETT": 3.5,
+            "ETT": 4,
             "blade": 1,
             "lma": 1.5,
             "estimatedMaleWeight": 9.4,
@@ -99,6 +111,7 @@
         {
             "age": "12 month",
             "cuffedETT": 3.5,
+            "ETT": 4,
             "blade": 1,
             "lma": 1.5,
             "estimatedMaleWeight": 9.6,
@@ -107,6 +120,7 @@
         {
             "age": "13 month",
             "cuffedETT": 3.5,
+            "ETT": 4,
             "blade": 1,
             "lma": 1.5,
             "estimatedMaleWeight": 9.8,
@@ -115,6 +129,7 @@
         {
             "age": "14 month",
             "cuffedETT": 3.5,
+            "ETT": 4,
             "blade": 1,
             "lma": 1.5,
             "estimatedMaleWeight": 10,
@@ -123,6 +138,7 @@
         {
             "age": "15 month",
             "cuffedETT": 3.5,
+            "ETT": 4,
             "blade": 1,
             "lma": 1.5,
             "estimatedMaleWeight": 10.3,
@@ -131,6 +147,7 @@
         {
             "age": "16 month",
             "cuffedETT": 3.5,
+            "ETT": 4,
             "blade": 1,
             "lma": 1.5,
             "estimatedMaleWeight": 10.5,
@@ -139,6 +156,7 @@
         {
             "age": "17 month",
             "cuffedETT": 3.5,
+            "ETT": 4,
             "blade": 1,
             "lma": 1.5,
             "estimatedMaleWeight": 10.7,
@@ -147,6 +165,7 @@
         {
             "age": "18 month",
             "cuffedETT": 4,
+            "ETT": 4.5,
             "blade": 1,
             "lma": 1.5,
             "estimatedMaleWeight": 10.9,
@@ -155,6 +174,7 @@
         {
             "age": "19 month",
             "cuffedETT": 4,
+            "ETT": 4.5,
             "blade": 2,
             "lma": 1.5,
             "estimatedMaleWeight": 11.1,
@@ -163,6 +183,7 @@
         {
             "age": "20 month",
             "cuffedETT": 4,
+            "ETT": 4.5,
             "blade": 2,
             "lma": 1.5,
             "estimatedMaleWeight": 11.3,
@@ -171,6 +192,7 @@
         {
             "age": "21 month",
             "cuffedETT": 4,
+            "ETT": 4.5,
             "blade": 2,
             "lma": 1.5,
             "estimatedMaleWeight": 11.5,
@@ -179,6 +201,7 @@
         {
             "age": "22 month",
             "cuffedETT": 4,
+            "ETT": 4.5,
             "blade": 2,
             "lma": 1.5,
             "estimatedMaleWeight": 11.7,
@@ -187,6 +210,7 @@
         {
             "age": "23 month",
             "cuffedETT": 4,
+            "ETT": 4.5,
             "blade": 2,
             "lma": 2,
             "estimatedMaleWeight": 12,
@@ -195,6 +219,7 @@
         {
             "age": "24 month",
             "cuffedETT": 4,
+            "ETT": 4.5,
             "blade": 2,
             "lma": 2,
             "estimatedMaleWeight": 12.2,
@@ -203,6 +228,7 @@
         {
             "age": "3 year",
             "cuffedETT": 4,
+            "ETT": 4.5,
             "blade": 2,
             "lma": 2,
             "estimatedMaleWeight": 14,
@@ -211,6 +237,7 @@
         {
             "age": "4 year",
             "cuffedETT": 4.5,
+            "ETT": 5,
             "blade": 2,
             "lma": 2,
             "estimatedMaleWeight": 16,
@@ -219,6 +246,7 @@
         {
             "age": "5 year",
             "cuffedETT": 4.5,
+            "ETT": 5,
             "blade": 2,
             "lma": 2,
             "estimatedMaleWeight": 18,
@@ -227,6 +255,7 @@
         {
             "age": "6 year",
             "cuffedETT": 5,
+            "ETT": 5.5,
             "blade": 2,
             "lma": 2,
             "estimatedMaleWeight": 21,
@@ -235,6 +264,7 @@
         {
             "age": "7 year",
             "cuffedETT": 5,
+            "ETT": 5.5,
             "blade": 3,
             "lma": 2.5,
             "estimatedMaleWeight": 23,
@@ -243,6 +273,7 @@
         {
             "age": "8 year",
             "cuffedETT": 5.5,
+            "ETT": 6,
             "blade": 3,
             "lma": 2.5,
             "estimatedMaleWeight": 26,
@@ -251,6 +282,7 @@
         {
             "age": "9 year",
             "cuffedETT": 5.5,
+            "ETT": 6,
             "blade": 3,
             "lma": 2.5,
             "estimatedMaleWeight": 28,
@@ -259,6 +291,7 @@
         {
             "age": "10 year",
             "cuffedETT": 6,
+            "ETT": 6.5,
             "blade": 3,
             "lma": 2.5,
             "estimatedMaleWeight": 32,
@@ -267,6 +300,7 @@
         {
             "age": "11 year",
             "cuffedETT": 6,
+            "ETT": 6.5,
             "blade": 3,
             "lma": 2.5,
             "estimatedMaleWeight": 36,
@@ -275,6 +309,7 @@
         {
             "age": "12 year",
             "cuffedETT": 6.5,
+            "ETT": 7,
             "blade": 3,
             "lma": 3,
             "estimatedMaleWeight": 40,
@@ -283,6 +318,7 @@
         {
             "age": "13 year",
             "cuffedETT": 6.5,
+            "ETT": 7,
             "blade": 3,
             "lma": 3,
             "estimatedMaleWeight": 45,
@@ -291,6 +327,7 @@
         {
             "age": "14 year",
             "cuffedETT": 7,
+            "ETT": 7.5,
             "blade": 3,
             "lma": 4,
             "estimatedMaleWeight": 51,
@@ -299,6 +336,7 @@
         {
             "age": "15 year",
             "cuffedETT": 7,
+            "ETT": 7.5,
             "blade": 3,
             "lma": 4,
             "estimatedMaleWeight": 56,
@@ -307,6 +345,7 @@
         {
             "age": "16 year",
             "cuffedETT": 7.5,
+            "ETT": 8,
             "blade": 4,
             "lma": 4,
             "estimatedMaleWeight": 61,
@@ -315,6 +354,7 @@
         {
             "age": "17 year",
             "cuffedETT": 7.5,
+            "ETT": 8,
             "blade": 4,
             "lma": 4,
             "estimatedMaleWeight": 65,
@@ -323,6 +363,7 @@
         {
             "age": "18 year",
             "cuffedETT": 7.5,
+            "ETT": 8,
             "blade": 4,
             "lma": 4,
             "estimatedMaleWeight": 67,

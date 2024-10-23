@@ -1,0 +1,24 @@
+.airways-recommendations {
+    direction: rtl;
+  }
+  
+  .airways-title {
+    font-weight: bold;
+    text-align: right;
+    margin-bottom: 10px;
+  }
+  
+  .airways-list {
+    background-color: #B9EDE7;
+    border-radius: 10px;
+    padding: 15px;
+    margin-right: 15px;
+    line-height: 1rem;
+    list-style-type: none;
+    text-align: left;
+  }
+  
+  .defi-data {
+    display: inline-block;
+    margin-bottom: 8px;
+  }
