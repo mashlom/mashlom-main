@@ -183,10 +183,10 @@ const VitalSigns: React.FC = () => {
           </button>
         </div>
       </form>
-      <div className="vital-signs-history">
+      {vitalSigns.length > 0 && <div className="vital-signs-history">
         <h4>היסטוריית מדדים</h4>
         {vitalSigns.map((signs) => renderVitalSignsHistory(signs))}
-       </div>
+       </div>}
     </div>
   );
 };
